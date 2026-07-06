@@ -1,37 +1,174 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jude Films</title>
-    <!-- Lien vers votre feuille de style dans le dossier assets -->
-    <link rel="stylesheet" href="/assets/css/style.css">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>JUDE FILMS — Director / Réalisatrice</title>
+    <meta name="description" content="JUDE FILMS — independent director and musician. Music videos, live sessions, photography." />
+    
+    <!-- Polices -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;1,9..144,400&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --ink: #0a0807; 
+            --bone: #ECE7DD;
+            --smoke: #8a817b; 
+            --smoke-2: #56514c;
+            --red: #F4221A; 
+            --line: rgba(236,231,221,.13);
+            --serif: "Fraunces", Georgia, serif; 
+            --sans: "Space Grotesk", sans-serif;
+            --pad: clamp(20px, 4vw, 56px); 
+            --ease: cubic-bezier(.22,.61,.36,1);
+        }
+        
+        * { box-sizing: border-box; }
+        html, body { margin: 0; height: 100%; background: var(--ink); color: var(--bone); font-family: var(--sans); overflow-x: hidden; }
+        a { color: inherit; text-decoration: none; }
+        button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+        ul { list-style: none; padding: 0; margin: 0; }
+
+        /* EFFETS CAMERA (Grain, Vignette, Scanlines) */
+        .vignette { position: fixed; inset: 0; pointer-events: none; z-index: 2; background: radial-gradient(circle at center, transparent 40%, rgba(0,0,0,0.8) 100%); }
+        .scanlines { position: fixed; inset: 0; pointer-events: none; z-index: 3; background: repeating-linear-gradient(to bottom, transparent 0, transparent 2px, rgba(0,0,0,0.1) 2px, rgba(0,0,0,0.1) 4px); }
+        
+        /* VIEWFINDER & REC */
+        .vf-rec { position: fixed; bottom: 24px; left: var(--pad); display: flex; align-items: center; gap: 9px; z-index: 55; pointer-events: none; font-size: 11px; letter-spacing: .26em; color: var(--red); text-shadow: 0 0 10px rgba(244,34,26,.6); }
+        .vf-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--red); box-shadow: 0 0 12px var(--red); animation: blink 1.3s infinite; }
+        .vf-tc { position: fixed; bottom: 24px; right: var(--pad); z-index: 55; pointer-events: none; font-variant-numeric: tabular-nums; font-size: 12px; letter-spacing: .18em; color: var(--red); }
+        @keyframes blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0.2; } }
+
+        /* TOPBAR & MENU */
+        .topbar { position: fixed; top: 0; width: 100%; z-index: 60; display: flex; justify-content: space-between; padding: 24px var(--pad); pointer-events: none; }
+        .topbar > * { pointer-events: auto; }
+        .brand { font-family: var(--serif); font-size: 24px; font-weight: 500; letter-spacing: 2px; }
+        .menu-btn { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; border: 1px solid var(--line); padding: 8px 16px; border-radius: 20px; transition: 0.3s; }
+        .menu-btn:hover { border-color: var(--red); color: var(--red); }
+
+        /* OVERLAY MENU */
+        .menu-overlay { position: fixed; inset: 0; background: rgba(10,8,7,0.95); z-index: 70; display: flex; flex-direction: column; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: 0.5s var(--ease); backdrop-filter: blur(5px); }
+        .menu-overlay.active { opacity: 1; pointer-events: auto; }
+        .menu-close { position: absolute; top: 24px; right: var(--pad); font-size: 12px; letter-spacing: 2px; border: 1px solid var(--smoke); padding: 8px 16px; border-radius: 20px; }
+        .menu-close:hover { border-color: var(--red); color: var(--red); }
+        .menu-links { text-align: center; display: flex; flex-direction: column; gap: 20px; }
+        .menu-links a { font-family: var(--serif); font-size: clamp(30px, 6vw, 60px); text-transform: uppercase; transition: 0.3s; }
+        .menu-links a:hover { color: var(--red); font-style: italic; }
+
+        /* MAIN CONTENT - WORKS LIST */
+        .main-content { position: relative; z-index: 10; padding: 120px var(--pad) 100px; display: flex; flex-direction: column; justify-content: center; min-height: 100vh; }
+        .worklist { display: flex; flex-direction: column; gap: 10px; width: fit-content; margin: 0 auto; }
+        .wl-item { display: flex; align-items: baseline; gap: 20px; font-family: var(--serif); font-size: clamp(24px, 5vw, 64px); color: var(--smoke); transition: 0.4s; cursor: pointer; border-bottom: 1px solid transparent; padding-bottom: 5px; }
+        .wl-item .idx { font-family: var(--sans); font-size: 12px; color: var(--smoke-2); }
+        .wl-item .cli { font-family: var(--sans); font-size: 12px; letter-spacing: 2px; color: var(--red); opacity: 0; transform: translateX(-10px); transition: 0.4s; }
+        .wl-item:hover { color: var(--bone); transform: translateX(10px); border-bottom: 1px solid var(--red); }
+        .wl-item:hover .cli { opacity: 1; transform: translateX(0); }
+
+        /* PREVIEW IMAGE ON HOVER */
+        .preview-box { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.9); width: clamp(250px, 40vw, 500px); aspect-ratio: 16/9; opacity: 0; pointer-events: none; transition: 0.4s var(--ease); z-index: 5; background-size: cover; background-position: center; border: 1px solid var(--line); }
+        .preview-box.show { opacity: 0.4; transform: translate(-50%, -50%) scale(1); }
+
+        /* INTRO SCREEN */
+        .enter-screen { position: fixed; inset: 0; z-index: 90; background: var(--ink); display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 1s, visibility 1s; }
+        .enter-screen.hidden { opacity: 0; visibility: hidden; }
+        .enter-btn { border: 1px solid var(--line); padding: 12px 30px; letter-spacing: 3px; font-size: 12px; transition: 0.4s; border-radius: 4px; }
+        .enter-btn:hover { border-color: var(--red); color: var(--red); box-shadow: 0 0 15px rgba(244,34,26,0.3); }
+
+    </style>
 </head>
 <body>
 
-    <!-- SECTION LOADER (S'efface une fois la page chargée) -->
-    <div id="loader">
-        <div class="spinner"></div>
+    <!-- ECRAN D'ENTREE -->
+    <div class="enter-screen" id="enterScreen">
+        <h1 style="font-family: var(--serif); font-size: clamp(30px, 5vw, 50px); margin-bottom: 40px; font-weight: 300;">JUDE FILMS</h1>
+        <button class="enter-btn" onclick="startExperience()">ENTER</button>
     </div>
 
-    <!-- CONTENU PRINCIPAL DE VOTRE SITE -->
-    <main id="main-content">
-        <h1>Jude Films</h1>
-        <p>Bienvenue sur le site officiel de Jude Films. Contenu en cours de chargement...</p>
+    <!-- OVERLAYS CAMERA -->
+    <div class="vignette"></div>
+    <div class="scanlines"></div>
+
+    <div class="vf-rec">
+        <div class="vf-dot"></div> REC
+    </div>
+    <div class="vf-tc" id="timecode">00:00:00:00</div>
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+        <div class="brand">JUDE</div>
+        <button class="menu-btn" onclick="toggleMenu()">Menu</button>
+    </header>
+
+    <!-- MENU OVERLAY -->
+    <div class="menu-overlay" id="menuOverlay">
+        <button class="menu-close" onclick="toggleMenu()">CLOSE</button>
+        <nav class="menu-links">
+            <a href="#" onclick="toggleMenu()">Works</a>
+            <a href="#" onclick="toggleMenu()">About</a>
+            <a href="#" onclick="toggleMenu()">Services</a>
+            <a href="mailto:contact@jude-films.com">Contact</a>
+        </nav>
+    </div>
+
+    <!-- IMAGE PREVIEW -->
+    <div class="preview-box" id="previewBox"></div>
+
+    <!-- CONTENU PRINCIPAL -->
+    <main class="main-content">
+        <ul class="worklist">
+            <li class="wl-item" data-img="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&q=80&w=1000">
+                <span class="idx">01</span> Projet Alpha <span class="cli">Clip Musical</span>
+            </li>
+            <li class="wl-item" data-img="https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&q=80&w=1000">
+                <span class="idx">02</span> The Neon Live <span class="cli">Live Session</span>
+            </li>
+            <li class="wl-item" data-img="https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?auto=format&fit=crop&q=80&w=1000">
+                <span class="idx">03</span> Sombre Rêve <span class="cli">Court Métrage</span>
+            </li>
+            <li class="wl-item" data-img="https://images.unsplash.com/photo-1621252179027-94459d278660?auto=format&fit=crop&q=80&w=1000">
+                <span class="idx">04</span> Echoes <span class="cli">Documentaire</span>
+            </li>
+        </ul>
     </main>
 
-    <!-- SCRIPT DU LOADER -->
+    <!-- SCRIPTS -->
     <script>
-        window.addEventListener('load', () => {
-            const loader = document.getElementById('loader');
-            // Ajoute une transition fluide pour faire disparaître le loader
-            loader.style.opacity = '0';
-            loader.style.transition = 'opacity 0.5s ease';
-            
-            // Masque complètement le loader après la transition
-            setTimeout(() => {
-                loader.style.display = 'none';
-            }, 500);
+        // 1. Bouton "Enter" de l'intro
+        function startExperience() {
+            document.getElementById('enterScreen').classList.add('hidden');
+        }
+
+        // 2. Menu Toggle
+        function toggleMenu() {
+            document.getElementById('menuOverlay').classList.toggle('active');
+        }
+
+        // 3. Timecode dynamique (format hh:mm:ss:ff)
+        function updateTimecode() {
+            const now = new Date();
+            const h = String(now.getHours()).padStart(2, '0');
+            const m = String(now.getMinutes()).padStart(2, '0');
+            const s = String(now.getSeconds()).padStart(2, '0');
+            const frames = String(Math.floor(Math.random() * 24)).padStart(2, '0'); // Simule les frames à 24fps
+            document.getElementById('timecode').textContent = `${h}:${m}:${s}:${frames}`;
+        }
+        setInterval(updateTimecode, 1000 / 24); // Met à jour 24 fois par seconde
+
+        // 4. Aperçu des images au survol des projets
+        const items = document.querySelectorAll('.wl-item');
+        const previewBox = document.getElementById('previewBox');
+
+        items.forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                const imgUrl = item.getAttribute('data-img');
+                previewBox.style.backgroundImage = `url(${imgUrl})`;
+                previewBox.classList.add('show');
+            });
+            item.addEventListener('mouseleave', () => {
+                previewBox.classList.remove('show');
+            });
         });
     </script>
 </body>
