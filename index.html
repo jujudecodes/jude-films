@@ -101,7 +101,7 @@ body:not(.live-app) a, body:not(.live-app) button { cursor: pointer !important; 
 .view.show{opacity:1;visibility:visible}
 .view::-webkit-scrollbar{width:0}
 
-/* PAGE 1 : FILMS (LIST WITH DYNAMIC HOVER PREVIEW) */
+/* PAGE 1 : FILMS (LISTE AVEC APERÇU HOVER DYNAMIQUE) */
 #view-works{display:flex;align-items:center;justify-content:center}
 .worklist{display:flex;flex-direction:column;gap:4px;width:max-content;max-width:100%}
 .wl-item{position:relative;display:flex;align-items:baseline;gap:18px;width:max-content;font-family:var(--serif);font-weight:500;line-height:1.1;color:var(--smoke);
@@ -116,7 +116,7 @@ body:not(.live-app) a, body:not(.live-app) button { cursor: pointer !important; 
 .preview.on{opacity:1;transform:scale(1)}
 .preview .frame{position:absolute;inset:0;background-size:cover;background-position:center}
 
-/* PAGE 2 : SERVICES (SANS ARTEFACT ET ENTIÈREMENT DYNAMIQUE) */
+/* PAGE 2 : SERVICES (ENTIÈREMENT DYNAMIQUE) */
 .serv-wrap{max-width:900px;margin:0 auto;padding-top:40px}
 .serv-item{display:grid;grid-template-columns:240px 1fr;gap:20px;padding:30px 0;border-bottom:1px solid var(--line)}
 .serv-title{font-family:var(--serif);font-size:24px;font-style:italic;color:var(--red)}
@@ -134,13 +134,13 @@ body:not(.live-app) a, body:not(.live-app) button { cursor: pointer !important; 
   font-size:11px;letter-spacing:.26em;color:var(--bone);transition:all .3s}
 .music-link:hover{background:var(--red);color:#fff;box-shadow:0 0 20px rgba(244,34,26,0.4)}
 
-/* PAGE 4 : CONTACT COMPLET (TRADUISIBLE) */
+/* PAGE 4 : CONTACT COMPLET */
 .contact-wrap{max-width:600px;margin:0 auto;text-align:center;padding-top:60px}
 .contact-links{display:flex;justify-content:center;gap:30px;margin-top:40px}
 .contact-links a{font-size:14px;letter-spacing:2px;text-transform:uppercase;border-bottom:1px solid transparent;transition:.3s;padding-bottom:4px}
 .contact-links a:hover{color:var(--red);border-color:var(--red)}
 
-/* MODALE PROJETS (STYLE ENTIÈREMENT TRADUISIBLE) */
+/* MODALE PROJETS */
 .proj-modal{position:fixed;inset:0;z-index:100;background:var(--ink-2);opacity:0;visibility:hidden;transition:opacity .5s var(--ease);display:flex;flex-direction:column}
 .proj-modal.open{opacity:1;visibility:visible}
 .proj-header{display:flex;justify-content:space-between;align-items:center;padding:20px var(--pad)}
@@ -158,38 +158,33 @@ body:not(.live-app) a, body:not(.live-app) button { cursor: pointer !important; 
 </head>
 <body>
 
-<!-- GRAIN & VIGNETTE -->
-<video class="bg-grain" autoplay muted loop playsinline><source src="data:video/mp4;base64,Grains_Base64_Ici" type="video/mp4"></video>
+<video class="bg-grain" autoplay muted loop playsinline><source src="grain.mp4" type="video/mp4"></video>
 <div class="vignette"></div>
 
-<!-- 1. LOCKSCREEN D'ACCUEIL -->
 <div class="enter" id="screen-lock">
-  <img src="data:image/png;base64,Logo_Blanc_Base64_Ici" class="logo" alt="JUDE FILMS">
+  <img src="logo-white.png" class="logo" alt="JUDE FILMS">
   <button class="enterbtn" id="btn-lock-enter">
     <span data-en="ENTER" data-fr="ENTRER">ENTER</span>
     <div class="arw">→</div>
   </button>
 </div>
 
-<!-- 2. LOADER INTRO -->
 <div class="loader-screen" id="screen-voldata">
-  <video id="voldata-video" muted playsinline><source src="data:video/mp4;base64,Voldata3_Base64_Ici" type="video/mp4"></video>
+  <video id="voldata-video" muted playsinline><source src="voldata3.mp4" type="video/mp4"></video>
   <div class="tint"></div>
   <button class="skip" id="btn-skip-loader" data-en="SKIP SEQUENCE" data-fr="PASSER L'INTRO">SKIP SEQUENCE</button>
 </div>
 
-<!-- SOURIS CUSTOM -->
 <div class="cursor" id="custom-cursor">
-  <img src="data:image/png;base64,Camera_Base64_Ici" id="curImg" alt="cursor">
+  <img src="cursor-camera.png" id="curImg" alt="cursor">
   <div class="ring"></div>
 </div>
 
-<!-- CONTAINER GENERAL -->
 <div class="app" id="app">
   <header class="topbar">
     <a href="#" class="brand" id="brand-home">
-      <img src="data:image/png;base64,Logo_Blanc_Base64_Ici" class="lg lg-w" alt="Jude">
-      <img src="data:image/png;base64,Logo_Rouge_Scribble_Base64_Ici" class="lg lg-r" alt="Jude Scribble">
+      <img src="logo-white.png" class="lg lg-w" alt="Jude">
+      <img src="logo-red.png" class="lg lg-r" alt="Jude Scribble">
     </a>
     <div class="barright">
       <div class="lang">
@@ -205,18 +200,15 @@ body:not(.live-app) a, body:not(.live-app) button { cursor: pointer !important; 
   </header>
 
   <main class="views">
-    <!-- PAGE 1 : FILMS (LISTE) -->
     <section class="view show" id="view-works">
       <div class="worklist" id="worklist-container"></div>
       <div class="preview" id="floating-preview"><div class="frame"></div></div>
     </section>
 
-    <!-- PAGE 2 : SERVICES -->
     <section class="view" id="view-services">
       <div class="serv-wrap" id="services-container"></div>
     </section>
 
-    <!-- PAGE 3 : ABOUT -->
     <section class="view" id="view-about">
       <div class="about-wrap">
         <div class="eyebrow" data-en="ABOUT — JUDE FILMS" data-fr="À PROPOS — JUDE FILMS">ABOUT — JUDE FILMS</div>
@@ -233,7 +225,6 @@ body:not(.live-app) a, body:not(.live-app) button { cursor: pointer !important; 
       </div>
     </section>
 
-    <!-- PAGE 4 : CONTACT -->
     <section class="view" id="view-contact">
       <div class="contact-wrap">
         <div class="eyebrow" data-en="CONTACT" data-fr="CONTACT">CONTACT</div>
@@ -250,7 +241,6 @@ body:not(.live-app) a, body:not(.live-app) button { cursor: pointer !important; 
   </main>
 </div>
 
-<!-- LE MENU LATÉRAL TRADUISIBLE -->
 <div class="scrim" id="scrim"></div>
 <div class="menu" id="side-menu">
   <button class="x" id="menu-close-btn"><span data-en="CLOSE" data-fr="FERMER">CLOSE</span></button>
@@ -262,7 +252,6 @@ body:not(.live-app) a, body:not(.live-app) button { cursor: pointer !important; 
   </nav>
 </div>
 
-<!-- MODALE DE VISIONNAGE DES FILMS -->
 <div class="proj-modal" id="proj-modal">
   <div class="proj-header">
     <h2 id="modal-title" style="font-family:var(--serif); margin:0; font-size:24px;"></h2>
@@ -275,7 +264,7 @@ body:not(.live-app) a, body:not(.live-app) button { cursor: pointer !important; 
 </div>
 
 <script>
-// BASE DE DONNÉES DES PROJETS AVEC RÔLES ET TYPES EN BILINGUE
+// BASE DE DONNÉES DES PROJETS BILINGUES
 const WORKS = [
   { id:"cannibale", title:"Cannibale", client:"FURIES", role_en:"Co-Director / DOP", role_fr:"Co-Réalisatrice / DOP", youtube:"g6HoFXZXr48", type_en:"Music Video", type_fr:"Clip" },
   { id:"bain-rouge", title:"Bain Rouge", client:"JUDE", role_en:"Director", role_fr:"Réalisatrice", youtube:"HY_Pc1MpKtY", type_en:"Music Video", type_fr:"Clip" },
@@ -290,7 +279,7 @@ const WORKS = [
   { id:"appel-manque", title:"Appel Manqué", client:"OTHERS", role_en:"Photographer & Director", role_fr:"Photographe & Réalisatrice", type_en:"Photography", type_fr:"Photographie", gallery:["malcolm-01.jpg","malcolm-02.jpg"], creds_en:"Model: Malcolm", creds_fr:"Modèle : Malcolm" }
 ];
 
-// DONNÉES SERVICES BILINGUES COULÉES DANS LA STRUCTURE
+// DONNÉES SERVICES BILINGUES
 const SERVICES = [
   { title_en:"Concept & Treatment", title_fr:"Concept & Traitement", desc_en:"Scriptwriting, storyboarding, and technical breakdown tailored to the artistic project.", desc_fr:"Écriture, story-board et découpage technique adapté à l'univers esthétique du projet." },
   { title_en:"Direction", title_fr:"Réalisation", desc_en:"Full vision orchestration, performance coaching, and sets direction.", desc_fr:"Gestion globale de la vision artistique, direction d'acteurs et mise en scène sur le plateau." },
@@ -300,8 +289,9 @@ const SERVICES = [
   { title_en:"Photography", title_fr:"Photographie", desc_en:"Artistic series, promotional visuals and cover art productions.", desc_fr:"Création de séries artistiques, visuels promotionnels, presskits et pochettes d'albums." }
 ];
 
-const CAM = "data:image/png;base64,Camera_Base64_Ici";
-const POP = "data:image/png;base64,Popcorn_Base64_Ici";
+// CONFIGURATION DES FICHIERS EXTERNES POUR LES CURSEURS (PLUGUÉS SUR TES PNG)
+const CAM = "cursor-camera.png";
+const POP = "cursor-popcorn.png";
 
 // MANAGEMENT DES ÉCRANS DE CHARGEMENT
 const screenLock = document.getElementById('screen-lock');
@@ -327,7 +317,7 @@ function unlockSite() {
   document.body.classList.add('live-app');
 }
 
-// MOUSE INERTIA ANIMATION
+// ANIMATION DU CURSEUR AVEC SOURIS
 const cur = document.getElementById('custom-cursor');
 const curImg = document.getElementById('curImg');
 let posX = 0, posY = 0, mouseX = 0, mouseY = 0;
@@ -388,7 +378,7 @@ function buildWorklist() {
   });
 }
 
-// INJECTION DES SERVICES DYNAMIQUE SELON LA LANGUE ACTIVE
+// INJECTION DES SERVICES
 const servicesContainer = document.getElementById('services-container');
 function buildServices() {
   const lang = document.documentElement.getAttribute('data-lang') || 'en';
@@ -400,7 +390,7 @@ function buildServices() {
   `).join('');
 }
 
-// OUVERTURE ET CONSTRUCTION DE LA MODALE PROJET (BILINGUE)
+// GESTION DE LA MODALE PROJET (BILINGUE)
 const modal = document.getElementById('proj-modal');
 const videoSlot = document.getElementById('modal-video-slot');
 const creditsSlot = document.getElementById('modal-credits-slot');
@@ -453,7 +443,7 @@ document.getElementById('modal-close-btn').addEventListener('click', () => {
   videoSlot.innerHTML = '';
 });
 
-// NAVIGATION ET MANIPULATION DES PANELS DE PAGE
+// NAVIGATION NAV PANEL
 const sideMenu = document.getElementById('side-menu');
 const scrim = document.getElementById('scrim');
 
@@ -486,7 +476,7 @@ document.getElementById('brand-home').addEventListener('click', (e) => {
   videoSlot.innerHTML = '';
 });
 
-// SYSTEME DE BASCULE BILINGUE SANS FAILLE (REFRESH AUTOMATIQUE DES TABLEAUX DYNAMIQUES)
+// SYSTEME DE LANGUES
 const langEn = document.getElementById('lang-en');
 const langFr = document.getElementById('lang-fr');
 
@@ -495,15 +485,12 @@ function switchLanguage(lang) {
   langEn.classList.toggle('on', lang === 'en');
   langFr.classList.toggle('on', lang === 'fr');
   
-  // Traduit tous les textes fixes équipés de data-en et data-fr
   document.querySelectorAll('[data-' + lang + ']').forEach(el => {
     el.innerHTML = el.getAttribute('data-' + lang);
   });
 
-  // Reconstruit la section Services avec la bonne langue
   buildServices();
   
-  // Si la modale film est ouverte au moment du switch, on met à jour ses libellés à la volée
   if (modal.classList.contains('open')) {
     const currentIdx = modal.getAttribute('data-current-index');
     if (currentIdx !== null) openModal(currentIdx);
@@ -513,7 +500,7 @@ function switchLanguage(lang) {
 langEn.addEventListener('click', () => switchLanguage('en'));
 langFr.addEventListener('click', () => switchLanguage('fr'));
 
-// INITIALISATION DU SITE
+// INIT
 buildWorklist();
 buildServices();
 </script>
