@@ -1,175 +1,521 @@
 <!doctype html>
-<html lang="fr">
+<html lang="en" data-lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>JUDE FILMS — Director / Réalisatrice</title>
-    <meta name="description" content="JUDE FILMS — independent director and musician. Music videos, live sessions, photography." />
-    
-    <!-- Polices -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;1,9..144,400&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --ink: #0a0807; 
-            --bone: #ECE7DD;
-            --smoke: #8a817b; 
-            --smoke-2: #56514c;
-            --red: #F4221A; 
-            --line: rgba(236,231,221,.13);
-            --serif: "Fraunces", Georgia, serif; 
-            --sans: "Space Grotesk", sans-serif;
-            --pad: clamp(20px, 4vw, 56px); 
-            --ease: cubic-bezier(.22,.61,.36,1);
-        }
-        
-        * { box-sizing: border-box; }
-        html, body { margin: 0; height: 100%; background: var(--ink); color: var(--bone); font-family: var(--sans); overflow-x: hidden; }
-        a { color: inherit; text-decoration: none; }
-        button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
-        ul { list-style: none; padding: 0; margin: 0; }
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>JUDE FILMS — Director / Réalisatrice</title>
+<meta name="description" content="JUDE FILMS — independent director and musician. Music videos, live sessions, photography. A grainy, cinematic, red-noir signature." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0a0807; --ink-2:#060403; --bone:#ECE7DD;
+  --smoke:#8a817b; --smoke-2:#56514c;
+  --red:#F4221A; --red-deep:#B5120C; --line:rgba(236,231,221,.13);
+  --serif:"Fraunces", Georgia, serif; --sans:"Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --pad: clamp(20px, 4vw, 56px); --ease: cubic-bezier(.22,.61,.36,1);
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+html{background:var(--ink)}
+body{font-family:var(--sans);color:var(--bone);background:var(--ink);-webkit-font-smoothing:antialiased;overflow:hidden}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+img{display:block;max-width:100%}
 
-        /* EFFETS CAMERA (Grain, Vignette, Scanlines) */
-        .vignette { position: fixed; inset: 0; pointer-events: none; z-index: 2; background: radial-gradient(circle at center, transparent 40%, rgba(0,0,0,0.8) 100%); }
-        .scanlines { position: fixed; inset: 0; pointer-events: none; z-index: 3; background: repeating-linear-gradient(to bottom, transparent 0, transparent 2px, rgba(0,0,0,0.1) 2px, rgba(0,0,0,0.1) 4px); }
-        
-        /* VIEWFINDER & REC */
-        .vf-rec { position: fixed; bottom: 24px; left: var(--pad); display: flex; align-items: center; gap: 9px; z-index: 55; pointer-events: none; font-size: 11px; letter-spacing: .26em; color: var(--red); text-shadow: 0 0 10px rgba(244,34,26,.6); }
-        .vf-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--red); box-shadow: 0 0 12px var(--red); animation: blink 1.3s infinite; }
-        .vf-tc { position: fixed; bottom: 24px; right: var(--pad); z-index: 55; pointer-events: none; font-variant-numeric: tabular-nums; font-size: 12px; letter-spacing: .18em; color: var(--red); }
-        @keyframes blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0.2; } }
+/* ---- FOND NETTOYÉ DE TOUT VISEUR OU CROIX ROUGE ---- */
+.bg-grain{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;
+  pointer-events:none;mix-blend-mode:hard-light;opacity:.45}
+.vignette{position:fixed;inset:0;pointer-events:none;z-index:2;
+  background:radial-gradient(125% 95% at 50% 42%, transparent 50%, rgba(0,0,0,.4) 85%, rgba(0,0,0,.85) 100%)}
 
-        /* TOPBAR & MENU */
-        .topbar { position: fixed; top: 0; width: 100%; z-index: 60; display: flex; justify-content: space-between; padding: 24px var(--pad); pointer-events: none; }
-        .topbar > * { pointer-events: auto; }
-        .brand { font-family: var(--serif); font-size: 24px; font-weight: 500; letter-spacing: 2px; }
-        .menu-btn { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; border: 1px solid var(--line); padding: 8px 16px; border-radius: 20px; transition: 0.3s; }
-        .menu-btn:hover { border-color: var(--red); color: var(--red); }
+/* ---- DESIGN DES CURSEURS NETTOYÉS ---- */
+.cursor{position:fixed;top:0;left:0;z-index:90;pointer-events:none;transform:translate(-50%,-50%);will-change:transform}
+.cursor img{width:54px;height:auto;display:block;filter:drop-shadow(0 3px 6px rgba(0,0,0,.6));transition:transform .3s}
+body.ctx-popcorn .cursor img { background: transparent !important; }
 
-        /* OVERLAY MENU */
-        .menu-overlay { position: fixed; inset: 0; background: rgba(10,8,7,0.95); z-index: 70; display: flex; flex-direction: column; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: 0.5s var(--ease); backdrop-filter: blur(5px); }
-        .menu-overlay.active { opacity: 1; pointer-events: auto; }
-        .menu-close { position: absolute; top: 24px; right: var(--pad); font-size: 12px; letter-spacing: 2px; border: 1px solid var(--smoke); padding: 8px 16px; border-radius: 20px; }
-        .menu-close:hover { border-color: var(--red); color: var(--red); }
-        .menu-links { text-align: center; display: flex; flex-direction: column; gap: 20px; }
-        .menu-links a { font-family: var(--serif); font-size: clamp(30px, 6vw, 60px); text-transform: uppercase; transition: 0.3s; }
-        .menu-links a:hover { color: var(--red); font-style: italic; }
+.cursor .ring{position:absolute;inset:50%;width:74px;height:74px;margin:-37px 0 0 -37px;border:1px solid var(--red);
+  border-radius:50%;opacity:0;transform:scale(.4);box-shadow:0 0 12px var(--red);transition:opacity .3s,transform .3s}
+body.cursor-view .cursor .ring{opacity:.85;transform:scale(1)}
+@media (hover:hover) and (pointer:fine){ body{cursor:none} a,button{cursor:none} }
+@media (hover:none),(pointer:coarse){ .cursor{display:none} body{cursor:auto} }
 
-        /* MAIN CONTENT - WORKS LIST */
-        .main-content { position: relative; z-index: 10; padding: 120px var(--pad) 100px; display: flex; flex-direction: column; justify-content: center; min-height: 100vh; }
-        .worklist { display: flex; flex-direction: column; gap: 10px; width: fit-content; margin: 0 auto; }
-        .wl-item { display: flex; align-items: baseline; gap: 20px; font-family: var(--serif); font-size: clamp(24px, 5vw, 64px); color: var(--smoke); transition: 0.4s; cursor: pointer; border-bottom: 1px solid transparent; padding-bottom: 5px; }
-        .wl-item .idx { font-family: var(--sans); font-size: 12px; color: var(--smoke-2); }
-        .wl-item .cli { font-family: var(--sans); font-size: 12px; letter-spacing: 2px; color: var(--red); opacity: 0; transform: translateX(-10px); transition: 0.4s; }
-        .wl-item:hover { color: var(--bone); transform: translateX(10px); border-bottom: 1px solid var(--red); }
-        .wl-item:hover .cli { opacity: 1; transform: translateX(0); }
+/* ---- 1. ÉCRAN DE VERROUILLAGE ---- */
+.enter{position:fixed;inset:0;z-index:95;background:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:42px;
+  transition:opacity .9s var(--ease),visibility .9s;}
+body:not(.live-app) { cursor: auto !important; }
+body:not(.live-app) a, body:not(.live-app) button { cursor: pointer !important; }
+.enter.gone{opacity:0;visibility:hidden;pointer-events:none}
+.enter .logo{width:clamp(220px,42vw,520px);filter:drop-shadow(0 0 40px rgba(0,0,0,.6))}
+.enterbtn{display:inline-flex;align-items:center;gap:16px;padding:13px 18px 13px 24px;border:1px solid var(--line);border-radius:2px;
+  font-size:12px;letter-spacing:.3em;color:var(--bone);transition:border-color .35s,color .35s,box-shadow .35s}
+.enterbtn:hover{border-color:var(--red);color:#fff;box-shadow:0 0 30px -8px var(--red)}
+.enterbtn .arw{display:grid;place-items:center;width:30px;height:24px;border:1px solid var(--line)}
+.enterbtn:hover .arw{border-color:var(--red)}
 
-        /* PREVIEW IMAGE ON HOVER */
-        .preview-box { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.9); width: clamp(250px, 40vw, 500px); aspect-ratio: 16/9; opacity: 0; pointer-events: none; transition: 0.4s var(--ease); z-index: 5; background-size: cover; background-position: center; border: 1px solid var(--line); }
-        .preview-box.show { opacity: 0.4; transform: translate(-50%, -50%) scale(1); }
+/* ---- 2. INTRO LOADER (VOLDATA3) ---- */
+.loader-screen{position:fixed;inset:0;z-index:90;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  opacity:0;visibility:hidden;transition:opacity .6s, visibility .6s}
+.loader-screen.active{opacity:1;visibility:visible}
+.loader-screen video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.loader-screen .tint{position:absolute;inset:0;background:var(--red);mix-blend-mode:multiply}
+.loader-screen .skip{position:absolute;bottom:30px;right:40px;z-index:2;font-size:10px;letter-spacing:.25em;color:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.2);padding:8px 16px;border-radius:2px}
+.loader-screen .skip:hover{color:#fff;border-color:var(--red)}
 
-        /* INTRO SCREEN */
-        .enter-screen { position: fixed; inset: 0; z-index: 90; background: var(--ink); display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 1s, visibility 1s; }
-        .enter-screen.hidden { opacity: 0; visibility: hidden; }
-        .enter-btn { border: 1px solid var(--line); padding: 12px 30px; letter-spacing: 3px; font-size: 12px; transition: 0.4s; border-radius: 4px; }
-        .enter-btn:hover { border-color: var(--red); color: var(--red); box-shadow: 0 0 15px rgba(244,34,26,0.3); }
+/* ---- INTERFACE DE L'APPLICATION ---- */
+.app{position:fixed;inset:0;display:flex;flex-direction:column;opacity:0;transition:opacity .9s var(--ease);z-index:10}
+.app.live{opacity:1}
+.topbar{position:relative;z-index:56;display:flex;align-items:center;justify-content:space-between;padding:22px var(--pad);flex:0 0 auto}
+.brand{position:relative;display:inline-block;width:clamp(108px,12vw,150px);height:26px}
+.brand .lg{position:absolute;left:0;top:50%;width:100%;height:auto;transition:opacity .28s,transform .35s}
+.brand .lg-w{transform:translateY(-50%)}
+.brand .lg-r{transform:translateY(-50%) rotate(-2deg) scale(1.04);opacity:0}
+.brand:hover .lg-w{opacity:0}
+.brand:hover .lg-r{opacity:1}
 
-    </style>
+.barright{display:flex;align-items:center;gap:26px}
+.lang{display:flex;align-items:center;gap:7px;font-size:11px;letter-spacing:.2em}
+.lang button{color:var(--smoke-2);transition:color .3s;padding:4px 2px}
+.lang button.on{color:var(--bone)}
+.lang button.on::after{content:"";display:block;height:1px;background:var(--red);margin-top:3px}
+.menubtn{display:flex;align-items:center;gap:11px;font-size:12px;letter-spacing:.26em;color:var(--bone)}
+.menubtn .bars{display:inline-grid;gap:4px}
+.menubtn .bars i{display:block;width:24px;height:1.5px;background:var(--bone);transition:transform .35s}
+.menubtn:hover .bars i:first-child{transform:translateX(-3px)}
+
+/* ---- MENU ROUGE ORIGINAL ---- */
+.menu{position:fixed;top:0;right:0;bottom:0;z-index:70;width:min(460px,88vw);background:var(--red);color:#fff;
+  transform:translateX(100%);transition:transform .6s var(--ease);display:flex;flex-direction:column;justify-content:center;padding:0 clamp(34px,5vw,66px)}
+.menu.open{transform:none}
+.menu .x{position:absolute;top:26px;right:clamp(34px,5vw,66px);display:flex;align-items:center;gap:12px;font-size:12px;letter-spacing:.26em;color:#fff}
+.menu nav{display:flex;flex-direction:column;gap:14px}
+.menu nav a{font-family:var(--sans);font-weight:700;text-transform:uppercase;font-size:clamp(28px,4.5vw,44px);color:#fff;transition:color .25s,transform .35s}
+.menu nav a:hover{color:#000;transform:translateX(10px)}
+.scrim{position:fixed;inset:0;z-index:65;background:rgba(0,0,0,.6);opacity:0;visibility:hidden;transition:.5s}
+.scrim.on{opacity:1;visibility:visible}
+
+/* ---- PAGES / PANELS ---- */
+.views{position:relative;flex:1 1 auto;min-height:0}
+.view{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity .5s var(--ease);overflow:auto;padding:clamp(20px,4vh,60px) var(--pad) 80px}
+.view.show{opacity:1;visibility:visible}
+.view::-webkit-scrollbar{width:0}
+
+/* PAGE 1 : FILMS (LIST WITH DYNAMIC HOVER PREVIEW) */
+#view-works{display:flex;align-items:center;justify-content:center}
+.worklist{display:flex;flex-direction:column;gap:4px;width:max-content;max-width:100%}
+.wl-item{position:relative;display:flex;align-items:baseline;gap:18px;width:max-content;font-family:var(--serif);font-weight:500;line-height:1.1;color:var(--smoke);
+  font-size:clamp(22px,3.8vw,46px);letter-spacing:-.01em;transition:color .3s,transform .4s;padding:4px 0;text-align:left}
+.wl-item .idx{font-family:var(--sans);font-weight:400;font-size:11px;letter-spacing:.18em;color:var(--smoke-2);transform:translateY(-.4em)}
+.wl-item .cli{font-family:var(--sans);font-weight:400;font-size:11px;letter-spacing:.16em;color:var(--smoke-2);opacity:0;transform:translateX(-8px);transition:.4s}
+.wl-item:hover{color:var(--bone);transform:translateX(10px)}
+.wl-item:hover .cli{opacity:1;transform:none;color:var(--red)}
+
+.preview{position:fixed;z-index:40;width:clamp(220px,26vw,380px);aspect-ratio:16/9;pointer-events:none;opacity:0;transform:scale(.9);
+  transition:opacity .3s,transform .4s var(--ease);border:1px solid var(--line);overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,0.8)}
+.preview.on{opacity:1;transform:scale(1)}
+.preview .frame{position:absolute;inset:0;background-size:cover;background-position:center}
+
+/* PAGE 2 : SERVICES (SANS ARTEFACT ET ENTIÈREMENT DYNAMIQUE) */
+.serv-wrap{max-width:900px;margin:0 auto;padding-top:40px}
+.serv-item{display:grid;grid-template-columns:240px 1fr;gap:20px;padding:30px 0;border-bottom:1px solid var(--line)}
+.serv-title{font-family:var(--serif);font-size:24px;font-style:italic;color:var(--red)}
+.serv-desc{font-size:15px;line-height:1.6;color:#cfcabf}
+
+/* PAGE 3 : ABOUT (NETTOYÉ, SANS PHOTO) */
+.about-wrap{max-width:760px;margin:0 auto;padding-top:40px}
+.eyebrow{font-size:11px;letter-spacing:.4em;color:var(--red);margin-bottom:24px;text-transform:uppercase}
+.about-lede{font-family:var(--serif);font-weight:300;font-size:clamp(22px,2.8vw,34px);line-height:1.3;color:var(--bone)}
+.about-lede em{font-style:italic;color:var(--red)}
+.about-block{margin-top:34px;display:grid;grid-template-columns:120px 1fr;gap:14px 24px;border-top:1px solid var(--line);padding-top:26px}
+.about-block .lab{font-size:11px;letter-spacing:.26em;color:var(--smoke)}
+.about-block p{margin:0;font-size:15px;line-height:1.65;color:#cfcabf}
+.music-link{display:inline-flex;align-items:center;gap:10px;margin-top:30px;padding:12px 24px;border:1px solid var(--red);
+  font-size:11px;letter-spacing:.26em;color:var(--bone);transition:all .3s}
+.music-link:hover{background:var(--red);color:#fff;box-shadow:0 0 20px rgba(244,34,26,0.4)}
+
+/* PAGE 4 : CONTACT COMPLET (TRADUISIBLE) */
+.contact-wrap{max-width:600px;margin:0 auto;text-align:center;padding-top:60px}
+.contact-links{display:flex;justify-content:center;gap:30px;margin-top:40px}
+.contact-links a{font-size:14px;letter-spacing:2px;text-transform:uppercase;border-bottom:1px solid transparent;transition:.3s;padding-bottom:4px}
+.contact-links a:hover{color:var(--red);border-color:var(--red)}
+
+/* MODALE PROJETS (STYLE ENTIÈREMENT TRADUISIBLE) */
+.proj-modal{position:fixed;inset:0;z-index:100;background:var(--ink-2);opacity:0;visibility:hidden;transition:opacity .5s var(--ease);display:flex;flex-direction:column}
+.proj-modal.open{opacity:1;visibility:visible}
+.proj-header{display:flex;justify-content:space-between;align-items:center;padding:20px var(--pad)}
+.proj-body{flex:1;display:grid;grid-template-columns:1fr 340px;gap:40px;padding:0 var(--pad) 40px;min-height:0}
+@media(max-width:900px){ .proj-body{grid-template-columns:1fr;overflow-y:auto} .proj-credits{overflow-y:visible} }
+.video-container{width:100%;height:100%;background:#000;position:relative;aspect-ratio:16/9}
+.video-container iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+.proj-credits{display:flex;flex-direction:column;gap:16px;overflow-y:auto}
+.credit-row{border-bottom:1px solid var(--line);padding-bottom:10px}
+.credit-label{font-size:11px;color:var(--smoke);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.credit-value{font-size:15px;color:var(--bone)}
+.photo-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:15px}
+.photo-grid img{width:100%;height:auto;object-fit:cover;border:1px solid var(--line)}
+</style>
 </head>
 <body>
 
-    <!-- ECRAN D'ENTREE -->
-    <div class="enter-screen" id="enterScreen">
-        <h1 style="font-family: var(--serif); font-size: clamp(30px, 5vw, 50px); margin-bottom: 40px; font-weight: 300;">JUDE FILMS</h1>
-        <button class="enter-btn" onclick="startExperience()">ENTER</button>
+<!-- GRAIN & VIGNETTE -->
+<video class="bg-grain" autoplay muted loop playsinline><source src="data:video/mp4;base64,Grains_Base64_Ici" type="video/mp4"></video>
+<div class="vignette"></div>
+
+<!-- 1. LOCKSCREEN D'ACCUEIL -->
+<div class="enter" id="screen-lock">
+  <img src="data:image/png;base64,Logo_Blanc_Base64_Ici" class="logo" alt="JUDE FILMS">
+  <button class="enterbtn" id="btn-lock-enter">
+    <span data-en="ENTER" data-fr="ENTRER">ENTER</span>
+    <div class="arw">→</div>
+  </button>
+</div>
+
+<!-- 2. LOADER INTRO -->
+<div class="loader-screen" id="screen-voldata">
+  <video id="voldata-video" muted playsinline><source src="data:video/mp4;base64,Voldata3_Base64_Ici" type="video/mp4"></video>
+  <div class="tint"></div>
+  <button class="skip" id="btn-skip-loader" data-en="SKIP SEQUENCE" data-fr="PASSER L'INTRO">SKIP SEQUENCE</button>
+</div>
+
+<!-- SOURIS CUSTOM -->
+<div class="cursor" id="custom-cursor">
+  <img src="data:image/png;base64,Camera_Base64_Ici" id="curImg" alt="cursor">
+  <div class="ring"></div>
+</div>
+
+<!-- CONTAINER GENERAL -->
+<div class="app" id="app">
+  <header class="topbar">
+    <a href="#" class="brand" id="brand-home">
+      <img src="data:image/png;base64,Logo_Blanc_Base64_Ici" class="lg lg-w" alt="Jude">
+      <img src="data:image/png;base64,Logo_Rouge_Scribble_Base64_Ici" class="lg lg-r" alt="Jude Scribble">
+    </a>
+    <div class="barright">
+      <div class="lang">
+        <button id="lang-en" class="on">EN</button>
+        <span class="sep">/</span>
+        <button id="lang-fr">FR</button>
+      </div>
+      <button class="menubtn" id="menu-open-btn">
+        <span data-en="MENU" data-fr="MENU">MENU</span>
+        <div class="bars"><i></i><i></i></div>
+      </button>
     </div>
+  </header>
 
-    <!-- OVERLAYS CAMERA -->
-    <div class="vignette"></div>
-    <div class="scanlines"></div>
+  <main class="views">
+    <!-- PAGE 1 : FILMS (LISTE) -->
+    <section class="view show" id="view-works">
+      <div class="worklist" id="worklist-container"></div>
+      <div class="preview" id="floating-preview"><div class="frame"></div></div>
+    </section>
 
-    <div class="vf-rec">
-        <div class="vf-dot"></div> REC
+    <!-- PAGE 2 : SERVICES -->
+    <section class="view" id="view-services">
+      <div class="serv-wrap" id="services-container"></div>
+    </section>
+
+    <!-- PAGE 3 : ABOUT -->
+    <section class="view" id="view-about">
+      <div class="about-wrap">
+        <div class="eyebrow" data-en="ABOUT — JUDE FILMS" data-fr="À PROPOS — JUDE FILMS">ABOUT — JUDE FILMS</div>
+        <div class="about-lede" data-en="Building narratives <em>one frame at a time</em>. It's all about depth, rhythm, and meaning." data-fr="Construire des récits <em>une image à la fois</em>. Tout est une question de profondeur, de rythme et de sens.">
+          Building narratives <em>one frame at a time</em>. It's all about depth, rhythm, and meaning.
+        </div>
+        <div class="about-block">
+          <div class="lab" data-en="THE PERSON" data-fr="LE PROFIL">THE PERSON</div>
+          <p data-en="Independent director, cinematographer and editor. Specialized in music universes, crafting cinematic worlds driven entirely by sound, energy and purpose." data-fr="Réalisatrice, chef opératrice et monteuse indépendante. Spécialisée dans les univers musicaux, créant des mondes cinématographiques entièrement guidés par le son, l'énergie et le sens.">
+            Independent director, cinematographer and editor. Specialized in music universes, crafting cinematic worlds driven entirely by sound, energy and purpose.
+          </p>
+        </div>
+        <a href="https://jude-music.com" target="_blank" class="music-link" data-en="DISCOVER MY MUSIC" data-fr="DÉCOUVRIR MA MUSIQUE">DISCOVER MY MUSIC</a>
+      </div>
+    </section>
+
+    <!-- PAGE 4 : CONTACT -->
+    <section class="view" id="view-contact">
+      <div class="contact-wrap">
+        <div class="eyebrow" data-en="CONTACT" data-fr="CONTACT">CONTACT</div>
+        <h2 style="font-family:var(--serif); font-size:clamp(22px, 4vw, 36px); font-weight:300;">contact@jude-films.com</h2>
+        <p data-en="Music Videos · Live Sessions · Photography" data-fr="Clips · Live Sessions · Photographie" style="color:var(--smoke); margin-top:12px; letter-spacing:1px;">
+          Music Videos · Live Sessions · Photography
+        </p>
+        <div class="contact-links">
+          <a href="https://instagram.com" target="_blank">Instagram</a>
+          <a href="https://youtube.com" target="_blank">YouTube</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- LE MENU LATÉRAL TRADUISIBLE -->
+<div class="scrim" id="scrim"></div>
+<div class="menu" id="side-menu">
+  <button class="x" id="menu-close-btn"><span data-en="CLOSE" data-fr="FERMER">CLOSE</span></button>
+  <nav>
+    <a href="#" data-target="view-works" data-en="FILMS" data-fr="FILMS">FILMS</a>
+    <a href="#" data-target="view-services" data-en="SERVICES" data-fr="SERVICES">SERVICES</a>
+    <a href="#" data-target="view-about" data-en="ABOUT" data-fr="À PROPOS">ABOUT</a>
+    <a href="#" data-target="view-contact" data-en="CONTACT" data-fr="CONTACT">CONTACT</a>
+  </nav>
+</div>
+
+<!-- MODALE DE VISIONNAGE DES FILMS -->
+<div class="proj-modal" id="proj-modal">
+  <div class="proj-header">
+    <h2 id="modal-title" style="font-family:var(--serif); margin:0; font-size:24px;"></h2>
+    <button id="modal-close-btn" style="letter-spacing:2px; font-size:12px;" data-en="[ CLOSE ]" data-fr="[ FERMER ]">[ CLOSE ]</button>
+  </div>
+  <div class="proj-body">
+    <div class="video-container" id="modal-video-slot"></div>
+    <div class="proj-credits" id="modal-credits-slot"></div>
+  </div>
+</div>
+
+<script>
+// BASE DE DONNÉES DES PROJETS AVEC RÔLES ET TYPES EN BILINGUE
+const WORKS = [
+  { id:"cannibale", title:"Cannibale", client:"FURIES", role_en:"Co-Director / DOP", role_fr:"Co-Réalisatrice / DOP", youtube:"g6HoFXZXr48", type_en:"Music Video", type_fr:"Clip" },
+  { id:"bain-rouge", title:"Bain Rouge", client:"JUDE", role_en:"Director", role_fr:"Réalisatrice", youtube:"HY_Pc1MpKtY", type_en:"Music Video", type_fr:"Clip" },
+  { id:"evergreen", title:"Evergreen", client:"JUDE", role_en:"Director", role_fr:"Réalisatrice", youtube:"ArP71Qkisj4", type_en:"Music Video", type_fr:"Clip", gallery:["evergreen-01.jpg","evergreen-02.jpg"], creds_en:"Artistic Direction JUDE FILMS / Photography Philomène Piquet-Gauthier / Makeup MAXDESEUM", creds_fr:"Direction Artistique JUDE FILMS / Photographie Philomène Piquet-Gauthier / Maquillage MAXDESEUM" },
+  { id:"unleash", title:"Unleash the Fury", client:"BLACKRAIN", role_en:"Director of Photography", role_fr:"Chef Opératrice", youtube:"c55ODDo8vVY", type_en:"Music Video", type_fr:"Clip" },
+  { id:"ifthisislove", title:"If This Is Love", client:"BLACKRAIN", role_en:"Director of Photography", role_fr:"Chef Opératrice", youtube:"2XJw75pRFec", type_en:"Music Video", type_fr:"Clip" },
+  { id:"resurrection", title:"Resurrection", client:"BLACKRAIN (by Jerem G)", role_en:"Director of Photography", role_fr:"Chef Opératrice", youtube:"2j27nKpYuoQ", type_en:"Music Video", type_fr:"Clip" },
+  { id:"kill-you", title:"Kill You 'till You Die", client:"CHEY 'N' SHINERS", role_en:"Camera / DOP", role_fr:"Cadreuse / DOP", youtube:"D7XQAjJffuU", type_en:"Music Video", type_fr:"Clip" },
+  { id:"last-night", title:"Last Night Was A Better Night", client:"CHEY 'N' SHINERS", role_en:"Camera / DOP", role_fr:"Cadreuse / DOP", youtube:"IA9D7lPEIuk", type_en:"Music Video", type_fr:"Clip", gallery:["last-night-01.jpg","last-night-02.jpg"] },
+  { id:"critical-pint", title:"What a Big Question", client:"CRITICAL PINT", role_en:"Director, Editor", role_fr:"Réalisatrice & Monteuse", youtube:"xDQGliGCB9E", type_en:"Music Video", type_fr:"Clip" },
+  { id:"promethee", title:"Prométhée", client:"COEURBEAU", role_en:"Director & Editor", role_fr:"Réalisation & Montage", youtube:"YORFuxiPtgM", type_en:"Live Session", type_fr:"Live Session" },
+  { id:"appel-manque", title:"Appel Manqué", client:"OTHERS", role_en:"Photographer & Director", role_fr:"Photographe & Réalisatrice", type_en:"Photography", type_fr:"Photographie", gallery:["malcolm-01.jpg","malcolm-02.jpg"], creds_en:"Model: Malcolm", creds_fr:"Modèle : Malcolm" }
+];
+
+// DONNÉES SERVICES BILINGUES COULÉES DANS LA STRUCTURE
+const SERVICES = [
+  { title_en:"Concept & Treatment", title_fr:"Concept & Traitement", desc_en:"Scriptwriting, storyboarding, and technical breakdown tailored to the artistic project.", desc_fr:"Écriture, story-board et découpage technique adapté à l'univers esthétique du projet." },
+  { title_en:"Direction", title_fr:"Réalisation", desc_en:"Full vision orchestration, performance coaching, and sets direction.", desc_fr:"Gestion globale de la vision artistique, direction d'acteurs et mise en scène sur le plateau." },
+  { title_en:"Cinematography", title_fr:"Image / Caméra", desc_en:"Camera operating and lighting design focused on deep cinematic visuals.", desc_fr:"Cadrage, mouvements caméra et création de lumières soignées axées sur un rendu cinéma profond." },
+  { title_en:"Editing & Color", title_fr:"Montage & Étalonnage", desc_en:"Rhythmic narrative editing and rich color grading to complete the mood.", desc_fr:"Montage rythmique narratif et application méticuleuse des teintes pour parfaire l'univers du film." },
+  { title_en:"Music & Original Score", title_fr:"Création Musicale & OST", desc_en:"Composing original soundtracks and sound designs tailored to the film's pulse.", desc_fr:"Composition de bandes-son originales et sound design sur mesure calés sur le pouls du film." },
+  { title_en:"Photography", title_fr:"Photographie", desc_en:"Artistic series, promotional visuals and cover art productions.", desc_fr:"Création de séries artistiques, visuels promotionnels, presskits et pochettes d'albums." }
+];
+
+const CAM = "data:image/png;base64,Camera_Base64_Ici";
+const POP = "data:image/png;base64,Popcorn_Base64_Ici";
+
+// MANAGEMENT DES ÉCRANS DE CHARGEMENT
+const screenLock = document.getElementById('screen-lock');
+const btnLockEnter = document.getElementById('btn-lock-enter');
+const screenVoldata = document.getElementById('screen-voldata');
+const voldataVideo = document.getElementById('voldata-video');
+const btnSkipLoader = document.getElementById('btn-skip-loader');
+const app = document.getElementById('app');
+
+btnLockEnter.addEventListener('click', () => {
+  screenLock.classList.add('gone');
+  screenVoldata.classList.add('active');
+  voldataVideo.play().catch(unlockSite);
+});
+
+voldataVideo.addEventListener('ended', unlockSite);
+btnSkipLoader.addEventListener('click', unlockSite);
+
+function unlockSite() {
+  screenVoldata.classList.remove('active');
+  screenVoldata.classList.add('gone');
+  app.classList.add('live');
+  document.body.classList.add('live-app');
+}
+
+// MOUSE INERTIA ANIMATION
+const cur = document.getElementById('custom-cursor');
+const curImg = document.getElementById('curImg');
+let posX = 0, posY = 0, mouseX = 0, mouseY = 0;
+
+window.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; });
+
+function animateCursor() {
+  posX += (mouseX - posX) * 0.2;
+  posY += (mouseY - posY) * 0.2;
+  cur.style.transform = `translate3d(${posX}px, ${posY}px, 0)`;
+  requestAnimationFrame(animateCursor);
+}
+animateCursor();
+
+function adaptCursor(viewId) {
+  if (viewId === 'view-about' || viewId === 'view-contact') {
+    curImg.src = POP;
+    document.body.classList.add('ctx-popcorn');
+  } else {
+    curImg.src = CAM;
+    document.body.classList.remove('ctx-popcorn');
+  }
+}
+
+// INJECTION DES FILMS & HOVER DYNAMIQUE
+const worklistContainer = document.getElementById('worklist-container');
+const floatingPreview = document.getElementById('floating-preview');
+const previewFrame = floatingPreview.querySelector('.frame');
+
+function buildWorklist() {
+  worklistContainer.innerHTML = WORKS.map((w, index) => {
+    const poster = w.youtube ? `https://img.youtube.com/vi/${w.youtube}/maxresdefault.jpg` : 'data:image/png;base64,Placeholder';
+    return `
+      <button class="wl-item" data-index="${index}" data-poster="${poster}">
+        <span class="idx">${String(index + 1).padStart(2, '0')}/</span>
+        ${w.title.toUpperCase()}
+        <span class="cli">${w.client}</span>
+      </button>
+    `;
+  }).join('');
+
+  const items = worklistContainer.querySelectorAll('.wl-item');
+  items.forEach(item => {
+    item.addEventListener('mouseenter', () => {
+      previewFrame.style.backgroundImage = `url('${item.getAttribute('data-poster')}')`;
+      floatingPreview.classList.add('on');
+      document.body.classList.add('cursor-view');
+    });
+    item.addEventListener('mousemove', (e) => {
+      floatingPreview.style.left = `${e.clientX + 25}px`;
+      floatingPreview.style.top = `${e.clientY + 15}px`;
+    });
+    item.addEventListener('mouseleave', () => {
+      floatingPreview.classList.remove('on');
+      document.body.classList.remove('cursor-view');
+    });
+    item.addEventListener('click', () => openModal(item.getAttribute('data-index')));
+  });
+}
+
+// INJECTION DES SERVICES DYNAMIQUE SELON LA LANGUE ACTIVE
+const servicesContainer = document.getElementById('services-container');
+function buildServices() {
+  const lang = document.documentElement.getAttribute('data-lang') || 'en';
+  servicesContainer.innerHTML = SERVICES.map(s => `
+    <div class="serv-item">
+      <div class="serv-title">${lang === 'fr' ? s.title_fr : s.title_en}</div>
+      <div class="serv-desc">${lang === 'fr' ? s.desc_fr : s.desc_en}</div>
     </div>
-    <div class="vf-tc" id="timecode">00:00:00:00</div>
+  `).join('');
+}
 
-    <!-- TOPBAR -->
-    <header class="topbar">
-        <div class="brand">JUDE</div>
-        <button class="menu-btn" onclick="toggleMenu()">Menu</button>
-    </header>
+// OUVERTURE ET CONSTRUCTION DE LA MODALE PROJET (BILINGUE)
+const modal = document.getElementById('proj-modal');
+const videoSlot = document.getElementById('modal-video-slot');
+const creditsSlot = document.getElementById('modal-credits-slot');
+const modalTitle = document.getElementById('modal-title');
 
-    <!-- MENU OVERLAY -->
-    <div class="menu-overlay" id="menuOverlay">
-        <button class="menu-close" onclick="toggleMenu()">CLOSE</button>
-        <nav class="menu-links">
-            <a href="#" onclick="toggleMenu()">Works</a>
-            <a href="#" onclick="toggleMenu()">About</a>
-            <a href="#" onclick="toggleMenu()">Services</a>
-            <a href="mailto:contact@jude-films.com">Contact</a>
-        </nav>
-    </div>
+function openModal(index) {
+  const proj = WORKS[index];
+  const lang = document.documentElement.getAttribute('data-lang') || 'en';
+  modal.setAttribute('data-current-index', index);
+  modalTitle.textContent = proj.title.toUpperCase();
+  
+  if (proj.youtube) {
+    videoSlot.innerHTML = `<iframe src="https://www.youtube.com/embed/${proj.youtube}?autoplay=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+  } else {
+    videoSlot.innerHTML = `<div style="display:grid; place-items:center; height:100%; color:var(--smoke); font-size:12px; letter-spacing:1px;">PHOTOGRAPHY SERIES</div>`;
+  }
 
-    <!-- IMAGE PREVIEW -->
-    <div class="preview-box" id="previewBox"></div>
+  const roleLabel = lang === 'fr' ? "Rôle" : "Role";
+  const typeLabel = lang === 'fr' ? "Format" : "Type";
+  const roleValue = lang === 'fr' ? proj.role_fr : proj.role_en;
+  const typeValue = lang === 'fr' ? proj.type_fr : proj.type_en;
+  const credsValue = lang === 'fr' ? (proj.creds_fr || proj.creds_en) : proj.creds_en;
 
-    <!-- CONTENU PRINCIPAL -->
-    <main class="main-content">
-        <ul class="worklist">
-            <li class="wl-item" data-img="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&q=80&w=1000">
-                <span class="idx">01</span> Projet Alpha <span class="cli">Clip Musical</span>
-            </li>
-            <li class="wl-item" data-img="https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&q=80&w=1000">
-                <span class="idx">02</span> The Neon Live <span class="cli">Live Session</span>
-            </li>
-            <li class="wl-item" data-img="https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?auto=format&fit=crop&q=80&w=1000">
-                <span class="idx">03</span> Sombre Rêve <span class="cli">Court Métrage</span>
-            </li>
-            <li class="wl-item" data-img="https://images.unsplash.com/photo-1621252179027-94459d278660?auto=format&fit=crop&q=80&w=1000">
-                <span class="idx">04</span> Echoes <span class="cli">Documentaire</span>
-            </li>
-        </ul>
-    </main>
+  let credsHTML = `
+    <div class="credit-row"><div class="credit-label">Client</div><div class="credit-value">${proj.client}</div></div>
+    <div class="credit-row"><div class="credit-label">${roleLabel}</div><div class="credit-value">${roleValue}</div></div>
+    <div class="credit-row"><div class="credit-label">${typeLabel}</div><div class="credit-value">${typeValue}</div></div>
+  `;
 
-    <!-- SCRIPTS -->
-    <script>
-        // 1. Bouton "Enter" de l'intro
-        function startExperience() {
-            document.getElementById('enterScreen').classList.add('hidden');
-        }
+  if (proj.gallery) {
+    credsHTML += `
+      <div class="credit-row"><div class="credit-label">Press / Visuals</div>
+        <div class="photo-grid">
+          ${proj.gallery.map(img => `<img src="photos/${img}" onerror="this.src='https://images.unsplash.com/photo-1542204172-e70528095627?q=80&w=400'" alt="Press">`).join('')}
+        </div>
+      </div>
+    `;
+  }
 
-        // 2. Menu Toggle
-        function toggleMenu() {
-            document.getElementById('menuOverlay').classList.toggle('active');
-        }
+  if (credsValue) {
+    credsHTML += `<div class="credit-row"><div class="credit-label">Credits</div><div class="credit-value" style="font-size:12px; line-height:1.4; color:#aaa;">${credsValue}</div></div>`;
+  }
 
-        // 3. Timecode dynamique (format hh:mm:ss:ff)
-        function updateTimecode() {
-            const now = new Date();
-            const h = String(now.getHours()).padStart(2, '0');
-            const m = String(now.getMinutes()).padStart(2, '0');
-            const s = String(now.getSeconds()).padStart(2, '0');
-            const frames = String(Math.floor(Math.random() * 24)).padStart(2, '0'); // Simule les frames à 24fps
-            document.getElementById('timecode').textContent = `${h}:${m}:${s}:${frames}`;
-        }
-        setInterval(updateTimecode, 1000 / 24); // Met à jour 24 fois par seconde
+  creditsSlot.innerHTML = credsHTML;
+  modal.classList.add('open');
+}
 
-        // 4. Aperçu des images au survol des projets
-        const items = document.querySelectorAll('.wl-item');
-        const previewBox = document.getElementById('previewBox');
+document.getElementById('modal-close-btn').addEventListener('click', () => {
+  modal.classList.remove('open');
+  videoSlot.innerHTML = '';
+});
 
-        items.forEach(item => {
-            item.addEventListener('mouseenter', () => {
-                const imgUrl = item.getAttribute('data-img');
-                previewBox.style.backgroundImage = `url(${imgUrl})`;
-                previewBox.classList.add('show');
-            });
-            item.addEventListener('mouseleave', () => {
-                previewBox.classList.remove('show');
-            });
-        });
-    </script>
+// NAVIGATION ET MANIPULATION DES PANELS DE PAGE
+const sideMenu = document.getElementById('side-menu');
+const scrim = document.getElementById('scrim');
+
+function toggleMenu(state) {
+  sideMenu.classList.toggle('open', state);
+  scrim.classList.toggle('on', state);
+}
+
+document.getElementById('menu-open-btn').addEventListener('click', () => toggleMenu(true));
+document.getElementById('menu-close-btn').addEventListener('click', () => toggleMenu(false));
+scrim.addEventListener('click', () => toggleMenu(false));
+
+sideMenu.querySelectorAll('nav a').forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    const target = link.getAttribute('data-target');
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('show'));
+    document.getElementById(target).classList.add('show');
+    adaptCursor(target);
+    toggleMenu(false);
+  });
+});
+
+document.getElementById('brand-home').addEventListener('click', (e) => {
+  e.preventDefault();
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('show'));
+  document.getElementById('view-works').classList.add('show');
+  adaptCursor('view-works');
+  modal.classList.remove('open');
+  videoSlot.innerHTML = '';
+});
+
+// SYSTEME DE BASCULE BILINGUE SANS FAILLE (REFRESH AUTOMATIQUE DES TABLEAUX DYNAMIQUES)
+const langEn = document.getElementById('lang-en');
+const langFr = document.getElementById('lang-fr');
+
+function switchLanguage(lang) {
+  document.documentElement.setAttribute('data-lang', lang);
+  langEn.classList.toggle('on', lang === 'en');
+  langFr.classList.toggle('on', lang === 'fr');
+  
+  // Traduit tous les textes fixes équipés de data-en et data-fr
+  document.querySelectorAll('[data-' + lang + ']').forEach(el => {
+    el.innerHTML = el.getAttribute('data-' + lang);
+  });
+
+  // Reconstruit la section Services avec la bonne langue
+  buildServices();
+  
+  // Si la modale film est ouverte au moment du switch, on met à jour ses libellés à la volée
+  if (modal.classList.contains('open')) {
+    const currentIdx = modal.getAttribute('data-current-index');
+    if (currentIdx !== null) openModal(currentIdx);
+  }
+}
+
+langEn.addEventListener('click', () => switchLanguage('en'));
+langFr.addEventListener('click', () => switchLanguage('fr'));
+
+// INITIALISATION DU SITE
+buildWorklist();
+buildServices();
+</script>
 </body>
 </html>
