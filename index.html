@@ -159,25 +159,6 @@ img { display: block; max-width: 100%; }
   </button>
 </div>
 
-// PARTICULES INTEGRÉES DIRECTEMENT
-window.addEventListener('load', () => {
-  if (typeof particlesJS !== 'undefined') {
-    particlesJS('particles-js', {
-      "particles": {
-        "number": { "value": 40, "density": { "enable": true, "value_area": 800 } },
-        "color": { "value": "#8a817b" },
-        "shape": { "type": "circle" },
-        "opacity": { "value": 0.3, "random": true },
-        "size": { "value": 2, "random": true },
-        "line_linked": { "enable": false },
-        "move": { "enable": true, "speed": 1, "direction": "none", "random": true, "out_mode": "out" }
-      },
-      "interactivity": { "detect_on": "canvas", "events": { "onclick": { "enable": false } } },
-      "retina_detect": true
-    });
-  }
-});
-  
 <!-- CONTAINER APPLICATION -->
 <div class="app" id="app">
   <header class="topbar">
@@ -285,10 +266,10 @@ const WORKS = [
   { id:"kill-you", title:"Kill You 'till You Die", client:"CHEY 'N' SHINERS", role_en:"Camera / DOP", role_fr:"Cadreuse / DOP", youtube:"D7XQAjJffuU", type_en:"Music Video", type_fr:"Clip" },
   { id:"bain-rouge", title:"Bain Rouge", client:"JUDE", role_en:"Director", role_fr:"Réalisatrice", youtube:"HY_Pc1MpKtY", type_en:"Music Video", type_fr:"Clip" },
   { id:"resurrection", title:"Resurrection", client:"BLACKRAIN (by Jerem G)", role_en:"Director of Photography", role_fr:"Chef Opératrice", youtube:"2j27nKpYuoQ", type_en:"Music Video", type_fr:"Clip" },
-  { id:"last-night", title:"Last Night Was A Better Night", client:"CHEY 'N' SHINERS", role_en:"Camera / DOP", role_fr:"Cadreuse / DOP", youtube:"IA9D7lPEIuk", type_en:"Music Video", type_fr:"Clip", gallery:["last-night-01.jpg","last-night-02.jpg"] },
+  { id:"last-night", title:"Last Night Was A Better Night", client:"CHEY 'N' SHINERS", role_en:"Camera / DOP", role_fr:"Cadreuse / DOP", youtube:"IA9D7lPEIuk", type_en:"Music Video", type_fr:"Clip", gallery:["SHINERS.jpg","SHINERS 2.jpg"] },
   { id:"unleash", title:"Unleash the Fury", client:"BLACKRAIN", role_en:"Director of Photography", role_fr:"Chef Opératrice", youtube:"c55ODDo8vVY", type_en:"Music Video", type_fr:"Clip" },
   { id:"critical-pint", title:"What a Big Question", client:"CRITICAL PINT", role_en:"Director, Editor", role_fr:"Réalisatrice & Monteuse", youtube:"xDQGliGCB9E", type_en:"Music Video", type_fr:"Clip" },
-  { id:"appel-manque", title:"Appel Manqué", client:"OTHERS", role_en:"Photographer", role_fr:"Photographe", type_en:"Photography", type_fr:"Photographie", gallery:["malcolm-01.jpg","malcolm-02.jpg"], creds_en:"Model: Malcolm", creds_fr:"Modèle : Malcolm" }
+  { id:"appel-manque", title:"Appel Manqué", client:"OTHERS", role_en:"Photographer", role_fr:"Photographe", type_en:"Photography", type_fr:"Photographie", gallery:["Appel_Manque work.jpg","Appel_Manque work 2.jpg"], creds_en:"Model: Malcolm", creds_fr:"Modèle : Malcolm" }
 ];
 
 const SERVICES = [
@@ -322,10 +303,22 @@ document.getElementById('btn-lock-enter').addEventListener('click', () => {
   app.classList.add('live');
 });
 
-// PARTICULES JSON
+// PARTICULES JS (INTÉGRATION DIRECTE)
 window.addEventListener('load', () => {
   if (typeof particlesJS !== 'undefined') {
-    particlesJS.load('particles-js', 'particles.json', () => {});
+    particlesJS('particles-js', {
+      "particles": {
+        "number": { "value": 40, "density": { "enable": true, "value_area": 800 } },
+        "color": { "value": "#8a817b" },
+        "shape": { "type": "circle" },
+        "opacity": { "value": 0.3, "random": true },
+        "size": { "value": 2, "random": true },
+        "line_linked": { "enable": false },
+        "move": { "enable": true, "speed": 1, "direction": "none", "random": true, "out_mode": "out" }
+      },
+      "interactivity": { "detect_on": "canvas", "events": { "onclick": { "enable": false } } },
+      "retina_detect": true
+    });
   }
 });
 
@@ -404,7 +397,7 @@ function openModal(index) {
     credsHTML += `
       <div class="credit-row"><div class="credit-label">Press / Visuals</div>
         <div class="photo-grid">
-          ${proj.gallery.map(img => `<img src="photos/${img}" alt="Press">`).join('')}
+          ${proj.gallery.map(img => `<img src="photos/${encodeURI(img)}" alt="Press">`).join('')}
         </div>
       </div>
     `;
