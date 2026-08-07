@@ -4,163 +4,153 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>JUDE FILMS — Director / Réalisatrice</title>
-<meta name="description" content="JUDE FILMS — independent director and musician. Music videos, live sessions, photography. A grainy, cinematic, red-noir signature." />
+<meta name="description" content="JUDE FILMS — independent director and musician. Music videos, live sessions, photography." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js" defer></script>
+
 <style>
-:root{
-  --ink:#0a0807; --ink-2:#060403; --bone:#ECE7DD;
-  --smoke:#8a817b; --smoke-2:#56514c;
-  --red:#F4221A; --red-deep:#B5120C; --line:rgba(236,231,221,.13);
-  --serif:"Fraunces", Georgia, serif; --sans:"Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+:root {
+  --ink: #0a0807; --ink-2: #060403; --bone: #ECE7DD;
+  --smoke: #8a817b; --smoke-2: #56514c;
+  --red: #F4221A; --line: rgba(236,231,221,.13);
+  --serif: "Fraunces", Georgia, serif; --sans: "Space Grotesk", system-ui, sans-serif;
   --pad: clamp(20px, 4vw, 56px); --ease: cubic-bezier(.22,.61,.36,1);
 }
-*{box-sizing:border-box}
-html,body{margin:0;height:100%}
-html{background:var(--ink)}
-body{font-family:var(--sans);color:var(--bone);background:var(--ink);-webkit-font-smoothing:antialiased;overflow:hidden}
-a{color:inherit;text-decoration:none}
-button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
-img{display:block;max-width:100%}
+*, ::before, ::after { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--ink); color: var(--bone); font-family: var(--sans); -webkit-font-smoothing: antialiased; overflow: hidden; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+img { display: block; max-width: 100%; }
 
-/* ---- FOND NETTOYÉ DE TOUT VISEUR OU CROIX ROUGE ---- */
-.bg-grain{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;
-  pointer-events:none;mix-blend-mode:hard-light;opacity:.45}
-.vignette{position:fixed;inset:0;pointer-events:none;z-index:2;
-  background:radial-gradient(125% 95% at 50% 42%, transparent 50%, rgba(0,0,0,.4) 85%, rgba(0,0,0,.85) 100%)}
+/* FONDS & RENDU ÉCO-CONÇU */
+#particles-js { position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: .65; }
+.bg-grain { position: fixed; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; pointer-events: none; mix-blend-mode: hard-light; opacity: .35; }
+.vignette { position: fixed; inset: 0; pointer-events: none; z-index: 2; background: radial-gradient(125% 95% at 50% 42%, transparent 40%, rgba(0,0,0,.5) 80%, rgba(0,0,0,.9) 100%); }
 
-/* ---- DESIGN DES CURSEURS NETTOYÉS ---- */
-.cursor{position:fixed;top:0;left:0;z-index:90;pointer-events:none;transform:translate(-50%,-50%);will-change:transform}
-.cursor img{width:54px;height:auto;display:block;filter:drop-shadow(0 3px 6px rgba(0,0,0,.6));transition:transform .3s}
-body.ctx-popcorn .cursor img { background: transparent !important; }
+/* MUTE LES ANIMATIONS EN MODE ÉCONOMIE D'ÉNERGIE / REDUCED MOTION */
+@media (prefers-reduced-motion: reduce) {
+  #particles-js, .bg-grain { display: none !important; }
+  *, ::before, ::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+}
 
-.cursor .ring{position:absolute;inset:50%;width:74px;height:74px;margin:-37px 0 0 -37px;border:1px solid var(--red);
-  border-radius:50%;opacity:0;transform:scale(.4);box-shadow:0 0 12px var(--red);transition:opacity .3s,transform .3s}
-body.cursor-view .cursor .ring{opacity:.85;transform:scale(1)}
-@media (hover:hover) and (pointer:fine){ body{cursor:none} a,button{cursor:none} }
-@media (hover:none),(pointer:coarse){ .cursor{display:none} body{cursor:auto} }
+/* ÉCRAN DE VERROUILLAGE */
+.enter { position: fixed; inset: 0; z-index: 95; background: var(--ink); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 42px; transition: opacity .9s var(--ease), visibility .9s; }
+.enter.gone { opacity: 0; visibility: hidden; pointer-events: none; }
+.enter .logo { width: clamp(220px, 42vw, 520px); filter: drop-shadow(0 0 40px rgba(0,0,0,.6)); }
+.enterbtn { display: inline-flex; align-items: center; gap: 16px; padding: 13px 18px 13px 24px; border: 1px solid var(--line); border-radius: 2px; font-size: 12px; letter-spacing: .3em; color: var(--bone); transition: border-color .35s, color .35s, box-shadow .35s; }
+.enterbtn:hover { border-color: var(--red); color: #fff; box-shadow: 0 0 30px -8px var(--red); }
+.enterbtn .arw { display: grid; place-items: center; width: 30px; height: 24px; border: 1px solid var(--line); }
+.enterbtn:hover .arw { border-color: var(--red); }
 
-/* ---- 1. ÉCRAN DE VERROUILLAGE ---- */
-.enter{position:fixed;inset:0;z-index:95;background:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:42px;
-  transition:opacity .9s var(--ease),visibility .9s;}
-body:not(.live-app) { cursor: auto !important; }
-body:not(.live-app) a, body:not(.live-app) button { cursor: pointer !important; }
-.enter.gone{opacity:0;visibility:hidden;pointer-events:none}
-.enter .logo{width:clamp(220px,42vw,520px);filter:drop-shadow(0 0 40px rgba(0,0,0,.6))}
-.enterbtn{display:inline-flex;align-items:center;gap:16px;padding:13px 18px 13px 24px;border:1px solid var(--line);border-radius:2px;
-  font-size:12px;letter-spacing:.3em;color:var(--bone);transition:border-color .35s,color .35s,box-shadow .35s}
-.enterbtn:hover{border-color:var(--red);color:#fff;box-shadow:0 0 30px -8px var(--red)}
-.enterbtn .arw{display:grid;place-items:center;width:30px;height:24px;border:1px solid var(--line)}
-.enterbtn:hover .arw{border-color:var(--red)}
+/* STRUCTURE APP & HEADER */
+.app { position: fixed; inset: 0; display: flex; flex-direction: column; opacity: 0; transition: opacity .9s var(--ease); z-index: 10; }
+.app.live { opacity: 1; }
+.topbar { position: relative; z-index: 56; display: flex; align-items: center; justify-content: space-between; padding: 22px var(--pad); flex: 0 0 auto; }
+.brand { position: relative; display: inline-block; width: clamp(108px, 12vw, 150px); }
+.brand .lg { width: 100%; height: auto; }
+.barright { display: flex; align-items: center; gap: 26px; }
+.lang { display: flex; align-items: center; gap: 7px; font-size: 11px; letter-spacing: .2em; }
+.lang button { color: var(--smoke-2); transition: color .3s; padding: 4px 2px; }
+.lang button.on { color: var(--bone); }
+.lang button.on::after { content: ""; display: block; height: 1px; background: var(--red); margin-top: 3px; }
+.menubtn { display: flex; align-items: center; gap: 11px; font-size: 12px; letter-spacing: .26em; color: var(--bone); }
+.menubtn .bars { display: inline-grid; gap: 4px; }
+.menubtn .bars i { display: block; width: 24px; height: 1.5px; background: var(--bone); transition: transform .35s; }
+.menubtn:hover .bars i:first-child { transform: translateX(-3px); }
 
-/* ---- 2. INTRO LOADER (VOLDATA3) ---- */
-.loader-screen{position:fixed;inset:0;z-index:90;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  opacity:0;visibility:hidden;transition:opacity .6s, visibility .6s}
-.loader-screen.active{opacity:1;visibility:visible}
-.loader-screen video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.loader-screen .tint{position:absolute;inset:0;background:var(--red);mix-blend-mode:multiply}
-.loader-screen .skip{position:absolute;bottom:30px;right:40px;z-index:2;font-size:10px;letter-spacing:.25em;color:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.2);padding:8px 16px;border-radius:2px}
-.loader-screen .skip:hover{color:#fff;border-color:var(--red)}
+/* MENU LATÉRAL */
+.menu { position: fixed; top: 0; right: 0; bottom: 0; z-index: 70; width: min(460px, 88vw); background: var(--red); color: #fff; transform: translateX(100%); transition: transform .6s var(--ease); display: flex; flex-direction: column; justify-content: center; padding: 0 clamp(34px, 5vw, 66px); }
+.menu.open { transform: none; }
+.menu .x { position: absolute; top: 26px; right: clamp(34px, 5vw, 66px); display: flex; align-items: center; gap: 12px; font-size: 12px; letter-spacing: .26em; color: #fff; }
+.menu nav { display: flex; flex-direction: column; gap: 14px; }
+.menu nav a { font-weight: 700; text-transform: uppercase; font-size: clamp(28px, 4.5vw, 44px); color: #fff; transition: color .25s, transform .35s; }
+.menu nav a:hover { color: #000; transform: translateX(10px); }
+.scrim { position: fixed; inset: 0; z-index: 65; background: rgba(0,0,0,.6); opacity: 0; visibility: hidden; transition: .5s; }
+.scrim.on { opacity: 1; visibility: visible; }
 
-/* ---- INTERFACE DE L'APPLICATION ---- */
-.app{position:fixed;inset:0;display:flex;flex-direction:column;opacity:0;transition:opacity .9s var(--ease);z-index:10}
-.app.live{opacity:1}
-.topbar{position:relative;z-index:56;display:flex;align-items:center;justify-content:space-between;padding:22px var(--pad);flex:0 0 auto}
-.brand{position:relative;display:inline-block;width:clamp(108px,12vw,150px);height:26px}
-.brand .lg{position:absolute;left:0;top:50%;width:100%;height:auto;transition:opacity .28s,transform .35s}
-.brand .lg-w{transform:translateY(-50%)}
-.brand .lg-r{transform:translateY(-50%) rotate(-2deg) scale(1.04);opacity:0}
-.brand:hover .lg-w{opacity:0}
-.brand:hover .lg-r{opacity:1}
+/* CONTENU PRINCIPAL */
+.views { position: relative; flex: 1 1 auto; min-height: 0; }
+.view { position: absolute; inset: 0; opacity: 0; visibility: hidden; transition: opacity .5s var(--ease); overflow-y: auto; padding: clamp(20px, 3vh, 40px) var(--pad) 80px; }
+.view.show { opacity: 1; visibility: visible; }
+.view::-webkit-scrollbar { width: 4px; }
+.view::-webkit-scrollbar-thumb { background: var(--red); }
 
-.barright{display:flex;align-items:center;gap:26px}
-.lang{display:flex;align-items:center;gap:7px;font-size:11px;letter-spacing:.2em}
-.lang button{color:var(--smoke-2);transition:color .3s;padding:4px 2px}
-.lang button.on{color:var(--bone)}
-.lang button.on::after{content:"";display:block;height:1px;background:var(--red);margin-top:3px}
-.menubtn{display:flex;align-items:center;gap:11px;font-size:12px;letter-spacing:.26em;color:var(--bone)}
-.menubtn .bars{display:inline-grid;gap:4px}
-.menubtn .bars i{display:block;width:24px;height:1.5px;background:var(--bone);transition:transform .35s}
-.menubtn:hover .bars i:first-child{transform:translateX(-3px)}
+/* HOME / SHOWREEL & PROJETS */
+.home-container { max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; gap: 60px; align-items: center; }
+.hero-reel { width: 100%; position: relative; border: 1px solid var(--line); border-radius: 2px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.8); background: #000; }
+.hero-reel video { width: 100%; height: auto; aspect-ratio: 16/9; display: block; object-fit: cover; }
+.hero-reel .reel-tag { position: absolute; bottom: 16px; left: 20px; font-size: 10px; letter-spacing: .3em; color: rgba(255,255,255,.7); text-transform: uppercase; background: rgba(0,0,0,.6); padding: 6px 12px; border-radius: 2px; backdrop-filter: blur(4px); }
 
-/* ---- MENU ROUGE ORIGINAL ---- */
-.menu{position:fixed;top:0;right:0;bottom:0;z-index:70;width:min(460px,88vw);background:var(--red);color:#fff;
-  transform:translateX(100%);transition:transform .6s var(--ease);display:flex;flex-direction:column;justify-content:center;padding:0 clamp(34px,5vw,66px)}
-.menu.open{transform:none}
-.menu .x{position:absolute;top:26px;right:clamp(34px,5vw,66px);display:flex;align-items:center;gap:12px;font-size:12px;letter-spacing:.26em;color:#fff}
-.menu nav{display:flex;flex-direction:column;gap:14px}
-.menu nav a{font-family:var(--sans);font-weight:700;text-transform:uppercase;font-size:clamp(28px,4.5vw,44px);color:#fff;transition:color .25s,transform .35s}
-.menu nav a:hover{color:#000;transform:translateX(10px)}
-.scrim{position:fixed;inset:0;z-index:65;background:rgba(0,0,0,.6);opacity:0;visibility:hidden;transition:.5s}
-.scrim.on{opacity:1;visibility:visible}
+.worklist-section { width: 100%; display: flex; flex-direction: column; align-items: center; padding-top: 20px; }
+.worklist-title { font-size: 11px; letter-spacing: .4em; color: var(--red); margin-bottom: 30px; text-transform: uppercase; text-align: center; }
+.worklist { display: flex; flex-direction: column; gap: 6px; width: max-content; max-width: 100%; }
+.wl-item { position: relative; display: flex; align-items: baseline; gap: 18px; width: max-content; font-family: var(--serif); font-weight: 500; line-height: 1.1; color: var(--smoke); font-size: clamp(20px, 3.2vw, 40px); letter-spacing: -.01em; transition: color .3s, transform .4s; padding: 6px 0; text-align: left; }
+.wl-item .idx { font-family: var(--sans); font-weight: 400; font-size: 11px; letter-spacing: .18em; color: var(--smoke-2); transform: translateY(-.4em); }
+.wl-item .cli { font-family: var(--sans); font-weight: 400; font-size: 11px; letter-spacing: .16em; color: var(--smoke-2); opacity: 0; transform: translateX(-8px); transition: .4s; }
+.wl-item:hover { color: var(--bone); transform: translateX(10px); }
+.wl-item:hover .cli { opacity: 1; transform: none; color: var(--red); }
 
-/* ---- PAGES / PANELS ---- */
-.views{position:relative;flex:1 1 auto;min-height:0}
-.view{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity .5s var(--ease);overflow:auto;padding:clamp(20px,4vh,60px) var(--pad) 80px}
-.view.show{opacity:1;visibility:visible}
-.view::-webkit-scrollbar{width:0}
+.preview { position: fixed; z-index: 40; width: clamp(220px, 24vw, 360px); aspect-ratio: 16/9; pointer-events: none; opacity: 0; transform: scale(.9); transition: opacity .3s, transform .4s var(--ease); border: 1px solid var(--line); overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.8); }
+.preview.on { opacity: 1; transform: scale(1); }
+.preview .frame { position: absolute; inset: 0; background-size: cover; background-position: center; }
 
-/* PAGE 1 : FILMS (LISTE AVEC APERÇU HOVER DYNAMIQUE) */
-#view-works{display:flex;align-items:center;justify-content:center}
-.worklist{display:flex;flex-direction:column;gap:4px;width:max-content;max-width:100%}
-.wl-item{position:relative;display:flex;align-items:baseline;gap:18px;width:max-content;font-family:var(--serif);font-weight:500;line-height:1.1;color:var(--smoke);
-  font-size:clamp(22px,3.8vw,46px);letter-spacing:-.01em;transition:color .3s,transform .4s;padding:4px 0;text-align:left}
-.wl-item .idx{font-family:var(--sans);font-weight:400;font-size:11px;letter-spacing:.18em;color:var(--smoke-2);transform:translateY(-.4em)}
-.wl-item .cli{font-family:var(--sans);font-weight:400;font-size:11px;letter-spacing:.16em;color:var(--smoke-2);opacity:0;transform:translateX(-8px);transition:.4s}
-.wl-item:hover{color:var(--bone);transform:translateX(10px)}
-.wl-item:hover .cli{opacity:1;transform:none;color:var(--red)}
+/* SERVICES, ABOUT & CONTACT */
+.serv-wrap { max-width: 900px; margin: 0 auto; padding-top: 40px; }
+.serv-item { display: grid; grid-template-columns: 240px 1fr; gap: 20px; padding: 30px 0; border-bottom: 1px solid var(--line); }
+.serv-title { font-family: var(--serif); font-size: 24px; font-style: italic; color: var(--red); }
+.serv-desc { font-size: 15px; line-height: 1.6; color: #cfcabf; }
 
-.preview{position:fixed;z-index:40;width:clamp(220px,26vw,380px);aspect-ratio:16/9;pointer-events:none;opacity:0;transform:scale(.9);
-  transition:opacity .3s,transform .4s var(--ease);border:1px solid var(--line);overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,0.8)}
-.preview.on{opacity:1;transform:scale(1)}
-.preview .frame{position:absolute;inset:0;background-size:cover;background-position:center}
+.about-wrap { max-width: 760px; margin: 0 auto; padding-top: 40px; }
+.eyebrow { font-size: 11px; letter-spacing: .4em; color: var(--red); margin-bottom: 24px; text-transform: uppercase; }
+.about-lede { font-family: var(--serif); font-weight: 300; font-size: clamp(22px, 2.8vw, 34px); line-height: 1.3; color: var(--bone); }
+.about-lede em { font-style: italic; color: var(--red); }
+.about-block { margin-top: 34px; display: grid; grid-template-columns: 120px 1fr; gap: 14px 24px; border-top: 1px solid var(--line); padding-top: 26px; }
+.about-block .lab { font-size: 11px; letter-spacing: .26em; color: var(--smoke); }
+.about-block p { margin: 0; font-size: 15px; line-height: 1.65; color: #cfcabf; }
+.music-link { display: inline-flex; align-items: center; gap: 10px; margin-top: 30px; padding: 12px 24px; border: 1px solid var(--red); font-size: 11px; letter-spacing: .26em; color: var(--bone); transition: all .3s; }
+.music-link:hover { background: var(--red); color: #fff; box-shadow: 0 0 20px rgba(244,34,26,0.4); }
 
-/* PAGE 2 : SERVICES (ENTIÈREMENT DYNAMIQUE) */
-.serv-wrap{max-width:900px;margin:0 auto;padding-top:40px}
-.serv-item{display:grid;grid-template-columns:240px 1fr;gap:20px;padding:30px 0;border-bottom:1px solid var(--line)}
-.serv-title{font-family:var(--serif);font-size:24px;font-style:italic;color:var(--red)}
-.serv-desc{font-size:15px;line-height:1.6;color:#cfcabf}
-
-/* PAGE 3 : ABOUT (NETTOYÉ, SANS PHOTO) */
-.about-wrap{max-width:760px;margin:0 auto;padding-top:40px}
-.eyebrow{font-size:11px;letter-spacing:.4em;color:var(--red);margin-bottom:24px;text-transform:uppercase}
-.about-lede{font-family:var(--serif);font-weight:300;font-size:clamp(22px,2.8vw,34px);line-height:1.3;color:var(--bone)}
-.about-lede em{font-style:italic;color:var(--red)}
-.about-block{margin-top:34px;display:grid;grid-template-columns:120px 1fr;gap:14px 24px;border-top:1px solid var(--line);padding-top:26px}
-.about-block .lab{font-size:11px;letter-spacing:.26em;color:var(--smoke)}
-.about-block p{margin:0;font-size:15px;line-height:1.65;color:#cfcabf}
-.music-link{display:inline-flex;align-items:center;gap:10px;margin-top:30px;padding:12px 24px;border:1px solid var(--red);
-  font-size:11px;letter-spacing:.26em;color:var(--bone);transition:all .3s}
-.music-link:hover{background:var(--red);color:#fff;box-shadow:0 0 20px rgba(244,34,26,0.4)}
-
-/* PAGE 4 : CONTACT COMPLET */
-.contact-wrap{max-width:600px;margin:0 auto;text-align:center;padding-top:60px}
-.contact-links{display:flex;justify-content:center;gap:30px;margin-top:40px}
-.contact-links a{font-size:14px;letter-spacing:2px;text-transform:uppercase;border-bottom:1px solid transparent;transition:.3s;padding-bottom:4px}
-.contact-links a:hover{color:var(--red);border-color:var(--red)}
+.contact-wrap { max-width: 600px; margin: 0 auto; text-align: center; padding-top: 60px; }
+.contact-title { font-family: var(--serif); font-size: clamp(22px, 4vw, 36px); font-weight: 300; margin: 0; }
+.contact-sub { color: var(--smoke); margin-top: 12px; letter-spacing: 1px; }
+.contact-links { display: flex; justify-content: center; gap: 30px; margin-top: 40px; }
+.contact-links a { font-size: 14px; letter-spacing: 2px; text-transform: uppercase; border-bottom: 1px solid transparent; transition: .3s; padding-bottom: 4px; }
+.contact-links a:hover { color: var(--red); border-color: var(--red); }
 
 /* MODALE PROJETS */
-.proj-modal{position:fixed;inset:0;z-index:100;background:var(--ink-2);opacity:0;visibility:hidden;transition:opacity .5s var(--ease);display:flex;flex-direction:column}
-.proj-modal.open{opacity:1;visibility:visible}
-.proj-header{display:flex;justify-content:space-between;align-items:center;padding:20px var(--pad)}
-.proj-body{flex:1;display:grid;grid-template-columns:1fr 340px;gap:40px;padding:0 var(--pad) 40px;min-height:0}
-@media(max-width:900px){ .proj-body{grid-template-columns:1fr;overflow-y:auto} .proj-credits{overflow-y:visible} }
-.video-container{width:100%;height:100%;background:#000;position:relative;aspect-ratio:16/9}
-.video-container iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
-.proj-credits{display:flex;flex-direction:column;gap:16px;overflow-y:auto}
-.credit-row{border-bottom:1px solid var(--line);padding-bottom:10px}
-.credit-label{font-size:11px;color:var(--smoke);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
-.credit-value{font-size:15px;color:var(--bone)}
-.photo-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:15px}
-.photo-grid img{width:100%;height:auto;object-fit:cover;border:1px solid var(--line)}
+.proj-modal { position: fixed; inset: 0; z-index: 100; background: var(--ink-2); opacity: 0; visibility: hidden; transition: opacity .5s var(--ease); display: flex; flex-direction: column; }
+.proj-modal.open { opacity: 1; visibility: visible; }
+.proj-header { display: flex; justify-content: space-between; align-items: center; padding: 20px var(--pad); }
+.modal-title-txt { font-family: var(--serif); margin: 0; font-size: 24px; }
+.modal-close-btn { letter-spacing: 2px; font-size: 12px; }
+.proj-body { flex: 1; display: grid; grid-template-columns: 1fr 340px; gap: 40px; padding: 0 var(--pad) 40px; min-height: 0; }
+.video-container { width: 100%; height: 100%; background: #000; position: relative; aspect-ratio: 16/9; }
+.video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+.photo-fallback { display: grid; place-items: center; height: 100%; color: var(--smoke); font-size: 12px; letter-spacing: 1px; }
+.proj-credits { display: flex; flex-direction: column; gap: 16px; overflow-y: auto; }
+.credit-row { border-bottom: 1px solid var(--line); padding-bottom: 10px; }
+.credit-label { font-size: 11px; color: var(--smoke); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+.credit-value { font-size: 15px; color: var(--bone); }
+.credit-value-sm { font-size: 12px; line-height: 1.4; color: #aaa; }
+.photo-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 15px; }
+.photo-grid img { width: 100%; height: auto; object-fit: cover; border: 1px solid var(--line); }
+
+@media(max-width: 900px) {
+  .proj-body { grid-template-columns: 1fr; overflow-y: auto; }
+  .serv-item { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 <body>
 
+<div id="particles-js"></div>
 <video class="bg-grain" autoplay muted loop playsinline><source src="grain.mp4" type="video/mp4"></video>
 <div class="vignette"></div>
 
+<!-- ÉCRAN D'ACCUEIL -->
 <div class="enter" id="screen-lock">
   <img src="logo-white.png" class="logo" alt="JUDE FILMS">
   <button class="enterbtn" id="btn-lock-enter">
@@ -169,22 +159,11 @@ body:not(.live-app) a, body:not(.live-app) button { cursor: pointer !important; 
   </button>
 </div>
 
-<div class="loader-screen" id="screen-voldata">
-  <video id="voldata-video" muted playsinline><source src="voldata3.mp4" type="video/mp4"></video>
-  <div class="tint"></div>
-  <button class="skip" id="btn-skip-loader" data-en="SKIP SEQUENCE" data-fr="PASSER L'INTRO">SKIP SEQUENCE</button>
-</div>
-
-<div class="cursor" id="custom-cursor">
-  <img src="cursor-camera.png" id="curImg" alt="cursor">
-  <div class="ring"></div>
-</div>
-
+<!-- CONTAINER APPLICATION -->
 <div class="app" id="app">
   <header class="topbar">
     <a href="#" class="brand" id="brand-home">
-      <img src="logo-white.png" class="lg lg-w" alt="Jude">
-      <img src="logo-red.png" class="lg lg-r" alt="Jude Scribble">
+      <img src="logo-white.png" class="lg" alt="Jude Films">
     </a>
     <div class="barright">
       <div class="lang">
@@ -200,15 +179,29 @@ body:not(.live-app) a, body:not(.live-app) button { cursor: pointer !important; 
   </header>
 
   <main class="views">
+    <!-- FILMS / HOME -->
     <section class="view show" id="view-works">
-      <div class="worklist" id="worklist-container"></div>
+      <div class="home-container">
+        <div class="hero-reel">
+          <video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=1200">
+            <source src="showreel.mp4" type="video/mp4">
+          </video>
+          <div class="reel-tag" data-en="SHOWREEL — SELECTED WORKS" data-fr="SHOWREEL — SÉLECTION DE FILMS">SHOWREEL — SELECTED WORKS</div>
+        </div>
+        <div class="worklist-section">
+          <div class="worklist-title" data-en="SELECTED PROJECTS" data-fr="PROJETS SÉLECTIONNÉS">SELECTED PROJECTS</div>
+          <div class="worklist" id="worklist-container"></div>
+        </div>
+      </div>
       <div class="preview" id="floating-preview"><div class="frame"></div></div>
     </section>
 
+    <!-- SERVICES -->
     <section class="view" id="view-services">
       <div class="serv-wrap" id="services-container"></div>
     </section>
 
+    <!-- ABOUT -->
     <section class="view" id="view-about">
       <div class="about-wrap">
         <div class="eyebrow" data-en="ABOUT — JUDE FILMS" data-fr="À PROPOS — JUDE FILMS">ABOUT — JUDE FILMS</div>
@@ -225,11 +218,12 @@ body:not(.live-app) a, body:not(.live-app) button { cursor: pointer !important; 
       </div>
     </section>
 
+    <!-- CONTACT -->
     <section class="view" id="view-contact">
       <div class="contact-wrap">
         <div class="eyebrow" data-en="CONTACT" data-fr="CONTACT">CONTACT</div>
-        <h2 style="font-family:var(--serif); font-size:clamp(22px, 4vw, 36px); font-weight:300;">contact@jude-films.com</h2>
-        <p data-en="Music Videos · Live Sessions · Photography" data-fr="Clips · Live Sessions · Photographie" style="color:var(--smoke); margin-top:12px; letter-spacing:1px;">
+        <h2 class="contact-title">contact@jude-films.com</h2>
+        <p class="contact-sub" data-en="Music Videos · Live Sessions · Photography" data-fr="Clips · Live Sessions · Photographie">
           Music Videos · Live Sessions · Photography
         </p>
         <div class="contact-links">
@@ -241,6 +235,7 @@ body:not(.live-app) a, body:not(.live-app) button { cursor: pointer !important; 
   </main>
 </div>
 
+<!-- MENU -->
 <div class="scrim" id="scrim"></div>
 <div class="menu" id="side-menu">
   <button class="x" id="menu-close-btn"><span data-en="CLOSE" data-fr="FERMER">CLOSE</span></button>
@@ -252,10 +247,11 @@ body:not(.live-app) a, body:not(.live-app) button { cursor: pointer !important; 
   </nav>
 </div>
 
+<!-- MODALE -->
 <div class="proj-modal" id="proj-modal">
   <div class="proj-header">
-    <h2 id="modal-title" style="font-family:var(--serif); margin:0; font-size:24px;"></h2>
-    <button id="modal-close-btn" style="letter-spacing:2px; font-size:12px;" data-en="[ CLOSE ]" data-fr="[ FERMER ]">[ CLOSE ]</button>
+    <h2 id="modal-title" class="modal-title-txt"></h2>
+    <button id="modal-close-btn" class="modal-close-btn" data-en="[ CLOSE ]" data-fr="[ FERMER ]">[ CLOSE ]</button>
   </div>
   <div class="proj-body">
     <div class="video-container" id="modal-video-slot"></div>
@@ -264,22 +260,18 @@ body:not(.live-app) a, body:not(.live-app) button { cursor: pointer !important; 
 </div>
 
 <script>
-// BASE DE DONNÉES DES PROJETS BILINGUES
+// DONNÉES DU SITE
 const WORKS = [
   { id:"cannibale", title:"Cannibale", client:"FURIES", role_en:"Co-Director / DOP", role_fr:"Co-Réalisatrice / DOP", youtube:"g6HoFXZXr48", type_en:"Music Video", type_fr:"Clip" },
-  { id:"bain-rouge", title:"Bain Rouge", client:"JUDE", role_en:"Director", role_fr:"Réalisatrice", youtube:"HY_Pc1MpKtY", type_en:"Music Video", type_fr:"Clip" },
-  { id:"evergreen", title:"Evergreen", client:"JUDE", role_en:"Director", role_fr:"Réalisatrice", youtube:"ArP71Qkisj4", type_en:"Music Video", type_fr:"Clip", gallery:["evergreen-01.jpg","evergreen-02.jpg"], creds_en:"Artistic Direction JUDE FILMS / Photography Philomène Piquet-Gauthier / Makeup MAXDESEUM", creds_fr:"Direction Artistique JUDE FILMS / Photographie Philomène Piquet-Gauthier / Maquillage MAXDESEUM" },
-  { id:"unleash", title:"Unleash the Fury", client:"BLACKRAIN", role_en:"Director of Photography", role_fr:"Chef Opératrice", youtube:"c55ODDo8vVY", type_en:"Music Video", type_fr:"Clip" },
-  { id:"ifthisislove", title:"If This Is Love", client:"BLACKRAIN", role_en:"Director of Photography", role_fr:"Chef Opératrice", youtube:"2XJw75pRFec", type_en:"Music Video", type_fr:"Clip" },
-  { id:"resurrection", title:"Resurrection", client:"BLACKRAIN (by Jerem G)", role_en:"Director of Photography", role_fr:"Chef Opératrice", youtube:"2j27nKpYuoQ", type_en:"Music Video", type_fr:"Clip" },
   { id:"kill-you", title:"Kill You 'till You Die", client:"CHEY 'N' SHINERS", role_en:"Camera / DOP", role_fr:"Cadreuse / DOP", youtube:"D7XQAjJffuU", type_en:"Music Video", type_fr:"Clip" },
+  { id:"bain-rouge", title:"Bain Rouge", client:"JUDE", role_en:"Director", role_fr:"Réalisatrice", youtube:"HY_Pc1MpKtY", type_en:"Music Video", type_fr:"Clip" },
+  { id:"resurrection", title:"Resurrection", client:"BLACKRAIN (by Jerem G)", role_en:"Director of Photography", role_fr:"Chef Opératrice", youtube:"2j27nKpYuoQ", type_en:"Music Video", type_fr:"Clip" },
   { id:"last-night", title:"Last Night Was A Better Night", client:"CHEY 'N' SHINERS", role_en:"Camera / DOP", role_fr:"Cadreuse / DOP", youtube:"IA9D7lPEIuk", type_en:"Music Video", type_fr:"Clip", gallery:["last-night-01.jpg","last-night-02.jpg"] },
+  { id:"unleash", title:"Unleash the Fury", client:"BLACKRAIN", role_en:"Director of Photography", role_fr:"Chef Opératrice", youtube:"c55ODDo8vVY", type_en:"Music Video", type_fr:"Clip" },
   { id:"critical-pint", title:"What a Big Question", client:"CRITICAL PINT", role_en:"Director, Editor", role_fr:"Réalisatrice & Monteuse", youtube:"xDQGliGCB9E", type_en:"Music Video", type_fr:"Clip" },
-  { id:"promethee", title:"Prométhée", client:"COEURBEAU", role_en:"Director & Editor", role_fr:"Réalisation & Montage", youtube:"YORFuxiPtgM", type_en:"Live Session", type_fr:"Live Session" },
-  { id:"appel-manque", title:"Appel Manqué", client:"OTHERS", role_en:"Photographer & Director", role_fr:"Photographe & Réalisatrice", type_en:"Photography", type_fr:"Photographie", gallery:["malcolm-01.jpg","malcolm-02.jpg"], creds_en:"Model: Malcolm", creds_fr:"Modèle : Malcolm" }
+  { id:"appel-manque", title:"Appel Manqué", client:"OTHERS", role_en:"Photographer", role_fr:"Photographe", type_en:"Photography", type_fr:"Photographie", gallery:["malcolm-01.jpg","malcolm-02.jpg"], creds_en:"Model: Malcolm", creds_fr:"Modèle : Malcolm" }
 ];
 
-// DONNÉES SERVICES BILINGUES
 const SERVICES = [
   { title_en:"Concept & Treatment", title_fr:"Concept & Traitement", desc_en:"Scriptwriting, storyboarding, and technical breakdown tailored to the artistic project.", desc_fr:"Écriture, story-board et découpage technique adapté à l'univers esthétique du projet." },
   { title_en:"Direction", title_fr:"Réalisation", desc_en:"Full vision orchestration, performance coaching, and sets direction.", desc_fr:"Gestion globale de la vision artistique, direction d'acteurs et mise en scène sur le plateau." },
@@ -289,67 +281,39 @@ const SERVICES = [
   { title_en:"Photography", title_fr:"Photographie", desc_en:"Artistic series, promotional visuals and cover art productions.", desc_fr:"Création de séries artistiques, visuels promotionnels, presskits et pochettes d'albums." }
 ];
 
-// CONFIGURATION DES FICHIERS EXTERNES POUR LES CURSEURS (PLUGUÉS SUR TES PNG)
-const CAM = "cursor-camera.png";
-const POP = "cursor-popcorn.png";
-
-// MANAGEMENT DES ÉCRANS DE CHARGEMENT
+// DOM ELEMENTS
 const screenLock = document.getElementById('screen-lock');
-const btnLockEnter = document.getElementById('btn-lock-enter');
-const screenVoldata = document.getElementById('screen-voldata');
-const voldataVideo = document.getElementById('voldata-video');
-const btnSkipLoader = document.getElementById('btn-skip-loader');
 const app = document.getElementById('app');
-
-btnLockEnter.addEventListener('click', () => {
-  screenLock.classList.add('gone');
-  screenVoldata.classList.add('active');
-  voldataVideo.play().catch(unlockSite);
-});
-
-voldataVideo.addEventListener('ended', unlockSite);
-btnSkipLoader.addEventListener('click', unlockSite);
-
-function unlockSite() {
-  screenVoldata.classList.remove('active');
-  screenVoldata.classList.add('gone');
-  app.classList.add('live');
-  document.body.classList.add('live-app');
-}
-
-// ANIMATION DU CURSEUR AVEC SOURIS
-const cur = document.getElementById('custom-cursor');
-const curImg = document.getElementById('curImg');
-let posX = 0, posY = 0, mouseX = 0, mouseY = 0;
-
-window.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; });
-
-function animateCursor() {
-  posX += (mouseX - posX) * 0.2;
-  posY += (mouseY - posY) * 0.2;
-  cur.style.transform = `translate3d(${posX}px, ${posY}px, 0)`;
-  requestAnimationFrame(animateCursor);
-}
-animateCursor();
-
-function adaptCursor(viewId) {
-  if (viewId === 'view-about' || viewId === 'view-contact') {
-    curImg.src = POP;
-    document.body.classList.add('ctx-popcorn');
-  } else {
-    curImg.src = CAM;
-    document.body.classList.remove('ctx-popcorn');
-  }
-}
-
-// INJECTION DES FILMS & HOVER DYNAMIQUE
 const worklistContainer = document.getElementById('worklist-container');
 const floatingPreview = document.getElementById('floating-preview');
 const previewFrame = floatingPreview.querySelector('.frame');
+const servicesContainer = document.getElementById('services-container');
+const modal = document.getElementById('proj-modal');
+const videoSlot = document.getElementById('modal-video-slot');
+const creditsSlot = document.getElementById('modal-credits-slot');
+const modalTitle = document.getElementById('modal-title');
+const sideMenu = document.getElementById('side-menu');
+const scrim = document.getElementById('scrim');
+const langEn = document.getElementById('lang-en');
+const langFr = document.getElementById('lang-fr');
 
+// OUVERTURE
+document.getElementById('btn-lock-enter').addEventListener('click', () => {
+  screenLock.classList.add('gone');
+  app.classList.add('live');
+});
+
+// PARTICULES JSON
+window.addEventListener('load', () => {
+  if (typeof particlesJS !== 'undefined') {
+    particlesJS.load('particles-js', 'particles.json', () => {});
+  }
+});
+
+// INJECTION TRAVAUX
 function buildWorklist() {
   worklistContainer.innerHTML = WORKS.map((w, index) => {
-    const poster = w.youtube ? `https://img.youtube.com/vi/${w.youtube}/maxresdefault.jpg` : 'data:image/png;base64,Placeholder';
+    const poster = w.youtube ? `https://img.youtube.com/vi/${w.youtube}/maxresdefault.jpg` : '';
     return `
       <button class="wl-item" data-index="${index}" data-poster="${poster}">
         <span class="idx">${String(index + 1).padStart(2, '0')}/</span>
@@ -358,28 +322,32 @@ function buildWorklist() {
       </button>
     `;
   }).join('');
-
-  const items = worklistContainer.querySelectorAll('.wl-item');
-  items.forEach(item => {
-    item.addEventListener('mouseenter', () => {
-      previewFrame.style.backgroundImage = `url('${item.getAttribute('data-poster')}')`;
-      floatingPreview.classList.add('on');
-      document.body.classList.add('cursor-view');
-    });
-    item.addEventListener('mousemove', (e) => {
-      floatingPreview.style.left = `${e.clientX + 25}px`;
-      floatingPreview.style.top = `${e.clientY + 15}px`;
-    });
-    item.addEventListener('mouseleave', () => {
-      floatingPreview.classList.remove('on');
-      document.body.classList.remove('cursor-view');
-    });
-    item.addEventListener('click', () => openModal(item.getAttribute('data-index')));
-  });
 }
 
-// INJECTION DES SERVICES
-const servicesContainer = document.getElementById('services-container');
+// DÉLÉGATION D'ÉVÉNEMENTS OPTIMISÉE (ECO-PERFORMANCE)
+worklistContainer.addEventListener('mouseover', (e) => {
+  const item = e.target.closest('.wl-item');
+  if (!item || !item.dataset.poster) return;
+  previewFrame.style.backgroundImage = `url('${item.dataset.poster}')`;
+  floatingPreview.classList.add('on');
+});
+
+worklistContainer.addEventListener('mousemove', (e) => {
+  if (!floatingPreview.classList.contains('on')) return;
+  floatingPreview.style.left = `${e.clientX + 25}px`;
+  floatingPreview.style.top = `${e.clientY + 15}px`;
+});
+
+worklistContainer.addEventListener('mouseout', (e) => {
+  if (e.target.closest('.wl-item')) floatingPreview.classList.remove('on');
+});
+
+worklistContainer.addEventListener('click', (e) => {
+  const item = e.target.closest('.wl-item');
+  if (item) openModal(item.dataset.index);
+});
+
+// INJECTION SERVICES
 function buildServices() {
   const lang = document.documentElement.getAttribute('data-lang') || 'en';
   servicesContainer.innerHTML = SERVICES.map(s => `
@@ -390,23 +358,16 @@ function buildServices() {
   `).join('');
 }
 
-// GESTION DE LA MODALE PROJET (BILINGUE)
-const modal = document.getElementById('proj-modal');
-const videoSlot = document.getElementById('modal-video-slot');
-const creditsSlot = document.getElementById('modal-credits-slot');
-const modalTitle = document.getElementById('modal-title');
-
+// MODALE
 function openModal(index) {
   const proj = WORKS[index];
   const lang = document.documentElement.getAttribute('data-lang') || 'en';
-  modal.setAttribute('data-current-index', index);
+  modal.dataset.currentIndex = index;
   modalTitle.textContent = proj.title.toUpperCase();
   
-  if (proj.youtube) {
-    videoSlot.innerHTML = `<iframe src="https://www.youtube.com/embed/${proj.youtube}?autoplay=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
-  } else {
-    videoSlot.innerHTML = `<div style="display:grid; place-items:center; height:100%; color:var(--smoke); font-size:12px; letter-spacing:1px;">PHOTOGRAPHY SERIES</div>`;
-  }
+  videoSlot.innerHTML = proj.youtube 
+    ? `<iframe src="https://www.youtube.com/embed/${proj.youtube}?autoplay=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>`
+    : `<div class="photo-fallback">PHOTOGRAPHY SERIES</div>`;
 
   const roleLabel = lang === 'fr' ? "Rôle" : "Role";
   const typeLabel = lang === 'fr' ? "Format" : "Type";
@@ -424,14 +385,14 @@ function openModal(index) {
     credsHTML += `
       <div class="credit-row"><div class="credit-label">Press / Visuals</div>
         <div class="photo-grid">
-          ${proj.gallery.map(img => `<img src="photos/${img}" onerror="this.src='https://images.unsplash.com/photo-1542204172-e70528095627?q=80&w=400'" alt="Press">`).join('')}
+          ${proj.gallery.map(img => `<img src="photos/${img}" alt="Press">`).join('')}
         </div>
       </div>
     `;
   }
 
   if (credsValue) {
-    credsHTML += `<div class="credit-row"><div class="credit-label">Credits</div><div class="credit-value" style="font-size:12px; line-height:1.4; color:#aaa;">${credsValue}</div></div>`;
+    credsHTML += `<div class="credit-row"><div class="credit-label">Credits</div><div class="credit-value credit-value-sm">${credsValue}</div></div>`;
   }
 
   creditsSlot.innerHTML = credsHTML;
@@ -443,10 +404,7 @@ document.getElementById('modal-close-btn').addEventListener('click', () => {
   videoSlot.innerHTML = '';
 });
 
-// NAVIGATION NAV PANEL
-const sideMenu = document.getElementById('side-menu');
-const scrim = document.getElementById('scrim');
-
+// NAVIGATION MENU
 function toggleMenu(state) {
   sideMenu.classList.toggle('open', state);
   scrim.classList.toggle('on', state);
@@ -459,10 +417,9 @@ scrim.addEventListener('click', () => toggleMenu(false));
 sideMenu.querySelectorAll('nav a').forEach(link => {
   link.addEventListener('click', (e) => {
     e.preventDefault();
-    const target = link.getAttribute('data-target');
+    const target = link.dataset.target;
     document.querySelectorAll('.view').forEach(v => v.classList.remove('show'));
     document.getElementById(target).classList.add('show');
-    adaptCursor(target);
     toggleMenu(false);
   });
 });
@@ -471,15 +428,11 @@ document.getElementById('brand-home').addEventListener('click', (e) => {
   e.preventDefault();
   document.querySelectorAll('.view').forEach(v => v.classList.remove('show'));
   document.getElementById('view-works').classList.add('show');
-  adaptCursor('view-works');
   modal.classList.remove('open');
   videoSlot.innerHTML = '';
 });
 
-// SYSTEME DE LANGUES
-const langEn = document.getElementById('lang-en');
-const langFr = document.getElementById('lang-fr');
-
+// SYSTEME BILINGUE
 function switchLanguage(lang) {
   document.documentElement.setAttribute('data-lang', lang);
   langEn.classList.toggle('on', lang === 'en');
@@ -490,17 +443,15 @@ function switchLanguage(lang) {
   });
 
   buildServices();
-  
-  if (modal.classList.contains('open')) {
-    const currentIdx = modal.getAttribute('data-current-index');
-    if (currentIdx !== null) openModal(currentIdx);
+  if (modal.classList.contains('open') && modal.dataset.currentIndex) {
+    openModal(modal.dataset.currentIndex);
   }
 }
 
 langEn.addEventListener('click', () => switchLanguage('en'));
 langFr.addEventListener('click', () => switchLanguage('fr'));
 
-// INIT
+// INITIALISATION
 buildWorklist();
 buildServices();
 </script>
