@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JUDE FILMS</title>
+<meta name="description" content="JUDE FILMS — réalisation de clips musicaux et vidéos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  /* RESET & BASE */
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #050505; color: #fff; font-family: 'Inter', sans-serif; overflow: hidden; }
+
+  /* TYPOGRAPHIE */
+  h1, h2, h3, .wordmark { font-family: 'Bebas Neue', sans-serif; letter-spacing: 1px; }
+
+  /* GRAIN VHS */
+  .grain {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png');
+    opacity: 0.04; pointer-events: none; z-index: 9999;
+  }
+
+  /* TOPBAR */
+  .topbar { position: fixed; top: 0; left: 0; width: 100%; display: flex; justify-content: space-between; padding: 20px; z-index: 100; }
+  .wordmark { color: #fff; text-decoration: none; font-size: 1.5rem; }
+  .social a { color: #fff; margin-left: 15px; transition: opacity 0.3s; }
+  .social a:hover { opacity: 0.6; }
+
+  /* SHOWREEL YOUTUBE BACKGROUND */
+  .showreel { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; }
+  .showreel-wrapper { position: relative; width: 100vw; height: 100vh; }
+  .showreel-iframe { 
+    position: absolute; top: 50%; left: 50%; width: 100vw; height: 56.25vw; 
+    min-height: 100vh; min-width: 177.77vh; transform: translate(-50%, -50%) scale(1.15); 
+    pointer-events: none; 
+  }
+  .showreel-veil { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.65); }
+  .showreel-label {
+    position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+    font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; letter-spacing: 2px; color: rgba(255,255,255,0.5);
+  }
+
+  /* SCENE PRINCIPALE */
+  .stage { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; text-align: center; }
+  .logo { font-size: 8rem; margin-bottom: -10px; }
+  .tagline { font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; letter-spacing: 2px; color: #aaa; margin-bottom: 40px; }
+  .nav-windows { display: flex; gap: 20px; }
+  .nav-btn { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.2); padding: 10px 30px; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 8px;}
+  .nav-btn:hover { background: #fff; color: #000; }
+
+  /* FENÊTRES */
+  .window {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(10,10,10,0.95); z-index: 200;
+    display: flex; justify-content: center; align-items: center;
+    transition: opacity 0.3s; opacity: 1; backdrop-filter: blur(10px);
+  }
+  .window[aria-hidden="true"] { opacity: 0; pointer-events: none; }
+  .window-inner { width: 90%; max-width: 1100px; height: 85vh; background: #111; border: 1px solid #333; display: flex; flex-direction: column; }
+  .window-head { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; border-bottom: 1px solid #333; background: #1a1a1a; }
+  .window-head h2 { font-size: 1.5rem; margin: 0; }
+  .window-close, .window-back { background: none; border: none; color: #fff; cursor: pointer; font-size: 1rem; font-family: 'JetBrains Mono', monospace; }
+  .window-close:hover, .window-back:hover { color: #aaa; }
+
+  /* GRILLE FILMS */
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; padding: 20px; overflow-y: auto; height: 100%; }
+  .film-card { cursor: pointer; background: #0a0a0a; border: 1px solid #222; transition: 0.3s; display: flex; flex-direction: column; }
+  .film-card:hover { border-color: #fff; transform: translateY(-3px); }
+  .film-thumb { position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; background: #000; }
+  .film-thumb img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
+  .film-preview { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.4s; }
+  .film-card:hover .film-preview { opacity: 1; }
+  .film-info { padding: 15px; }
+  .film-info h3 { font-size: 1.3rem; margin-bottom: 5px; }
+  .film-info p { color: #888; font-size: 0.9rem; }
+
+  /* PAGE DETAIL YOUTUBE */
+  .detail-body { display: flex; flex-direction: column; height: 100%; overflow-y: auto; }
+  .detail-video-wrapper { position: relative; width: 100%; padding-bottom: 56.25%; background: #000; flex-shrink: 0; }
+  .detail-video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+  .detail-specs { padding: 30px; }
+  .detail-specs h2 { font-size: 2rem; margin-bottom: 10px; }
+  .detail-specs p { font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: #ccc; }
+
+  /* CONTACT */
+  .contact-body { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-align: center; }
+  .contact-photo { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; margin-bottom: 20px; }
+  .contact-name { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; margin-bottom: 5px; }
+  .contact-email { color: #fff; text-decoration: underline; font-family: 'JetBrains Mono', monospace; margin-bottom: 20px; display: inline-block; }
+  .contact-social { display: flex; gap: 15px; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; }
+  .contact-social a { color: #888; text-decoration: none; transition: color 0.3s; }
+  .contact-social a:hover { color: #fff; }
+
+  /* SCROLLBAR CUSTOM */
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: #111; }
+  ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: #555; }
+</style>
+</head>
+<body>
+
+<!-- ===== BRUIT / GRAIN ===== -->
+<div class="grain" aria-hidden="true"></div>
+
+<!-- ===== TOP BAR ===== -->
+<header class="topbar">
+  <a class="wordmark" href="#" data-action="close-all">JUDE FILMS</a>
+  <nav class="social" aria-label="Réseaux sociaux">
+    <a href="https://www.youtube.com/@judefilmsoff" target="_blank" rel="noopener" aria-label="YouTube">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4L15.8 12Z"/></svg>
+    </a>
+    <a href="https://www.instagram.com/judefilmsoff/" target="_blank" rel="noopener" aria-label="Instagram">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.2.06 2.2.27 2.9.55.8.3 1.4.7 2 1.3.6.6 1 1.2 1.3 2 .3.7.5 1.7.6 2.9.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 2.2-.6 2.9-.3.8-.7 1.4-1.3 2-.6.6-1.2 1-2 1.3-.7.3-1.7.5-2.9.6-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-2.2-.3-2.9-.6-.8-.3-1.4-.7-2-1.3-.6-.6-1-1.2-1.3-2-.3-.7-.5-1.7-.6-2.9C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-2.2.6-2.9.3-.8.7-1.4 1.3-2 .6-.6 1.2-1 2-1.3.7-.3 1.7-.5 2.9-.6C8.4 2.2 8.8 2.2 12 2.2Zm0 1.8c-3.15 0-3.52 0-4.76.07-1.02.05-1.57.22-1.94.36-.49.19-.84.42-1.2.79-.37.36-.6.71-.79 1.2-.14.37-.31.92-.36 1.94C2.9 9.38 2.9 9.75 2.9 12.9v.2c0 3.15 0 3.52.07 4.76.05 1.02.22 1.57.36 1.94.19.49.42.84.79 1.2.36.37.71.6 1.2.79.37.14.92.31 1.94.36 1.1.05 1.43.07 4.2.07h1.08c2.77 0 3.1-.02 4.2-.07 1.02-.05 1.57-.22 1.94-.36.49-.19.84-.42 1.2-.79.37-.36.6-.71.79-1.2.14-.37.31-.92.36-1.94.07-1.24.07-1.61.07-4.76s0-3.52-.07-4.76c-.05-1.02-.22-1.57-.36-1.94a3.2 3.2 0 0 0-.79-1.2 3.2 3.2 0 0 0-1.2-.79c-.37-.14-.92-.31-1.94-.36C15.62 4 15.25 4 12.1 4H12Zm0 3.4a4.9 4.9 0 1 1 0 9.8 4.9 4.9 0 0 1 0-9.8Zm0 1.8a3.1 3.1 0 1 0 0 6.2 3.1 3.1 0 0 0 0-6.2Zm5.1-2a1.15 1.15 0 1 1 0 2.3 1.15 1.15 0 0 1 0-2.3Z"/></svg>
+    </a>
+  </nav>
+</header>
+
+<!-- ===== SHOWREEL EN ARRIÈRE-PLAN ===== -->
+<section class="showreel" id="showreel">
+  <div class="showreel-wrapper">
+    <iframe class="showreel-iframe" src="https://www.youtube-nocookie.com/embed/IS-LM8V7tBc?autoplay=1&mute=1&loop=1&playlist=IS-LM8V7tBc&controls=0&modestbranding=1&rel=0" title="Showreel 2026" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+  <div class="showreel-veil"></div>
+  <div class="showreel-label">SHOWREEL 2026</div>
+</section>
+
+<!-- ===== SCÈNE PRINCIPALE ===== -->
+<main class="stage">
+  <h1 class="logo">JUDE</h1>
+  <p class="tagline">RÉALISATION&nbsp;/&nbsp;IMAGE&nbsp;/&nbsp;MONTAGE</p>
+  <div class="nav-windows">
+    <button class="nav-btn" data-open="films"><span class="nav-btn-label">FILMS</span> <span class="nav-btn-count" id="filmsCount"></span></button>
+    <button class="nav-btn" data-open="contact"><span class="nav-btn-label">CONTACT</span></button>
+  </div>
+</main>
+
+<!-- ===== FENÊTRE FILMS ===== -->
+<section class="window" id="window-films" aria-hidden="true">
+  <div class="window-inner">
+    <div class="window-head">
+      <h2>FILMS</h2>
+      <button class="window-close" data-close="films">✕ FERMER</button>
+    </div>
+    <div class="grid" id="filmsGrid"></div>
+  </div>
+</section>
+
+<!-- ===== FENÊTRE DÉTAIL PROJET ===== -->
+<section class="window window-detail" id="window-detail" aria-hidden="true">
+  <div class="window-inner">
+    <div class="window-head">
+      <button class="window-back" data-back="films">← RETOUR</button>
+      <button class="window-close" data-close="detail">✕ FERMER</button>
+    </div>
+    <div class="detail-body" id="detailBody"></div>
+  </div>
+</section>
+
+<!-- ===== FENÊTRE CONTACT ===== -->
+<section class="window" id="window-contact" aria-hidden="true">
+  <div class="window-inner">
+    <div class="window-head">
+      <h2>CONTACT</h2>
+      <button class="window-close" data-close="contact">✕ FERMER</button>
+    </div>
+    <div class="contact-body">
+      <img class="contact-photo" src="assets/images/Photodeprofil-sitevideo.jpg" alt="JUDE">
+      <div class="contact-info">
+        <p class="contact-name">JUDE</p>
+        <a class="contact-email" href="mailto:contact@jude-films.com">contact@jude-films.com</a>
+        <div class="contact-social">
+          <a href="https://www.instagram.com/judefilmsoff/" target="_blank" rel="noopener">Instagram ↗</a>
+          <a href="https://www.youtube.com/@judefilmsoff" target="_blank" rel="noopener">YouTube ↗</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== JAVASCRIPT ===== -->
+<script>
+  // DÉFINITION DE VOS PROJETS
+  const projects = [
+    {
+      id: "critical-pint",
+      title: "What A Big Question",
+      artist: "Critical Pint",
+      roles: "Réalisatrice, Monteuse, Étalonneuse",
+      youtubeId: "xDQGliGCB9E",
+      previewSrc: "assets/videos/WABQ - Critical Pint-preview.mp4"
+    },
+    {
+      id: "blackrain-is-this-love",
+      title: "Is This Love",
+      artist: "Black Rain",
+      roles: "Réalisatrice, Monteuse",
+      youtubeId: "ID_YOUTUBE_BLACKRAIN", // Remplacer par l'ID YouTube du clip si vous voulez qu'il s'ouvre au clic
+      previewSrc: "assets/videos/IfthisisLove - Black Rain-preview.mp4",
+      customThumbnail: "assets/images/blackrain-thumbnail.jpg" // Miniature JPG du site
+    }
+    // Ajoutez simplement vos autres projets ci-dessous :
+    // {
+    //   id: "blackrain-resurrection",
+    //   title: "Resurrection",
+    //   artist: "Black Rain",
+    //   roles: "Réalisatrice, Monteuse",
+    //   youtubeId: "...",
+    //   previewSrc: "assets/videos/Resurrection - Black Rain-preview.mp4"
+    // }
+  ];
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const filmsGrid = document.getElementById("filmsGrid");
+    const detailBody = document.getElementById("detailBody");
+    const filmsCount = document.getElementById("filmsCount");
+
+    if(filmsCount) filmsCount.textContent = `(${projects.length})`;
+
+    // Génération de la grille des films
+    projects.forEach(project => {
+      const card = document.createElement("div");
+      card.className = "film-card";
+      
+      // Utilise l'image locale si renseignée, sinon l'image par défaut YouTube
+      const thumbUrl = project.customThumbnail 
+        ? project.customThumbnail 
+        : `https://img.youtube.com/vi/${project.youtubeId}/maxresdefault.jpg`;
+
+      card.innerHTML = `
+        <div class="film-thumb">
+          <img src="${thumbUrl}" alt="${project.title} - ${project.artist}">
+          <video src="${project.previewSrc}" autoplay loop muted playsinline class="film-preview"></video>
+        </div>
+        <div class="film-info">
+          <h3>${project.artist}</h3>
+          <p>${project.title}</p>
+        </div>
+      `;
+
+      card.addEventListener("click", () => openDetail(project));
+      filmsGrid.appendChild(card);
+    });
+
+    // Navigation des fenêtres
+    document.querySelectorAll("[data-open]").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        const target = e.currentTarget.getAttribute("data-open");
+        closeAllWindows();
+        document.getElementById(`window-${target}`).setAttribute("aria-hidden", "false");
+      });
+    });
+
+    document.querySelectorAll("[data-close]").forEach(btn => {
+      btn.addEventListener("click", closeAllWindows);
+    });
+
+    document.querySelectorAll("[data-back]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        closeAllWindows();
+        document.getElementById("window-films").setAttribute("aria-hidden", "false");
+      });
+    });
+
+    document.querySelectorAll("[data-action='close-all']").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        closeAllWindows();
+      });
+    });
+    
+    function closeAllWindows() {
+      document.querySelectorAll(".window").forEach(win => {
+        win.setAttribute("aria-hidden", "true");
+      });
+      detailBody.innerHTML = ''; 
+    }
+
+    function openDetail(project) {
+      closeAllWindows();
+      detailBody.innerHTML = `
+        <div class="detail-video-wrapper">
+          <iframe src="https://www.youtube-nocookie.com/embed/${project.youtubeId}?autoplay=1" title="${project.title}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen frameborder="0" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        </div>
+        <div class="detail-specs">
+          <h2>${project.artist} — ${project.title}</h2>
+          <p>Rôles : ${project.roles}</p>
+        </div>
+      `;
+      document.getElementById("window-detail").setAttribute("aria-hidden", "false");
+    }
+  });
+</script>
+</body>
+</html>
