@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Jude Films — Réalisatrice de Clips Musicaux</title>
+  <title id="meta-title">Jude Films — Réalisatrice de Clips Musicaux</title>
   <meta name="description" content="Portfolio officiel de Jude Films, réalisatrice de clips musicaux, cadrage, montage et direction artistique.">
   <meta name="author" content="Jude">
   <meta name="robots" content="index, follow">
@@ -39,50 +39,69 @@
     html { scroll-behavior: smooth; }
     body { 
       background: #000000; 
-      color: #f5f5f7; 
+      color: #ffffff; 
       font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
     }
 
     :root {
-      --primary-color: #a80030;
+      --primary-color: #ffffff;
     }
 
-    /* TOPBAR STYLE LEFT.FILM (FOND NOIR PUR & ACCENT #a80030) */
+    /* TOPBAR STYLE MINIMALISTE TOUT BLANC */
     .topbar { 
       position: fixed; top: 0; left: 0; width: 100%; 
       display: flex; justify-content: space-between; align-items: center; 
-      padding: 24px 40px; z-index: 100;
+      padding: 22px 40px; z-index: 100;
       background: #000000;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
     }
     .nav-left { display: flex; align-items: center; gap: 40px; }
     .brand { 
-      color: var(--primary-color); text-decoration: none; font-size: 1.15rem; font-weight: 700; letter-spacing: 1.5px;
+      color: var(--primary-color); text-decoration: none; font-size: 1.25rem; font-weight: 700; letter-spacing: 1.5px;
       text-transform: uppercase; cursor: pointer;
     }
-    .nav-menu { display: flex; gap: 24px; }
+    .nav-menu { display: flex; gap: 28px; align-items: center; }
     .nav-link { 
-      color: #fff; text-decoration: none; font-size: 0.9rem; font-weight: 400; 
+      color: #fff; text-decoration: none; font-size: 1.05rem; font-weight: 500; 
       cursor: pointer; opacity: 0.7; transition: opacity 0.2s, color 0.2s; 
       background: none; border: none; font-family: inherit; padding: 0;
       letter-spacing: 0.5px;
     }
-    .nav-link:hover, .nav-link.active { opacity: 1; color: var(--primary-color); }
+    .nav-link:hover, .nav-link.active { opacity: 1; color: #fff; }
 
-    .nav-right { display: flex; align-items: center; gap: 16px; }
-    .social-icons { display: flex; gap: 16px; align-items: center; }
-    .social-icons a { color: var(--primary-color); opacity: 0.85; transition: opacity 0.2s; display: flex; }
+    .nav-right { display: flex; align-items: center; gap: 24px; }
+    .social-icons { display: flex; gap: 18px; align-items: center; }
+    .social-icons a { color: #fff; opacity: 0.75; transition: opacity 0.2s; display: flex; }
     .social-icons a:hover { opacity: 1; }
 
+    /* BOUTON LANGUE FR/EN */
+    .lang-btn {
+      background: transparent; border: 1px solid rgba(255,255,255,0.3); color: #fff;
+      padding: 5px 10px; font-size: 0.85rem; font-weight: 600; cursor: pointer;
+      border-radius: 3px; transition: all 0.2s; letter-spacing: 1px;
+    }
+    .lang-btn:hover { border-color: #fff; background: rgba(255,255,255,0.1); }
+
+    /* MENU BURGER MOBILE */
+    .menu-toggle {
+      display: none; background: none; border: none; cursor: pointer; color: #fff;
+      flex-direction: column; gap: 6px; z-index: 110;
+    }
+    .menu-toggle span {
+      display: block; width: 26px; height: 2px; background: #fff; transition: 0.3s;
+    }
+
     /* SECTIONS VUES (SPA) */
-    .view-section { display: none; padding-top: 76px; }
+    .view-section { display: none; padding-top: 78px; }
     .view-section.active { display: block; }
 
-    /* HERO SHOWREEL STYLE LEFT.FILM (PLEIN ÉCRAN IMMERSIF) */
+    /* HERO SHOWREEL (TAILLE OPTIMISÉE SANS CHEVAUCHEMENT) */
     .hero-section {
       width: 100vw;
-      height: calc(100vh - 76px);
+      height: 70vh;
+      max-height: 750px;
       position: relative;
       background: #000;
       overflow: hidden;
@@ -101,15 +120,15 @@
       border: 0;
     }
 
-    /* GRILLE PROJETS STYLE DANNY GEVIRTZ (3 PAR LIGNE, TRÈS LARGE & ÉPURÉ) */
+    /* GRILLE PROJETS (3 PAR LIGNE, TRÈS LARGE & ÉPURÉ) */
     .projects-section {
       max-width: 1700px;
       margin: 0 auto;
-      padding: 80px 40px 120px 40px;
+      padding: 60px 40px 100px 40px;
       background: #000;
     }
     .section-title {
-      font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2.5px; color: #777; margin-bottom: 40px; font-weight: 600;
+      font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2.5px; color: #888; margin-bottom: 35px; font-weight: 600;
     }
     .projects-grid {
       display: grid;
@@ -123,7 +142,16 @@
       .projects-grid { grid-template-columns: 1fr; }
       .topbar { padding: 18px 20px; }
       .nav-left { gap: 20px; }
-      .hero-section { height: 60vh; }
+      .hero-section { height: 50vh; }
+      
+      .menu-toggle { display: flex; }
+      .nav-menu {
+        position: fixed; top: 0; right: -100%; width: 75%; height: 100vh;
+        background: #0a0a0a; flex-direction: column; justify-content: center;
+        align-items: center; gap: 30px; transition: right 0.3s ease;
+        border-left: 1px solid rgba(255,255,255,0.1); z-index: 105;
+      }
+      .nav-menu.active { right: 0; }
     }
 
     .project-card {
@@ -145,12 +173,12 @@
     .project-card:hover .project-media video { opacity: 1; }
 
     .project-meta h3 { font-size: 1.15rem; font-weight: 500; margin-bottom: 6px; color: #fff; letter-spacing: 0.3px; }
-    .project-meta p { font-size: 0.88rem; color: #777; font-weight: 400; line-height: 1.4; }
+    .project-meta p { font-size: 0.88rem; color: #888; font-weight: 400; line-height: 1.4; }
 
     /* PAGE ABOUT & CONTACT (ONGLET DÉDIÉ) */
     .about-page {
       width: 100%;
-      min-height: calc(100vh - 76px);
+      min-height: calc(100vh - 78px);
       background: #000000;
       padding: 80px 6%;
       display: flex;
@@ -175,22 +203,22 @@
       background: #111;
       border-radius: 4px;
       overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.1);
     }
     .profile-photo-container img {
       width: 100%; height: 100%; object-fit: cover; display: block;
     }
 
     .about-content { display: flex; flex-direction: column; }
-    .about-title { font-size: 2.2rem; font-weight: 600; margin-bottom: 24px; color: var(--primary-color); letter-spacing: -0.5px; }
+    .about-title { font-size: 2.2rem; font-weight: 600; margin-bottom: 24px; color: #fff; letter-spacing: -0.5px; }
     .about-bio { font-size: 1.05rem; line-height: 1.7; color: #ccc; margin-bottom: 20px; font-weight: 300; }
-    .about-bio.en { color: #777; font-style: italic; border-left: 2px solid var(--primary-color); padding-left: 16px; margin-bottom: 36px; }
     
-    .favorites-box { background: #0a0a0a; padding: 20px 24px; border-radius: 4px; margin-bottom: 36px; border: 1px solid #1a1a1a; }
-    .favorites-title { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: var(--primary-color); margin-bottom: 8px; font-weight: 600; }
+    .favorites-box { background: #0a0a0a; padding: 20px 24px; border-radius: 4px; margin-bottom: 36px; border: 1px solid rgba(255,255,255,0.08); }
+    .favorites-title { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: #aaa; margin-bottom: 8px; font-weight: 600; }
     .favorites-list { font-size: 0.95rem; color: #ccc; font-weight: 300; }
     
     .contact-email-link { font-size: 1.2rem; color: #fff; text-decoration: underline; font-weight: 400; transition: color 0.2s; }
-    .contact-email-link:hover { color: var(--primary-color); }
+    .contact-email-link:hover { color: #aaa; }
 
     /* MODAL VIDEO PLAYER */
     .modal {
@@ -203,7 +231,7 @@
     .modal.active { opacity: 1; pointer-events: all; }
     .modal-content {
       width: 90%; max-width: 1100px; max-height: 90vh; overflow-y: auto;
-      background: #080808; border: 1px solid #1a1a1a; border-radius: 4px;
+      background: #080808; border: 1px solid rgba(255,255,255,0.1); border-radius: 4px;
       position: relative; padding: 40px;
     }
     .modal-close {
@@ -217,7 +245,7 @@
     .detail-info h2 { font-size: 1.7rem; font-weight: 500; margin-bottom: 10px; color: #fff; }
     .detail-info p { font-size: 0.95rem; color: #888; line-height: 1.5; }
 
-    footer { text-align: center; padding: 30px; font-size: 0.75rem; color: #444; background: #000; border-top: 1px solid #111; letter-spacing: 1px; }
+    footer { text-align: center; padding: 30px; font-size: 0.75rem; color: #666; background: #000; border-top: 1px solid rgba(255,255,255,0.05); letter-spacing: 1px; }
   </style>
 </head>
 <body>
@@ -226,61 +254,59 @@
 <header class="topbar">
   <div class="nav-left">
     <a class="brand" data-target="films-view">Jude Films</a>
-    <nav class="nav-menu">
-      <button class="nav-link active" data-target="films-view">Films</button>
-      <button class="nav-link" data-target="about-view">Contact / About</button>
+    <nav class="nav-menu" id="navMenu">
+      <button class="nav-link active" data-target="films-view" data-i18n="navFilms">Films</button>
+      <button class="nav-link" data-target="about-view" data-i18n="navContact">Contact / About</button>
     </nav>
   </div>
   <div class="nav-right">
     <div class="social-icons">
       <a href="https://www.instagram.com/judefilmsoff/" target="_blank" rel="noopener" aria-label="Instagram">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.2.06 2.2.27 2.9.55.8.3 1.4.7 2 1.3.6.6 1 1.2 1.3 2 .3.7.5 1.7.6 2.9.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 2.2-.6 2.9-.3.8-.7 1.4-1.3 2-.6.6-1.2 1-2 1.3-.7.3-1.7.5-2.9.6-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-2.2-.3-2.9-.6-.8-.3-1.4-.7-2-1.3-.6-.6-1-1.2-1.3-2-.3-.7-.5-1.7-.6-2.9C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-2.2.6-2.9.3-.8.7-1.4 1.3-2 .6-.6 1.2-1 2-1.3.7-.3 1.7-.5 2.9-.6C8.4 2.2 8.8 2.2 12 2.2Zm0 1.8c-3.15 0-3.52 0-4.76.07-1.02.05-1.57.22-1.94.36-.49.19-.84.42-1.2.79-.37.36-.6.71-.79 1.2-.14.37-.31.92-.36 1.94C2.9 9.38 2.9 9.75 2.9 12.9v.2c0 3.15 0 3.52.07 4.76.05 1.02.22 1.57.36 1.94.19.49.42.84.79 1.2.36.37.71.6 1.2.79.37.14.92.31 1.94.36 1.1.05 1.43.07 4.2.07h1.08c2.77 0 3.1-.02 4.2-.07 1.02-.05 1.57-.22 1.94-.36.49-.19.84-.42 1.2-.79.37-.36.6-.71.79-1.2.14-.37.31-.92.36-1.94.07-1.24.07-1.61.07-4.76s0-3.52-.07-4.76c-.05-1.02-.22-1.57-.36-1.94a3.2 3.2 0 0 0-.79-1.2 3.2 3.2 0 0 0-1.2-.79c-.37-.14-.92-.31-1.94-.36C15.62 4 15.25 4 12.1 4H12Zm0 3.4a4.9 4.9 0 1 1 0 9.8 4.9 4.9 0 0 1 0-9.8Zm0 1.8a3.1 3.1 0 1 0 0 6.2 3.1 3.1 0 0 0 0-6.2Zm5.1-2a1.15 1.15 0 1 1 0 2.3 1.15 1.15 0 0 1 0-2.3Z"/></svg>
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.2.06 2.2.27 2.9.55.8.3 1.4.7 2 1.3.6.6 1 1.2 1.3 2 .3.7.5 1.7.6 2.9.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 2.2-.6 2.9-.3.8-.7 1.4-1.3 2-.6.6-1.2 1-2 1.3-.7.3-1.7.5-2.9.6-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-2.2-.3-2.9-.6-.8-.3-1.4-.7-2-1.3-.6-.6-1-1.2-1.3-2-.3-.7-.5-1.7-.6-2.9C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-2.2.6-2.9.3-.8.7-1.4 1.3-2 .6-.6 1.2-1 2-1.3.7-.3 1.7-.5 2.9-.6C8.4 2.2 8.8 2.2 12 2.2Zm0 1.8c-3.15 0-3.52 0-4.76.07-1.02.05-1.57.22-1.94.36-.49.19-.84.42-1.2.79-.37.36-.6.71-.79 1.2-.14.37-.31.92-.36 1.94C2.9 9.38 2.9 9.75 2.9 12.9v.2c0 3.15 0 3.52.07 4.76.05 1.02.22 1.57.36 1.94.19.49.42.84.79 1.2.36.37.71.6 1.2.79.37.14.92.31 1.94.36 1.1.05 1.43.07 4.2.07h1.08c2.77 0 3.1-.02 4.2-.07 1.02-.05 1.57-.22 1.94-.36.49-.19.84-.42 1.2-.79.37-.36.6-.71.79-1.2.14-.37.31-.92.36-1.94.07-1.24.07-1.61.07-4.76s0-3.52-.07-4.76c-.05-1.02-.22-1.57-.36-1.94a3.2 3.2 0 0 0-.79-1.2 3.2 3.2 0 0 0-1.2-.79c-.37-.14-.92-.31-1.94-.36C15.62 4 15.25 4 12.1 4H12Zm0 3.4a4.9 4.9 0 1 1 0 9.8 4.9 4.9 0 0 1 0-9.8Zm0 1.8a3.1 3.1 0 1 0 0 6.2 3.1 3.1 0 0 0 0-6.2Zm5.1-2a1.15 1.15 0 1 1 0 2.3 1.15 1.15 0 0 1 0-2.3Z"/></svg>
       </a>
       <a href="https://www.youtube.com/@judefilmsoff" target="_blank" rel="noopener" aria-label="YouTube">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4L15.8 12Z"/></svg>
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4L15.8 12Z"/></svg>
       </a>
     </div>
+    <button class="lang-btn" id="langToggle">EN</button>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
 
 <main>
-  <!-- VUE FILMS (SHOWREEL + PROJETS) -->
+  <!-- VUE FILMS -->
   <section id="films-view" class="view-section active">
-    <!-- SHOWREEL PLEIN ÉCRAN -->
     <div class="hero-section">
       <div class="hero-video-container">
         <iframe src="https://www.youtube-nocookie.com/embed/IS-LM8V7tBc?autoplay=1&mute=1&loop=1&playlist=IS-LM8V7tBc&controls=1&modestbranding=1&rel=0" title="Showreel Jude Films" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
     </div>
 
-    <!-- GRILLE DES PROJETS -->
     <div class="projects-section">
-      <h2 class="section-title">Selected Projects</h2>
+      <h2 class="section-title" data-i18n="selectedProjects">Selected Projects</h2>
       <div class="projects-grid" id="projectsGrid"></div>
     </div>
   </section>
 
-  <!-- VUE CONTACT / ABOUT -->
+  <!-- VUE ABOUT & CONTACT -->
   <section id="about-view" class="view-section">
     <div class="about-page">
       <div class="about-wrapper">
         <div class="profile-photo-container">
-          <img src="./assets/images/profile.jpg" alt="Jude — Réalisatrice" loading="lazy" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'300\' height=\'400\' viewBox=\'0 0 300 400\'><rect width=\'300\' height=\'400\' fill=\'%23111\'/><text x=\'50%\' y=\'50%\' fill=\'%23444\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-family=\'sans-serif\' font-size=\'14\'>Photo Profile</text></svg>'">
+          <img src="./profile.jpg" alt="Jude — Réalisatrice" loading="lazy" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'300\' height=\'400\' viewBox=\'0 0 300 400\'><rect width=\'300\' height=\'400\' fill=\'%23111\'/><text x=\'50%\' y=\'50%\' fill=\'%23666\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-family=\'sans-serif\' font-size=\'14\'>profile.jpg</text></svg>'">
         </div>
         <div class="about-content">
-          <h1 class="about-title">About & Contact</h1>
+          <h1 class="about-title" data-i18n="aboutTitle">About & Contact</h1>
           
-          <p class="about-bio">
+          <p class="about-bio" id="bioText">
             Musicienne dans l’âme et amoureuse du grand écran, Jude façonne des univers visuels où la liberté narrative flirte avec l’audace esthétique. Après une immersion passionnée dans les métiers du cinéma à Paris, elle fonde en 2025 sa structure dédiée à la réalisation de clips. Un espace d’expression brut et singulier, taillé sur mesure pour donner vie aux visions des artistes.
           </p>
 
-          <p class="about-bio en">
-            A musician at heart and a lover of cinema, Jude crafts visual worlds where narrative freedom flirts with aesthetic boldness. After a passionate immersion in the Paris film industry, she founded her music video production structure in 2025. A raw, singular space designed to bring artists' visions to life.
-          </p>
-
           <div class="favorites-box">
-            <div class="favorites-title">Obsessions & Inspirations</div>
-            <div class="favorites-list">Kill Bill, esthétique obscure et magnétique, Néo-Noir, DC Comics, ramen nocturnes...</div>
+            <div class="favorites-title" data-i18n="obsessionsTitle">Obsessions & Inspirations</div>
+            <div class="favorites-list" id="obsessionsText">Kill Bill, esthétique obscure et magnétique, Néo-Noir, DC Comics, petit sachet de ramen à minuit...</div>
           </div>
 
           <div>
@@ -292,7 +318,7 @@
   </section>
 </main>
 
-<!-- MODAL LECTURE PROJET -->
+<!-- MODAL VIDEO -->
 <div class="modal" id="projectModal" aria-hidden="true">
   <div class="modal-content">
     <button class="modal-close" id="closeProjectModal" aria-label="Fermer">✕</button>
@@ -305,6 +331,30 @@
 </footer>
 
 <script>
+  // Traductions FR / EN
+  const translations = {
+    fr: {
+      navFilms: "Films",
+      navContact: "Contact / About",
+      selectedProjects: "Selected Projects",
+      aboutTitle: "About & Contact",
+      bioText: "Musicienne dans l’âme et amoureuse du grand écran, Jude façonne des univers visuels où la liberté narrative flirte avec l’audace esthétique. Après une immersion passionnée dans les métiers du cinéma à Paris, elle fonde en 2025 sa structure dédiée à la réalisation de clips. Un espace d’expression brut et singulier, taillé sur mesure pour donner vie aux visions des artistes.",
+      obsessionsTitle: "Obsessions & Inspirations",
+      obsessionsText: "Kill Bill, esthétique obscure et magnétique, Néo-Noir, DC Comics, petit sachet de ramen à minuit..."
+    },
+    en: {
+      navFilms: "Films",
+      navContact: "Contact / About",
+      selectedProjects: "Selected Projects",
+      aboutTitle: "About & Contact",
+      bioText: "A musician at heart and a lover of cinema, Jude crafts visual worlds where narrative freedom flirts with aesthetic boldness. After a passionate immersion in the Paris film industry, she founded her music video production structure in 2025. A raw, singular space designed to bring artists' visions to life.",
+      obsessionsTitle: "Obsessions & Inspirations",
+      obsessionsText: "Kill Bill, dark & magnetic aesthetic, Neo-Noir, DC Comics, late night ramen..."
+    }
+  };
+
+  let currentLang = "fr";
+
   const projects = [
     {
       title: "Cannibale — Furies",
@@ -362,16 +412,18 @@
     },
     {
       title: "If This Is Love — Black Rain",
-      role: "Réalisatrice / Cadrage",
+      role: "Cadrage (images IA incluses par choix du réalisateur)",
       youtubeId: "2XJw75pRFec",
       preview: "./assets/videos/Black Rain - If This Is Love-preview.mp4"
     }
   ];
 
   document.addEventListener("DOMContentLoaded", () => {
-    // Gestion des onglets SPA
+    // Navigation SPA & Menu Mobile
     const navLinks = document.querySelectorAll("[data-target]");
     const views = document.querySelectorAll(".view-section");
+    const navMenu = document.getElementById("navMenu");
+    const menuToggle = document.getElementById("menuToggle");
 
     navLinks.forEach(link => {
       link.addEventListener("click", (e) => {
@@ -384,18 +436,42 @@
         navLinks.forEach(nav => nav.classList.remove("active"));
         document.querySelectorAll(`[data-target="${targetId}"]`).forEach(n => n.classList.add("active"));
 
+        navMenu.classList.remove("active");
         window.scrollTo(0, 0);
       });
     });
 
-    // Rendu de la grille des projets (3 par ligne)
+    menuToggle.addEventListener("click", () => {
+      navMenu.classList.toggle("active");
+    });
+
+    // Bascule Langue FR/EN
+    const langToggle = document.getElementById("langToggle");
+    langToggle.addEventListener("click", () => {
+      currentLang = currentLang === "fr" ? "en" : "fr";
+      langToggle.textContent = currentLang === "fr" ? "EN" : "FR";
+      
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if (translations[currentLang][key]) {
+          el.textContent = translations[currentLang][key];
+        }
+      });
+      document.getElementById("bioText").textContent = translations[currentLang].bioText;
+      document.getElementById("obsessionsText").textContent = translations[currentLang].obsessionsText;
+    });
+
+    // Grille Projets
     const grid = document.getElementById("projectsGrid");
     const projectModal = document.getElementById("projectModal");
     const projectModalBody = document.getElementById("projectModalBody");
     const closeProjectModal = document.getElementById("closeProjectModal");
 
     projects.forEach(project => {
-      const thumb = `https://img.youtube.com/vi/${project.youtubeId}/maxresdefault.jpg`;
+      let thumb = `https://img.youtube.com/vi/${project.youtubeId}/maxresdefault.jpg`;
+      if (project.youtubeId === "2XJw75pRFec") {
+        thumb = `https://img.youtube.com/vi/2XJw75pRFec/hqdefault.jpg`; // Thumbnail spéciale si besoin
+      }
 
       const card = document.createElement("article");
       card.className = "project-card";
@@ -420,7 +496,6 @@
       });
 
       card.addEventListener("click", () => openProject(project));
-
       grid.appendChild(card);
     });
 
