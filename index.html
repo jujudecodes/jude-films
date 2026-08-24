@@ -60,7 +60,7 @@
     .nav-left { display: flex; align-items: center; gap: 32px; }
     .brand { 
       color: var(--primary-color); text-decoration: none; font-size: 1.2rem; font-weight: 700; letter-spacing: 1px;
-      text-transform: uppercase;
+      text-transform: uppercase; cursor: pointer;
     }
     .nav-menu { display: flex; gap: 24px; }
     .nav-link { 
@@ -79,10 +79,10 @@
     .view-section { display: none; padding-top: 73px; }
     .view-section.active { display: block; }
 
-    /* HERO SHOWREEL PLEIN ÉCRAN (100vh) */
+    /* HERO SHOWREEL (GRAND FORMAT MAIS LAISSE VOIR LA SUITE) */
     .hero-section {
       width: 100vw;
-      height: calc(100vh - 73px);
+      height: 85vh;
       position: relative;
       background: #000;
       overflow: hidden;
@@ -122,6 +122,7 @@
       .projects-grid { grid-template-columns: 1fr; }
       .topbar { padding: 15px 20px; }
       .nav-left { gap: 16px; }
+      .hero-section { height: 50vh; }
     }
 
     .project-card {
@@ -225,7 +226,7 @@
 <!-- TOPBAR -->
 <header class="topbar">
   <div class="nav-left">
-    <a href="#" class="brand" data-target="films-view">Jude Films</a>
+    <a class="brand" data-target="films-view">Jude Films</a>
     <nav class="nav-menu">
       <button class="nav-link active" data-target="films-view">Films</button>
       <button class="nav-link" data-target="about-view">Contact / About</button>
@@ -241,12 +242,12 @@
       </a>
     </div>
   </div>
-</main>
+</header>
 
 <main>
   <!-- VUE FILMS (SHOWREEL + PROJETS) -->
   <section id="films-view" class="view-section active">
-    <!-- SHOWREEL PLEIN ÉCRAN -->
+    <!-- SHOWREEL -->
     <div class="hero-section">
       <div class="hero-video-container">
         <iframe src="https://www.youtube-nocookie.com/embed/IS-LM8V7tBc?autoplay=1&mute=1&loop=1&playlist=IS-LM8V7tBc&controls=1&modestbranding=1&rel=0" title="Showreel Jude Films" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
