@@ -38,7 +38,7 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body { 
-      background: #0a0a0a; 
+      background: #000000; 
       color: #f5f5f7; 
       font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
       -webkit-font-smoothing: antialiased;
@@ -49,24 +49,24 @@
       --primary-color: #a80030;
     }
 
-    /* TOPBAR FIXE AVEC FOND NOIR SOLIDE */
+    /* TOPBAR STYLE LEFT.FILM (FOND NOIR PUR & ACCENT #a80030) */
     .topbar { 
       position: fixed; top: 0; left: 0; width: 100%; 
       display: flex; justify-content: space-between; align-items: center; 
-      padding: 20px 40px; z-index: 100;
-      background: #0a0a0a;
-      border-bottom: 1px solid #1a1a1a;
+      padding: 24px 40px; z-index: 100;
+      background: #000000;
     }
-    .nav-left { display: flex; align-items: center; gap: 32px; }
+    .nav-left { display: flex; align-items: center; gap: 40px; }
     .brand { 
-      color: var(--primary-color); text-decoration: none; font-size: 1.2rem; font-weight: 700; letter-spacing: 1px;
+      color: var(--primary-color); text-decoration: none; font-size: 1.15rem; font-weight: 700; letter-spacing: 1.5px;
       text-transform: uppercase; cursor: pointer;
     }
     .nav-menu { display: flex; gap: 24px; }
     .nav-link { 
-      color: #fff; text-decoration: none; font-size: 0.95rem; font-weight: 400; 
-      cursor: pointer; opacity: 0.75; transition: opacity 0.2s, color 0.2s; 
+      color: #fff; text-decoration: none; font-size: 0.9rem; font-weight: 400; 
+      cursor: pointer; opacity: 0.7; transition: opacity 0.2s, color 0.2s; 
       background: none; border: none; font-family: inherit; padding: 0;
+      letter-spacing: 0.5px;
     }
     .nav-link:hover, .nav-link.active { opacity: 1; color: var(--primary-color); }
 
@@ -76,13 +76,13 @@
     .social-icons a:hover { opacity: 1; }
 
     /* SECTIONS VUES (SPA) */
-    .view-section { display: none; padding-top: 73px; }
+    .view-section { display: none; padding-top: 76px; }
     .view-section.active { display: block; }
 
-    /* HERO SHOWREEL (GRAND FORMAT MAIS LAISSE VOIR LA SUITE) */
+    /* HERO SHOWREEL STYLE LEFT.FILM (PLEIN ÉCRAN IMMERSIF) */
     .hero-section {
       width: 100vw;
-      height: 85vh;
+      height: calc(100vh - 76px);
       position: relative;
       background: #000;
       overflow: hidden;
@@ -101,58 +101,58 @@
       border: 0;
     }
 
-    /* GRILLE PROJETS (3 PAR LIGNE & TRÈS GRANDS VISUELS) */
+    /* GRILLE PROJETS STYLE DANNY GEVIRTZ (3 PAR LIGNE, TRÈS LARGE & ÉPURÉ) */
     .projects-section {
-      max-width: 1650px;
-      margin: 60px auto 100px auto;
-      padding: 0 40px;
+      max-width: 1700px;
+      margin: 0 auto;
+      padding: 80px 40px 120px 40px;
+      background: #000;
     }
     .section-title {
-      font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; color: #666; margin-bottom: 30px; font-weight: 600;
+      font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2.5px; color: #777; margin-bottom: 40px; font-weight: 600;
     }
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 40px 30px;
+      gap: 50px 35px;
     }
     @media (max-width: 1200px) {
       .projects-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 768px) {
       .projects-grid { grid-template-columns: 1fr; }
-      .topbar { padding: 15px 20px; }
-      .nav-left { gap: 16px; }
-      .hero-section { height: 50vh; }
+      .topbar { padding: 18px 20px; }
+      .nav-left { gap: 20px; }
+      .hero-section { height: 60vh; }
     }
 
     .project-card {
       cursor: pointer; text-decoration: none; color: inherit; display: block;
     }
     .project-media {
-      position: relative; width: 100%; padding-bottom: 56.25%; background: #141414;
-      border-radius: 6px; overflow: hidden; margin-bottom: 14px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      position: relative; width: 100%; padding-bottom: 56.25%; background: #0c0c0c;
+      border-radius: 4px; overflow: hidden; margin-bottom: 16px;
     }
     .project-media img {
       position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;
-      transition: opacity 0.4s ease, transform 0.5s ease;
+      transition: opacity 0.3s ease, transform 0.4s ease;
     }
     .project-media video {
       position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;
-      opacity: 0; transition: opacity 0.4s ease;
+      opacity: 0; transition: opacity 0.3s ease;
     }
-    .project-card:hover .project-media img { opacity: 0; transform: scale(1.03); }
+    .project-card:hover .project-media img { opacity: 0; transform: scale(1.02); }
     .project-card:hover .project-media video { opacity: 1; }
 
-    .project-meta h3 { font-size: 1.2rem; font-weight: 600; margin-bottom: 4px; color: #fff; }
-    .project-meta p { font-size: 0.9rem; color: #888; font-weight: 400; line-height: 1.4; }
+    .project-meta h3 { font-size: 1.15rem; font-weight: 500; margin-bottom: 6px; color: #fff; letter-spacing: 0.3px; }
+    .project-meta p { font-size: 0.88rem; color: #777; font-weight: 400; line-height: 1.4; }
 
     /* PAGE ABOUT & CONTACT (ONGLET DÉDIÉ) */
     .about-page {
       width: 100%;
-      min-height: calc(100vh - 73px);
-      background: #0a0a0a;
-      padding: 80px 5%;
+      min-height: calc(100vh - 76px);
+      background: #000000;
+      padding: 80px 6%;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -162,7 +162,7 @@
       width: 100%;
       display: grid;
       grid-template-columns: 380px 1fr;
-      gap: 60px;
+      gap: 70px;
       align-items: start;
     }
     @media (max-width: 900px) {
@@ -172,53 +172,52 @@
     .profile-photo-container {
       width: 100%;
       aspect-ratio: 3 / 4;
-      background: #181818;
-      border-radius: 6px;
+      background: #111;
+      border-radius: 4px;
       overflow: hidden;
-      border: 1px solid #222;
     }
     .profile-photo-container img {
       width: 100%; height: 100%; object-fit: cover; display: block;
     }
 
     .about-content { display: flex; flex-direction: column; }
-    .about-title { font-size: 2.2rem; font-weight: 700; margin-bottom: 24px; color: var(--primary-color); letter-spacing: -0.5px; }
-    .about-bio { font-size: 1.05rem; line-height: 1.7; color: #ddd; margin-bottom: 20px; font-weight: 300; }
-    .about-bio.en { color: #888; font-style: italic; border-left: 2px solid var(--primary-color); padding-left: 16px; margin-bottom: 36px; }
+    .about-title { font-size: 2.2rem; font-weight: 600; margin-bottom: 24px; color: var(--primary-color); letter-spacing: -0.5px; }
+    .about-bio { font-size: 1.05rem; line-height: 1.7; color: #ccc; margin-bottom: 20px; font-weight: 300; }
+    .about-bio.en { color: #777; font-style: italic; border-left: 2px solid var(--primary-color); padding-left: 16px; margin-bottom: 36px; }
     
-    .favorites-box { background: #121212; padding: 20px 24px; border-radius: 6px; margin-bottom: 36px; border: 1px solid #1f1f1f; }
+    .favorites-box { background: #0a0a0a; padding: 20px 24px; border-radius: 4px; margin-bottom: 36px; border: 1px solid #1a1a1a; }
     .favorites-title { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: var(--primary-color); margin-bottom: 8px; font-weight: 600; }
-    .favorites-list { font-size: 0.95rem; color: #ddd; font-weight: 300; }
+    .favorites-list { font-size: 0.95rem; color: #ccc; font-weight: 300; }
     
-    .contact-email-link { font-size: 1.25rem; color: #fff; text-decoration: underline; font-weight: 500; transition: color 0.2s; }
+    .contact-email-link { font-size: 1.2rem; color: #fff; text-decoration: underline; font-weight: 400; transition: color 0.2s; }
     .contact-email-link:hover { color: var(--primary-color); }
 
     /* MODAL VIDEO PLAYER */
     .modal {
       position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-      background: rgba(10, 10, 10, 0.96); z-index: 300;
+      background: rgba(0, 0, 0, 0.96); z-index: 300;
       display: flex; justify-content: center; align-items: center;
       opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(10px);
     }
     .modal.active { opacity: 1; pointer-events: all; }
     .modal-content {
       width: 90%; max-width: 1100px; max-height: 90vh; overflow-y: auto;
-      background: #121212; border: 1px solid #222; border-radius: 8px;
+      background: #080808; border: 1px solid #1a1a1a; border-radius: 4px;
       position: relative; padding: 40px;
     }
     .modal-close {
       position: absolute; top: 20px; right: 25px; background: none; border: none;
-      color: #fff; font-size: 1.5rem; cursor: pointer; opacity: 0.7; transition: opacity 0.2s;
+      color: #fff; font-size: 1.4rem; cursor: pointer; opacity: 0.6; transition: opacity 0.2s;
     }
     .modal-close:hover { opacity: 1; }
 
     .video-embed { position: relative; padding-bottom: 56.25%; height: 0; margin-bottom: 24px; }
     .video-embed iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
-    .detail-info h2 { font-size: 1.8rem; font-weight: 600; margin-bottom: 12px; }
-    .detail-info p { font-size: 1rem; color: #bbb; line-height: 1.5; }
+    .detail-info h2 { font-size: 1.7rem; font-weight: 500; margin-bottom: 10px; color: #fff; }
+    .detail-info p { font-size: 0.95rem; color: #888; line-height: 1.5; }
 
-    footer { text-align: center; padding: 30px; font-size: 0.8rem; color: #444; background: #0a0a0a; border-top: 1px solid #141414; }
+    footer { text-align: center; padding: 30px; font-size: 0.75rem; color: #444; background: #000; border-top: 1px solid #111; letter-spacing: 1px; }
   </style>
 </head>
 <body>
@@ -235,10 +234,10 @@
   <div class="nav-right">
     <div class="social-icons">
       <a href="https://www.instagram.com/judefilmsoff/" target="_blank" rel="noopener" aria-label="Instagram">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.2.06 2.2.27 2.9.55.8.3 1.4.7 2 1.3.6.6 1 1.2 1.3 2 .3.7.5 1.7.6 2.9.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 2.2-.6 2.9-.3.8-.7 1.4-1.3 2-.6.6-1.2 1-2 1.3-.7.3-1.7.5-2.9.6-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-2.2-.3-2.9-.6-.8-.3-1.4-.7-2-1.3-.6-.6-1-1.2-1.3-2-.3-.7-.5-1.7-.6-2.9C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-2.2.6-2.9.3-.8.7-1.4 1.3-2 .6-.6 1.2-1 2-1.3.7-.3 1.7-.5 2.9-.6C8.4 2.2 8.8 2.2 12 2.2Zm0 1.8c-3.15 0-3.52 0-4.76.07-1.02.05-1.57.22-1.94.36-.49.19-.84.42-1.2.79-.37.36-.6.71-.79 1.2-.14.37-.31.92-.36 1.94C2.9 9.38 2.9 9.75 2.9 12.9v.2c0 3.15 0 3.52.07 4.76.05 1.02.22 1.57.36 1.94.19.49.42.84.79 1.2.36.37.71.6 1.2.79.37.14.92.31 1.94.36 1.1.05 1.43.07 4.2.07h1.08c2.77 0 3.1-.02 4.2-.07 1.02-.05 1.57-.22 1.94-.36.49-.19.84-.42 1.2-.79.37-.36.6-.71.79-1.2.14-.37.31-.92.36-1.94.07-1.24.07-1.61.07-4.76s0-3.52-.07-4.76c-.05-1.02-.22-1.57-.36-1.94a3.2 3.2 0 0 0-.79-1.2 3.2 3.2 0 0 0-1.2-.79c-.37-.14-.92-.31-1.94-.36C15.62 4 15.25 4 12.1 4H12Zm0 3.4a4.9 4.9 0 1 1 0 9.8 4.9 4.9 0 0 1 0-9.8Zm0 1.8a3.1 3.1 0 1 0 0 6.2 3.1 3.1 0 0 0 0-6.2Zm5.1-2a1.15 1.15 0 1 1 0 2.3 1.15 1.15 0 0 1 0-2.3Z"/></svg>
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.2.06 2.2.27 2.9.55.8.3 1.4.7 2 1.3.6.6 1 1.2 1.3 2 .3.7.5 1.7.6 2.9.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 2.2-.6 2.9-.3.8-.7 1.4-1.3 2-.6.6-1.2 1-2 1.3-.7.3-1.7.5-2.9.6-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-2.2-.3-2.9-.6-.8-.3-1.4-.7-2-1.3-.6-.6-1-1.2-1.3-2-.3-.7-.5-1.7-.6-2.9C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-2.2.6-2.9.3-.8.7-1.4 1.3-2 .6-.6 1.2-1 2-1.3.7-.3 1.7-.5 2.9-.6C8.4 2.2 8.8 2.2 12 2.2Zm0 1.8c-3.15 0-3.52 0-4.76.07-1.02.05-1.57.22-1.94.36-.49.19-.84.42-1.2.79-.37.36-.6.71-.79 1.2-.14.37-.31.92-.36 1.94C2.9 9.38 2.9 9.75 2.9 12.9v.2c0 3.15 0 3.52.07 4.76.05 1.02.22 1.57.36 1.94.19.49.42.84.79 1.2.36.37.71.6 1.2.79.37.14.92.31 1.94.36 1.1.05 1.43.07 4.2.07h1.08c2.77 0 3.1-.02 4.2-.07 1.02-.05 1.57-.22 1.94-.36.49-.19.84-.42 1.2-.79.37-.36.6-.71.79-1.2.14-.37.31-.92.36-1.94.07-1.24.07-1.61.07-4.76s0-3.52-.07-4.76c-.05-1.02-.22-1.57-.36-1.94a3.2 3.2 0 0 0-.79-1.2 3.2 3.2 0 0 0-1.2-.79c-.37-.14-.92-.31-1.94-.36C15.62 4 15.25 4 12.1 4H12Zm0 3.4a4.9 4.9 0 1 1 0 9.8 4.9 4.9 0 0 1 0-9.8Zm0 1.8a3.1 3.1 0 1 0 0 6.2 3.1 3.1 0 0 0 0-6.2Zm5.1-2a1.15 1.15 0 1 1 0 2.3 1.15 1.15 0 0 1 0-2.3Z"/></svg>
       </a>
       <a href="https://www.youtube.com/@judefilmsoff" target="_blank" rel="noopener" aria-label="YouTube">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4L15.8 12Z"/></svg>
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4L15.8 12Z"/></svg>
       </a>
     </div>
   </div>
@@ -247,7 +246,7 @@
 <main>
   <!-- VUE FILMS (SHOWREEL + PROJETS) -->
   <section id="films-view" class="view-section active">
-    <!-- SHOWREEL -->
+    <!-- SHOWREEL PLEIN ÉCRAN -->
     <div class="hero-section">
       <div class="hero-video-container">
         <iframe src="https://www.youtube-nocookie.com/embed/IS-LM8V7tBc?autoplay=1&mute=1&loop=1&playlist=IS-LM8V7tBc&controls=1&modestbranding=1&rel=0" title="Showreel Jude Films" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -266,7 +265,7 @@
     <div class="about-page">
       <div class="about-wrapper">
         <div class="profile-photo-container">
-          <img src="./assets/images/profile.jpg" alt="Jude — Réalisatrice" loading="lazy" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'300\' height=\'400\' viewBox=\'0 0 300 400\'><rect width=\'300\' height=\'400\' fill=\'%23141414\'/><text x=\'50%\' y=\'50%\' fill=\'%23444\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-family=\'sans-serif\' font-size=\'14\'>Photo Profile</text></svg>'">
+          <img src="./assets/images/profile.jpg" alt="Jude — Réalisatrice" loading="lazy" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'300\' height=\'400\' viewBox=\'0 0 300 400\'><rect width=\'300\' height=\'400\' fill=\'%23111\'/><text x=\'50%\' y=\'50%\' fill=\'%23444\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-family=\'sans-serif\' font-size=\'14\'>Photo Profile</text></svg>'">
         </div>
         <div class="about-content">
           <h1 class="about-title">About & Contact</h1>
@@ -302,7 +301,7 @@
 </div>
 
 <footer>
-  &copy; 2026 Jude Films. Tous droits réservés.
+  &copy; 2026 JUDE FILMS. All rights reserved.
 </footer>
 
 <script>
@@ -389,7 +388,7 @@
       });
     });
 
-    // Rendu de la grille des projets
+    // Rendu de la grille des projets (3 par ligne)
     const grid = document.getElementById("projectsGrid");
     const projectModal = document.getElementById("projectModal");
     const projectModalBody = document.getElementById("projectModalBody");
