@@ -1,231 +1,257 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Directed by Jude — Réalisatrice de Clips</title>
-<meta name="description" content="Portfolio de Jude. Réalisation, montage et étalonnage de clips musicaux.">
-
-<style>
-  /* RESET & BASE (HELVETICA) */
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { 
-    background: #0a0a0a; 
-    color: #f5f5f7; 
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
-    -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
-  }
-
-  /* TOPBAR */
-  .topbar { 
-    position: fixed; top: 0; left: 0; width: 100%; 
-    display: flex; justify-content: space-between; align-items: center; 
-    padding: 24px 40px; z-index: 100;
-    background: linear-gradient(to bottom, rgba(10,10,10,0.8), transparent);
-    backdrop-filter: blur(8px);
-  }
-  .brand { 
-    color: #ff2e2e; 
-    text-decoration: none; 
-    font-size: 1.1rem; 
-    font-weight: 300; 
-    letter-spacing: 0.5px;
-  }
-  .brand strong { font-weight: 700; color: #ff2e2e; }
-
-  .nav-right { display: flex; align-items: center; gap: 24px; }
-  .nav-link { 
-    color: #fff; text-decoration: none; font-size: 0.95rem; font-weight: 400; 
-    cursor: pointer; opacity: 0.85; transition: opacity 0.2s; 
-  }
-  .nav-link:hover { opacity: 1; }
-  .social-icons { display: flex; gap: 16px; align-items: center; }
-  .social-icons a { color: #fff; opacity: 0.85; transition: opacity 0.2s; display: flex; }
-  .social-icons a:hover { opacity: 1; }
-
-  /* MAIN CONTAINER */
-  main { width: 100%; }
-
-  /* HERO SHOWREEL (SANS OMBRAGE) */
-  .hero-section {
-    width: 100%;
-    padding-top: 100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #0a0a0a;
-  }
-  .hero-video-container {
-    position: relative;
-    width: 90%;
-    max-width: 1400px;
-    padding-bottom: 50.625%; /* Ratio 16:9 ajusté */
-    height: 0;
-    background: #000;
-    border-radius: 4px;
-    overflow: hidden;
-  }
-  .hero-video-container iframe {
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;
-  }
-
-  /* PORTFOLIO GRID (STYLE DANNY GEVIRTZ) */
-  .projects-section {
-    max-width: 1400px;
-    margin: 80px auto;
-    padding: 0 5%;
-  }
-  .section-title {
-    font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; color: #666; margin-bottom: 30px; font-weight: 600;
-  }
-  .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 40px;
-  }
-  @media (max-width: 768px) {
-    .projects-grid { grid-template-columns: 1fr; }
-    .topbar { padding: 20px; }
-  }
-
-  .project-card {
-    cursor: pointer;
-    text-decoration: none;
-    color: inherit;
-    display: block;
-  }
-  .project-media {
-    position: relative;
-    width: 100%;
-    padding-bottom: 56.25%; /* 16:9 */
-    background: #141414;
-    border-radius: 4px;
-    overflow: hidden;
-    margin-bottom: 16px;
-  }
-  .project-media img {
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;
-    transition: opacity 0.4s ease;
-  }
-  .project-media video {
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;
-    opacity: 0; transition: opacity 0.4s ease;
-  }
-  .project-card:hover .project-media img { opacity: 0; }
-  .project-card:hover .project-media video { opacity: 1; }
-
-  .project-meta h3 { font-size: 1.3rem; font-weight: 600; margin-bottom: 4px; }
-  .project-meta p { font-size: 0.95rem; color: #888; font-weight: 400; }
-
-  /* FENÊTRES / MODALES */
-  .modal {
-    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-    background: rgba(10,10,10,0.95); z-index: 300;
-    display: flex; justify-content: center; align-items: center;
-    opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
-    backdrop-filter: blur(12px);
-  }
-  .modal.active { opacity: 1; pointer-events: all; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  .modal-content {
-    width: 90%; max-width: 1000px; max-height: 90vh;
-    overflow-y: auto; background: #121212; border: 1px solid #222;
-    border-radius: 8px; position: relative; padding: 40px;
+  <!-- SEO & META TAGS -->
+  <title>Directed by Jude — Réalisatrice de Clips Musicaux</title>
+  <meta name="description" content="Portfolio officiel de Jude, réalisatrice de clips musicaux, cadrage, montage et direction artistique à Paris. Découvrez ses projets vidéo.">
+  <meta name="keywords" content="réalisatrice clip musical, réalisation vidéo musique, cadreuse clip, monteuse vidéo, Jude, Jude Films, direction artistique clip">
+  <meta name="author" content="Jude">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://jude-films.com/">
+
+  <!-- OPEN GRAPH (RÉSEAUX SOCIAUX & SHARING) -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://jude-films.com/">
+  <meta property="og:title" content="Directed by Jude — Réalisatrice de Clips Musicaux">
+  <meta property="og:description" content="Portfolio de réalisatrice de clips musicaux, cadrage et direction artistique.">
+  <meta property="og:image" content="https://img.youtube.com/vi/IS-LM8V7tBc/maxresdefault.jpg">
+
+  <!-- SCHEMA.ORG (DONNÉES STRUCTURÉES POUR GOOGLE) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Jude",
+    "jobTitle": "Réalisatrice de clips musicaux",
+    "url": "https://jude-films.com",
+    "email": "contact@jude-films.com",
+    "sameAs": [
+      "https://www.instagram.com/judefilmsoff/",
+      "https://www.youtube.com/@judefilmsoff"
+    ],
+    "knowsAbout": ["Réalisation de clips", "Cadrage", "Montage vidéo", "Direction Artistique", "Étalonnage"]
   }
-  .modal-close {
-    position: absolute; top: 20px; right: 25px;
-    background: none; border: none; color: #fff; font-size: 1.5rem;
-    cursor: pointer; opacity: 0.7; transition: opacity 0.2s;
-  }
-  .modal-close:hover { opacity: 1; }
+  </script>
 
-  /* MODAL DÉTAIL VIDEO */
-  .video-embed { position: relative; padding-bottom: 56.25%; height: 0; margin-bottom: 24px; }
-  .video-embed iframe { position: absolute; top:0; left:0; width:100%; height:100%; border:0; }
-  .detail-info h2 { font-size: 1.8rem; font-weight: 600; margin-bottom: 8px; }
-  .detail-info p { font-size: 1rem; color: #aaa; margin-top: 6px; }
+  <style>
+    /* RESET & BASE SYSTEM (HELVETICA) */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { 
+      background: #0a0a0a; 
+      color: #f5f5f7; 
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
 
-  /* ABOUT / CONTACT MODAL */
-  .about-container { max-width: 700px; margin: 0 auto; }
-  .about-title { font-size: 2rem; font-weight: 700; margin-bottom: 24px; color: #ff2e2e; }
-  .about-bio { font-size: 1.05rem; line-height: 1.6; color: #ddd; margin-bottom: 24px; }
-  .about-bio.en { color: #888; font-style: italic; border-left: 2px solid #333; padding-left: 16px; margin-bottom: 32px; }
-  .favorites-box { background: #1a1a1a; padding: 20px; border-radius: 6px; margin-bottom: 32px; }
-  .favorites-title { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.5px; color: #888; margin-bottom: 8px; font-weight: 600; }
-  .favorites-list { font-size: 1rem; color: #fff; font-weight: 500; }
-  .contact-email-link { font-size: 1.2rem; color: #fff; text-decoration: underline; font-weight: 500; }
-  .contact-email-link:hover { color: #ff2e2e; }
+    /* NAVIGATION / TOPBAR */
+    .topbar { 
+      position: fixed; top: 0; left: 0; width: 100%; 
+      display: flex; justify-content: space-between; align-items: center; 
+      padding: 24px 40px; z-index: 100;
+      background: rgba(10, 10, 10, 0.88);
+      backdrop-filter: blur(10px);
+    }
+    .brand { 
+      color: #ff2e2e; 
+      text-decoration: none; 
+      font-size: 1.1rem; 
+      font-weight: 300; 
+      letter-spacing: 0.5px;
+    }
+    .brand strong { font-weight: 700; color: #ff2e2e; }
 
-  /* FOOTER */
-  footer { text-align: center; padding: 40px; font-size: 0.85rem; color: #444; }
-</style>
+    .nav-right { display: flex; align-items: center; gap: 24px; }
+    .nav-link { 
+      color: #fff; text-decoration: none; font-size: 0.95rem; font-weight: 400; 
+      cursor: pointer; opacity: 0.85; transition: opacity 0.2s; 
+    }
+    .nav-link:hover { opacity: 1; }
+    .social-icons { display: flex; gap: 16px; align-items: center; }
+    .social-icons a { color: #fff; opacity: 0.85; transition: opacity 0.2s; display: flex; }
+    .social-icons a:hover { opacity: 1; }
+
+    /* CONTENU PRINCIPAL */
+    main { width: 100%; }
+
+    /* HERO SHOWREEL */
+    .hero-section {
+      width: 100%;
+      padding-top: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #0a0a0a;
+    }
+    .hero-video-container {
+      position: relative;
+      width: 90%;
+      max-width: 1400px;
+      padding-bottom: 50.625%; /* Ratio 16:9 */
+      height: 0;
+      background: #000;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .hero-video-container iframe {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;
+    }
+
+    /* LISTE DES PROJETS / GRILLE */
+    .projects-section {
+      max-width: 1400px;
+      margin: 80px auto;
+      padding: 0 5%;
+    }
+    .section-title {
+      font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; color: #666; margin-bottom: 30px; font-weight: 600;
+    }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+    }
+    @media (max-width: 768px) {
+      .projects-grid { grid-template-columns: 1fr; }
+      .topbar { padding: 20px; }
+    }
+
+    .project-card {
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .project-media {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      background: #141414;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+    .project-media img {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;
+      transition: opacity 0.4s ease;
+    }
+    .project-media video {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;
+      opacity: 0; transition: opacity 0.4s ease;
+    }
+    .project-card:hover .project-media img { opacity: 0; }
+    .project-card:hover .project-media video { opacity: 1; }
+
+    .project-meta h3 { font-size: 1.3rem; font-weight: 600; margin-bottom: 6px; }
+    .project-meta p { font-size: 0.95rem; color: #888; font-weight: 400; line-height: 1.4; }
+
+    /* MODALES & FENÊTRES */
+    .modal {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      background: rgba(10, 10, 10, 0.95); z-index: 300;
+      display: flex; justify-content: center; align-items: center;
+      opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+      backdrop-filter: blur(12px);
+    }
+    .modal.active { opacity: 1; pointer-events: all; }
+    
+    .modal-content {
+      width: 90%; max-width: 1000px; max-height: 90vh;
+      overflow-y: auto; background: #121212; border: 1px solid #222;
+      border-radius: 8px; position: relative; padding: 40px;
+    }
+    .modal-close {
+      position: absolute; top: 20px; right: 25px;
+      background: none; border: none; color: #fff; font-size: 1.5rem;
+      cursor: pointer; opacity: 0.7; transition: opacity 0.2s;
+    }
+    .modal-close:hover { opacity: 1; }
+
+    /* LECTEUR DÉTAIL DANS MODALE */
+    .video-embed { position: relative; padding-bottom: 56.25%; height: 0; margin-bottom: 24px; }
+    .video-embed iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+    .detail-info h2 { font-size: 1.8rem; font-weight: 600; margin-bottom: 12px; }
+    .detail-info p { font-size: 1rem; color: #bbb; line-height: 1.5; }
+
+    /* ABOUT / CONTACT MODAL */
+    .about-container { max-width: 700px; margin: 0 auto; }
+    .about-title { font-size: 2rem; font-weight: 700; margin-bottom: 24px; color: #ff2e2e; }
+    .about-bio { font-size: 1.05rem; line-height: 1.6; color: #ddd; margin-bottom: 24px; }
+    .about-bio.en { color: #888; font-style: italic; border-left: 2px solid #333; padding-left: 16px; margin-bottom: 32px; }
+    .favorites-box { background: #1a1a1a; padding: 20px; border-radius: 6px; margin-bottom: 32px; }
+    .favorites-title { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.5px; color: #888; margin-bottom: 8px; font-weight: 600; }
+    .favorites-list { font-size: 1rem; color: #fff; font-weight: 500; }
+    .contact-email-link { font-size: 1.2rem; color: #fff; text-decoration: underline; font-weight: 500; }
+    .contact-email-link:hover { color: #ff2e2e; }
+
+    footer { text-align: center; padding: 40px; font-size: 0.85rem; color: #444; }
+  </style>
 </head>
 <body>
 
-<!-- TOPBAR -->
+<!-- NAVIGATION HEADER -->
 <header class="topbar">
-  <a href="#" class="brand">Directed by <strong>Jude</strong></a>
-  <div class="nav-right">
-    <span class="nav-link" id="openContact">Contact</span>
+  <a href="#" class="brand" aria-label="Accueil Jude">Directed by <strong>Jude</strong></a>
+  <nav class="nav-right">
+    <span class="nav-link" id="openContact">Contact & About</span>
     <div class="social-icons">
-      <a href="https://www.instagram.com/judefilmsoff/" target="_blank" rel="noopener" aria-label="Instagram">
+      <a href="https://www.instagram.com/judefilmsoff/" target="_blank" rel="noopener" aria-label="Instagram de Jude">
         <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.2.06 2.2.27 2.9.55.8.3 1.4.7 2 1.3.6.6 1 1.2 1.3 2 .3.7.5 1.7.6 2.9.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 2.2-.6 2.9-.3.8-.7 1.4-1.3 2-.6.6-1.2 1-2 1.3-.7.3-1.7.5-2.9.6-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-2.2-.3-2.9-.6-.8-.3-1.4-.7-2-1.3-.6-.6-1-1.2-1.3-2-.3-.7-.5-1.7-.6-2.9C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-2.2.6-2.9.3-.8.7-1.4 1.3-2 .6-.6 1.2-1 2-1.3.7-.3 1.7-.5 2.9-.6C8.4 2.2 8.8 2.2 12 2.2Zm0 1.8c-3.15 0-3.52 0-4.76.07-1.02.05-1.57.22-1.94.36-.49.19-.84.42-1.2.79-.37.36-.6.71-.79 1.2-.14.37-.31.92-.36 1.94C2.9 9.38 2.9 9.75 2.9 12.9v.2c0 3.15 0 3.52.07 4.76.05 1.02.22 1.57.36 1.94.19.49.42.84.79 1.2.36.37.71.6 1.2.79.37.14.92.31 1.94.36 1.1.05 1.43.07 4.2.07h1.08c2.77 0 3.1-.02 4.2-.07 1.02-.05 1.57-.22 1.94-.36.49-.19.84-.42 1.2-.79.37-.36.6-.71.79-1.2.14-.37.31-.92.36-1.94.07-1.24.07-1.61.07-4.76s0-3.52-.07-4.76c-.05-1.02-.22-1.57-.36-1.94a3.2 3.2 0 0 0-.79-1.2 3.2 3.2 0 0 0-1.2-.79c-.37-.14-.92-.31-1.94-.36C15.62 4 15.25 4 12.1 4H12Zm0 3.4a4.9 4.9 0 1 1 0 9.8 4.9 4.9 0 0 1 0-9.8Zm0 1.8a3.1 3.1 0 1 0 0 6.2 3.1 3.1 0 0 0 0-6.2Zm5.1-2a1.15 1.15 0 1 1 0 2.3 1.15 1.15 0 0 1 0-2.3Z"/></svg>
       </a>
-      <a href="https://www.youtube.com/@judefilmsoff" target="_blank" rel="noopener" aria-label="YouTube">
+      <a href="https://www.youtube.com/@judefilmsoff" target="_blank" rel="noopener" aria-label="Chaîne YouTube de Jude">
         <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4L15.8 12Z"/></svg>
       </a>
     </div>
-  </div>
+  </nav>
 </header>
 
 <main>
-  <!-- HERO SHOWREEL (NET / SANS OMBRE) -->
-  <section class="hero-section">
+  <!-- SHOWREEL PRINCIPAL -->
+  <section class="hero-section" aria-label="Showreel de Jude">
     <div class="hero-video-container">
       <iframe src="https://www.youtube-nocookie.com/embed/IS-LM8V7tBc?autoplay=1&mute=1&loop=1&playlist=IS-LM8V7tBc&controls=1&modestbranding=1&rel=0" title="Showreel Jude Films" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
   </section>
 
-  <!-- LISTE DES PROJETS -->
-  <section class="projects-section">
-    <div class="section-title">Selected Projects</div>
+  <!-- GRILLE DE PROJETS -->
+  <section class="projects-section" aria-label="Projets récents">
+    <h1 class="section-title">Selected Projects</h1>
     <div class="projects-grid" id="projectsGrid"></div>
   </section>
 </main>
 
-<!-- MODAL DÉTAIL PROJET -->
-<div class="modal" id="projectModal">
+<!-- MODAL LECTURE PROJET -->
+<div class="modal" id="projectModal" aria-hidden="true">
   <div class="modal-content">
-    <button class="modal-close" id="closeProjectModal">✕</button>
+    <button class="modal-close" id="closeProjectModal" aria-label="Fermer la fenêtre">✕</button>
     <div id="projectModalBody"></div>
   </div>
 </div>
 
-<!-- MODAL CONTACT & ABOUT -->
-<div class="modal" id="contactModal">
+<!-- MODAL CONTACT & À PROPOS -->
+<div class="modal" id="contactModal" aria-hidden="true">
   <div class="modal-content">
-    <button class="modal-close" id="closeContactModal">✕</button>
+    <button class="modal-close" id="closeContactModal" aria-label="Fermer la fenêtre">✕</button>
     <div class="about-container">
       <h2 class="about-title">ABOUT & CONTACT</h2>
       
-      <!-- BIO FR -->
       <p class="about-bio">
         Jude est une artiste multi-disciplinaire. Passionnée de raconter des histoires, elle choisit la réalisation après plusieurs explorations des métiers du cinéma sur Paris. Elle monte son entreprise en 2025 en se concentrant sur les clips de musique, car elle-même musicienne, elle sent que c'est dans ce format aussi libre que décalé qu'elle pourra le mieux servir d'autres artistes ayant une histoire à partager.
       </p>
 
-      <!-- BIO EN -->
       <p class="about-bio en">
         Jude is a multidisciplinary artist. Passionate about storytelling, she chose directing after exploring various roles in the Paris film industry. She launched her business in 2025 focusing on music videos. As a musician herself, she feels that this free-form, quirky format is the best way to serve other artists with stories to share.
       </p>
 
-      <!-- FAVORITE THINGS -->
       <div class="favorites-box">
         <div class="favorites-title">Favorite Things</div>
         <div class="favorites-list">Kill Bill, Sexy but dark esthetique, Neo Noir, Love, DC Comics, late night ramens...</div>
       </div>
 
-      <!-- CONTACT EMAIL -->
       <div>
         <a class="contact-email-link" href="mailto:contact@jude-films.com">contact@jude-films.com</a>
       </div>
@@ -234,28 +260,65 @@
 </div>
 
 <footer>
-  &copy; 2026 Directed by Jude. All rights reserved.
+  &copy; 2026 Directed by Jude. Tous droits réservés.
 </footer>
 
 <script>
-  // LISTE DES PROJETS (STYLE DANNY GEVIRTZ)
+  // DONNÉES COMPLÈTES ET VÉRIFIÉES DES 9 PROJETS
   const projects = [
     {
-      id: "critical-pint",
-      title: "What A Big Question",
-      artist: "Critical Pint",
-      role: "Réalisatrice, Monteuse, Étalonneuse",
-      youtubeId: "xDQGliGCB9E",
-      preview: "assets/videos/WABQ - Critical Pint-preview.mp4"
+      title: "Cannibale — Furies",
+      role: "Réalisatrice et Direction Artistique",
+      youtubeId: "g6HoFXZXr48",
+      preview: "./assets/videos/Cannibale - Furies-preview.mp4"
     },
     {
-      id: "blackrain",
-      title: "Is This Love",
-      artist: "Black Rain",
-      role: "Réalisatrice, Monteuse",
-      youtubeId: "ID_YOUTUBE_BLACKRAIN", // Remplacer par l'ID YouTube du clip au besoin
-      preview: "assets/videos/IfthisisLove - Black Rain-preview.mp4",
-      customThumbnail: "assets/images/blackrain-thumbnail.jpg"
+      title: "Bain Rouge — JUDE",
+      role: "Réalisatrice, Actrice, Compositrice, Montage",
+      youtubeId: "HY_Pc1MpKtY",
+      preview: "./assets/videos/Bain Rouge - JUDE-preview.mp4"
+    },
+    {
+      title: "Kill You Till You Die — Chey’N’Shiners",
+      role: "Cadrage et Direction de la Photographie",
+      youtubeId: "D7XQAjJffuU",
+      preview: "./assets/videos/Kill You Till You Die - Chey'N'Shiners-preview.mp4"
+    },
+    {
+      title: "I AM — JUDE",
+      role: "Réalisatrice, Actrice, Compositrice, Montage",
+      youtubeId: "ArP71Qkisj4",
+      preview: "./assets/videos/I AM - JUDE-preview.mp4"
+    },
+    {
+      title: "What A Big Question — Critical Pint",
+      role: "Réalisatrice, montage, étalonnage",
+      youtubeId: "xDQGliGCB9E",
+      preview: "./assets/videos/WABQ - Critical Pint-preview.mp4"
+    },
+    {
+      title: "Last Night Was a Better Night — Chey’N’Shiners",
+      role: "Cadrage et Direction de la Photographie",
+      youtubeId: "IA9D7lPEIuk",
+      preview: "./assets/videos/Last Night Was a Better Night - Chey'N'Shiners-preview.mp4"
+    },
+    {
+      title: "Hexed — Hunters",
+      role: "Réalisatrice",
+      youtubeId: "CnbYk-25bgI",
+      preview: "./assets/videos/Hexed - Hunters-preview.mp4"
+    },
+    {
+      title: "Resurrection — Black Rain",
+      role: "Cadrage (les images par IA ont été générées et incluses dans le montage par avis du réalisateur - pas mon choix éditorial)",
+      youtubeId: "2j27nKpYuoQ",
+      preview: "./assets/videos/Resurrection - Black Rain-preview.mp4"
+    },
+    {
+      title: "Unleash the Fury — Black Rain",
+      role: "Cadrage (les images par IA ont été générées et incluses dans le montage par avis du réalisateur - pas mon choix éditorial)",
+      youtubeId: "c55ODDo8vVY",
+      preview: "./assets/videos/Unleash the Fury - Black Rain-preview.mp4"
     }
   ];
 
@@ -269,30 +332,35 @@
     const openContact = document.getElementById("openContact");
     const closeContactModal = document.getElementById("closeContactModal");
 
-    // Génération dynamique des cartes de projets
+    // Génération dynamique des cartes
     projects.forEach(project => {
-      const thumb = project.customThumbnail 
-        ? project.customThumbnail 
-        : `https://img.youtube.com/vi/${project.youtubeId}/maxresdefault.jpg`;
+      const thumb = `https://img.youtube.com/vi/${project.youtubeId}/maxresdefault.jpg`;
 
-      const card = document.createElement("a");
+      const card = document.createElement("article");
       card.className = "project-card";
-      card.href = "#";
       card.innerHTML = `
         <div class="project-media">
-          <img src="${thumb}" alt="${project.artist} - ${project.title}">
-          <video src="${project.preview}" autoplay loop muted playsinline></video>
+          <img src="${thumb}" alt="${project.title}" loading="lazy">
+          <video src="${project.preview}" loop muted playsinline preload="metadata"></video>
         </div>
         <div class="project-meta">
-          <h3>${project.artist} — ${project.title}</h3>
+          <h3>${project.title}</h3>
           <p>${project.role}</p>
         </div>
       `;
 
-      card.addEventListener("click", (e) => {
-        e.preventDefault();
-        openProject(project);
+      // Gestion de la lecture vidéo au survol
+      const video = card.querySelector("video");
+      card.addEventListener("mouseenter", () => {
+        video.currentTime = 0;
+        video.play().catch(() => {});
       });
+      card.addEventListener("mouseleave", () => {
+        video.pause();
+      });
+
+      // Ouverture au clic
+      card.addEventListener("click", () => openProject(project));
 
       grid.appendChild(card);
     });
@@ -301,29 +369,43 @@
     function openProject(project) {
       projectModalBody.innerHTML = `
         <div class="video-embed">
-          <iframe src="https://www.youtube-nocookie.com/embed/${project.youtubeId}?autoplay=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <iframe src="https://www.youtube-nocookie.com/embed/${project.youtubeId}?autoplay=1" title="${project.title}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
         <div class="detail-info">
-          <h2>${project.artist} — ${project.title}</h2>
-          <p><strong>Rôle :</strong> ${project.role}</p>
+          <h2>${project.title}</h2>
+          <p>${project.role}</p>
         </div>
       `;
       projectModal.classList.add("active");
+      projectModal.setAttribute("aria-hidden", "false");
     }
 
-    // Gestion de la modale de Contact
-    openContact.addEventListener("click", () => contactModal.classList.add("active"));
-    closeContactModal.addEventListener("click", () => contactModal.classList.remove("active"));
+    // Modal Contact
+    openContact.addEventListener("click", () => {
+      contactModal.classList.add("active");
+      contactModal.setAttribute("aria-hidden", "false");
+    });
+    
+    closeContactModal.addEventListener("click", () => {
+      contactModal.classList.remove("active");
+      contactModal.setAttribute("aria-hidden", "true");
+    });
+
     closeProjectModal.addEventListener("click", () => {
       projectModal.classList.remove("active");
+      projectModal.setAttribute("aria-hidden", "true");
       projectModalBody.innerHTML = "";
     });
 
-    // Fermeture des modales au clic à l'extérieur
+    // Fermeture extérieure
     window.addEventListener("click", (e) => {
-      if (e.target === contactModal) contactModal.classList.remove("active");
+      if (e.target === contactModal) {
+        contactModal.classList.remove("active");
+        contactModal.setAttribute("aria-hidden", "true");
+      }
       if (e.target === projectModal) {
         projectModal.classList.remove("active");
+        projectModal.setAttribute("aria-hidden", "true");
         projectModalBody.innerHTML = "";
       }
     });
