@@ -54,7 +54,8 @@
       position: fixed; top: 0; left: 0; width: 100%; 
       display: flex; justify-content: space-between; align-items: center; 
       padding: 22px 40px; z-index: 100;
-      background: #000000;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(10px);
       border-bottom: 1px solid rgba(255,255,255,0.08);
     }
     .nav-left { display: flex; align-items: center; gap: 40px; }
@@ -99,20 +100,16 @@
     }
 
     /* SECTIONS VUES (SPA) */
-    .view-section { display: none; padding-top: 78px; }
+    .view-section { display: none; }
     .view-section.active { display: block; }
 
-    /* HERO SHOWREEL (CORRIGÉ POUR ÉVITER LE CROP EXCESSIF) */
+    /* HERO SHOWREEL PLEIN ÉCRAN IMMERSIF */
     .hero-section {
       width: 100vw;
-      height: 65vh;
-      max-height: 700px;
+      height: 100vh;
       position: relative;
       background: #000;
       overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
     }
     .hero-video-container {
       width: 100%;
@@ -122,26 +119,23 @@
     .hero-video-container iframe {
       position: absolute;
       top: 50%; left: 50%;
-      width: 100%; height: 100%;
-      object-fit: contain;
+      width: 100vw; height: 56.25vw;
+      min-height: 100vh; min-width: 177.77vh;
       transform: translate(-50%, -50%);
       border: 0;
     }
 
-    /* GRILLE PROJETS (3 PAR LIGNE, TRÈS LARGE & ÉPURÉ) */
+    /* GRILLE PROJETS STYLE DANNY GEVIRTZ */
     .projects-section {
       max-width: 1700px;
       margin: 0 auto;
-      padding: 60px 40px 100px 40px;
+      padding: 80px 40px 120px 40px;
       background: #000;
-    }
-    .section-title {
-      font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2.5px; color: #888; margin-bottom: 35px; font-weight: 600;
     }
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 50px 35px;
+      gap: 30px;
     }
     @media (max-width: 1200px) {
       .projects-grid { grid-template-columns: repeat(2, 1fr); }
@@ -150,7 +144,6 @@
       .projects-grid { grid-template-columns: 1fr; }
       .topbar { padding: 18px 20px; }
       .nav-left { gap: 20px; }
-      .hero-section { height: 45vh; }
       
       .menu-toggle { display: flex; }
       .nav-menu {
@@ -163,32 +156,64 @@
     }
 
     .project-card {
-      cursor: pointer; text-decoration: none; color: inherit; display: block;
+      position: relative;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      border-radius: 4px;
+      overflow: hidden;
+      background: #0c0c0c;
+      aspect-ratio: 16 / 9;
     }
     .project-media {
-      position: relative; width: 100%; padding-bottom: 56.25%; background: #0c0c0c;
-      border-radius: 4px; overflow: hidden; margin-bottom: 16px;
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
     }
-    .project-media img {
-      position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;
-      transition: opacity 0.3s ease, transform 0.4s ease;
-    }
+    .project-media img,
     .project-media video {
       position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;
+    }
+    .project-media video {
       opacity: 0; transition: opacity 0.3s ease;
     }
-    .project-card:hover .project-media img { opacity: 0; transform: scale(1.02); }
+    /* Au survol, la vidéo en continu prend le relais de l'image fixe */
     .project-card:hover .project-media video { opacity: 1; }
 
-    .project-meta h3 { font-size: 1.15rem; font-weight: 500; margin-bottom: 6px; color: #fff; letter-spacing: 0.3px; }
-    .project-meta p { font-size: 0.88rem; color: #888; font-weight: 400; line-height: 1.4; }
+    /* OVERLAY TITRE / RÔLE STYLE DANNY GEVIRTZ AU HOVER */
+    .project-overlay {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.65);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 30px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      backdrop-filter: blur(2px);
+    }
+    .project-card:hover .project-overlay {
+      opacity: 1;
+    }
+    .project-overlay h3 {
+      font-size: 1.3rem; font-weight: 600; color: #fff; margin-bottom: 6px; letter-spacing: 0.5px;
+      transform: translateY(10px); transition: transform 0.3s ease;
+    }
+    .project-overlay p {
+      font-size: 0.9rem; color: #aaa; font-weight: 300;
+      transform: translateY(10px); transition: transform 0.3s ease 0.05s;
+    }
+    .project-card:hover .project-overlay h3,
+    .project-card:hover .project-overlay p {
+      transform: translateY(0);
+    }
 
-    /* PAGE ABOUT & CONTACT (ONGLET DÉDIÉ) */
+    /* PAGE ABOUT & CONTACT */
     .about-page {
       width: 100%;
-      min-height: calc(100vh - 78px);
+      min-height: 100vh;
       background: #000000;
-      padding: 80px 6%;
+      padding: 140px 6% 80px 6%;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -269,17 +294,14 @@
   </div>
   <div class="nav-right">
     <div class="social-icons">
-      <!-- Icône Instagram corrigée et propre -->
       <a href="https://www.instagram.com/judefilmsoff/" target="_blank" rel="noopener" aria-label="Instagram">
         <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
       </a>
-      <!-- Icône YouTube -->
       <a href="https://www.youtube.com/@judefilmsoff" target="_blank" rel="noopener" aria-label="YouTube">
         <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4L15.8 12Z"/></svg>
       </a>
     </div>
 
-    <!-- Sélecteur Langue FR / ENG direct -->
     <div class="lang-switcher">
       <button class="lang-option active" id="btnFr" onclick="setLanguage('fr')">FR</button>
       <span class="lang-sep">/</span>
@@ -295,14 +317,15 @@
 <main>
   <!-- VUE FILMS -->
   <section id="films-view" class="view-section active">
+    <!-- SHOWREEL PLEIN ÉCRAN -->
     <div class="hero-section">
       <div class="hero-video-container">
-        <iframe src="https://www.youtube-nocookie.com/embed/IS-LM8V7tBc?autoplay=1&mute=1&loop=1&playlist=IS-LM8V7tBc&controls=1&modestbranding=1&rel=0" title="Showreel Jude Films" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube-nocookie.com/embed/IS-LM8V7tBc?autoplay=1&mute=1&loop=1&playlist=IS-LM8V7tBc&controls=0&modestbranding=1&rel=0&playsinline=1" title="Showreel Jude Films" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
     </div>
 
+    <!-- GRILLE PROJETS STYLE GEVIRTZ -->
     <div class="projects-section">
-      <h2 class="section-title" data-i18n="selectedProjects">Selected Projects</h2>
       <div class="projects-grid" id="projectsGrid"></div>
     </div>
   </section>
@@ -348,12 +371,10 @@
 </footer>
 
 <script>
-  // Traductions FR / ENG
   const translations = {
     fr: {
       navFilms: "Films",
       navContact: "Contact / About",
-      selectedProjects: "Selected Projects",
       aboutTitle: "About & Contact",
       bioText: "Musicienne dans l’âme et amoureuse du grand écran, Jude façonne des univers visuels où la liberté narrative flirte avec l’audace esthétique. Après une immersion passionnée dans les métiers du cinéma à Paris, elle fonde en 2025 sa structure dédiée à la réalisation de clips. Un espace d’expression brut et singulier, taillé sur mesure pour donner vie aux visions des artistes.",
       obsessionsTitle: "Obsessions & Inspirations",
@@ -362,7 +383,6 @@
     en: {
       navFilms: "Films",
       navContact: "Contact / About",
-      selectedProjects: "Selected Projects",
       aboutTitle: "About & Contact",
       bioText: "A musician at heart and a lover of cinema, Jude crafts visual worlds where narrative freedom flirts with aesthetic boldness. After a passionate immersion in the Paris film industry, she founded her music video production structure in 2025. A raw, singular space designed to bring artists' visions to life.",
       obsessionsTitle: "Obsessions & Inspirations",
@@ -446,13 +466,12 @@
       title: "If This Is Love — Black Rain",
       role: "Cadrage (images IA incluses par choix du réalisateur)",
       youtubeId: "2XJw75pRFec",
-      thumbnail: "./blackrain-thumbnail.jpg", // Thumbnail personnalisée chargée via ton fichier
+      thumbnail: "./blackrain-thumbnail.jpg",
       preview: "./assets/videos/Black Rain - If This Is Love-preview.mp4"
     }
   ];
 
   document.addEventListener("DOMContentLoaded", () => {
-    // Navigation SPA & Menu Mobile
     const navLinks = document.querySelectorAll("[data-target]");
     const views = document.querySelectorAll(".view-section");
     const navMenu = document.getElementById("navMenu");
@@ -478,14 +497,12 @@
       navMenu.classList.toggle("active");
     });
 
-    // Grille Projets
     const grid = document.getElementById("projectsGrid");
     const projectModal = document.getElementById("projectModal");
     const projectModalBody = document.getElementById("projectModalBody");
     const closeProjectModal = document.getElementById("closeProjectModal");
 
     projects.forEach(project => {
-      // Utilise la miniature personnalisée si elle existe, sinon celle générée par YouTube
       const thumb = project.thumbnail || `https://img.youtube.com/vi/${project.youtubeId}/maxresdefault.jpg`;
 
       const card = document.createElement("article");
@@ -493,9 +510,9 @@
       card.innerHTML = `
         <div class="project-media">
           <img src="${thumb}" alt="${project.title}" loading="lazy">
-          <video src="${project.preview}" loop muted playsinline preload="metadata"></video>
+          <video src="${project.preview}" loop muted playsinline preload="auto"></video>
         </div>
-        <div class="project-meta">
+        <div class="project-overlay">
           <h3>${project.title}</h3>
           <p>${project.role}</p>
         </div>
